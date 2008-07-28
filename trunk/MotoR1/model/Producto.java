@@ -39,7 +39,7 @@ public class Producto {
     // <editor-fold defaultstate="collapsed" desc=" UML Marker "> 
     // #[regen=yes,id=DCE.7EDA296F-B66E-4E16-DF81-C2097115C137]
     // </editor-fold> 
-    private int cantidad;
+    private int existencias; 
 
     // <editor-fold defaultstate="collapsed" desc=" UML Marker "> 
     // #[regen=yes,id=DCE.AA713D94-F261-8C85-DED1-4256084954AF]
@@ -49,7 +49,7 @@ public class Producto {
     // <editor-fold defaultstate="collapsed" desc=" UML Marker "> 
     // #[regen=yes,id=DCE.A1EDBB73-8722-68B6-8819-CF19D056F485]
     // </editor-fold> 
-    private double costo;
+    private double precio;
 
     // <editor-fold defaultstate="collapsed" desc=" UML Marker "> 
     // #[regen=yes,id=DCE.E36533B3-F535-75D4-8568-22F25F8CED55]
@@ -64,7 +64,7 @@ public class Producto {
     // <editor-fold defaultstate="collapsed" desc=" UML Marker "> 
     // #[regen=yes,id=DCE.C7DEE7A0-2DA0-95FB-22EB-52BC6C6876AE]
     // </editor-fold> 
-    private double precioFinal;
+
 
     // <editor-fold defaultstate="collapsed" desc=" UML Marker "> 
     // #[regen=yes,id=DCE.641BF209-EFEC-D639-FA7E-20CACFACD88C]
@@ -75,29 +75,29 @@ public class Producto {
     // <editor-fold defaultstate="collapsed" desc=" UML Marker "> 
     // #[regen=yes,regenBody=yes,id=DCE.C6616433-86EE-D067-08DA-498493EC5F7F]
     // </editor-fold> 
-    public int getCantidad () {
-        return cantidad;
+    public int getExistencias () {
+        return existencias;
     }
 
     // <editor-fold defaultstate="collapsed" desc=" UML Marker "> 
     // #[regen=yes,regenBody=yes,id=DCE.1A893E3D-04C6-EC4D-23CC-D3C453E0F8E4]
     // </editor-fold> 
-    public void setCantidad (int val) {
-        this.cantidad = val;
+    public void setExistencias (int val) {
+        this.existencias = val;
     }
 
     // <editor-fold defaultstate="collapsed" desc=" UML Marker "> 
     // #[regen=yes,regenBody=yes,id=DCE.DD684D74-CBB4-A44F-C1D7-312AC4164C54]
     // </editor-fold> 
-    public double getCosto () {
-        return costo;
+    public double getPrecio () {
+        return precio;
     }
 
     // <editor-fold defaultstate="collapsed" desc=" UML Marker "> 
     // #[regen=yes,regenBody=yes,id=DCE.3EA1AABF-F749-A917-20C2-D5A10F1BAE0C]
     // </editor-fold> 
-    public void setCosto (double val) {
-        this.costo = val;
+    public void setPrecio (double val) {
+        this.precio = val;
     }
 
     // <editor-fold defaultstate="collapsed" desc=" UML Marker "> 
@@ -172,20 +172,6 @@ public class Producto {
     // </editor-fold> 
     public void setMinimos (int val) {
         this.minimos = val;
-    }
-
-    // <editor-fold defaultstate="collapsed" desc=" UML Marker "> 
-    // #[regen=yes,regenBody=yes,id=DCE.6B3C478F-A704-E645-4F8D-ED4CC93159BA]
-    // </editor-fold> 
-    public double getPrecioFinal () {
-        return precioFinal;
-    }
-
-    // <editor-fold defaultstate="collapsed" desc=" UML Marker "> 
-    // #[regen=yes,regenBody=yes,id=DCE.68E7692D-96CD-442A-CEE9-A62BC38B4354]
-    // </editor-fold> 
-    public void setPrecioFinal (double val) {
-        this.precioFinal = val;
     }
 
     // <editor-fold defaultstate="collapsed" desc=" UML Marker "> 

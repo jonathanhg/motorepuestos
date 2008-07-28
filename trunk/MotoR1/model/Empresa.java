@@ -14,28 +14,22 @@ import javax.persistence.Table;
 @Entity
 @Table(name="empresa")
 public class Empresa implements Serializable    {
-    
-    public Empresa(){
-        
-    }
-
-    
-    
+      
     private Integer id;
+    private String nombre;
+    private String telefono;
+    private String direccion;
+    private String personaJuridica;
     
     @Id
     @GeneratedValue(strategy=GenerationType.AUTO)
     public Integer getId () {
         return id;
     }
-
-  
+    
     public void setId (Integer val) {
         this.id = val;
     }
-
-    
-    private String nombre;
     
     public String getNombre() {
         return nombre;
@@ -43,6 +37,30 @@ public class Empresa implements Serializable    {
 
     public void setNombre(String nombre) {
         this.nombre = nombre;
+    }
+
+    public String getTelefono() {
+        return telefono;
+    }
+
+    public void setTelefono(String telefono) {
+        this.telefono = telefono;
+    }
+
+    public String getDireccion() {
+        return direccion;
+    }
+
+    public void setDireccion(String direccion) {
+        this.direccion = direccion;
+    }
+
+    public String getPersonaJuridica() {
+        return personaJuridica;
+    }
+
+    public void setPersonaJuridica(String personaJuridica) {
+        this.personaJuridica = personaJuridica;
     }
     
    

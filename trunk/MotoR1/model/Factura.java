@@ -201,7 +201,9 @@ public class Factura implements Serializable  {
     
     private List<Producto> productos;
 
-    @OneToMany(cascade=CascadeType.ALL)  // Borra todos los productos cuando se elimina factura , crea nuevos productos en la factura sin tener que consultarlos antes para insertarlos , 
+    // Borra todos los productos cuando se elimina factura ,  
+    //crea nuevos productos en la factura sin tener que consultarlos antes para insertarlos , 
+    @OneToMany(cascade=CascadeType.ALL)  
     @JoinTable(
         name="FactProductos",
         joinColumns={@JoinColumn(name="fact_id")},
