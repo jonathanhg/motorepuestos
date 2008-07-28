@@ -21,5 +21,11 @@ public interface  FacturaDao {
     public void actualizarEmpresa(Factura factura);
     
     public List facturasPorAnio(int anio);
+    
+    public List facturasPorFecha(int anioDesde, int anioHasta, int mesDesde, int mesHasta);
+    
+    public List facturasPorCliente(String nombreCliente);
+    
+    public List facturasAnuladasPorMes(int mes);
 
 }

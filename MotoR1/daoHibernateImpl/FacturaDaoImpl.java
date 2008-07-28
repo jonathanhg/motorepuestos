@@ -2,7 +2,6 @@
  * To change this template, choose Tools | Templates
  * and open the template in the editor.
  */
-
 package daoHibernateImpl;
 
 import dao.FacturaDao;
@@ -20,59 +19,116 @@ import util.HibernateUtil;
 public class FacturaDaoImpl implements FacturaDao {
 
     public void agregarFactura(Factura factura) {
-       Session session =HibernateUtil.getSessionFactory().openSession();
-       try{
-           session.beginTransaction();
-           session.save(factura);
-           session.getTransaction().commit();
-       }catch(Exception e ){
-         System.out.println(e.toString());
-       }finally{
-         session.close();
-       }
+        Session session = HibernateUtil.getSessionFactory().openSession();
+        try {
+            session.beginTransaction();
+            session.save(factura);
+            session.getTransaction().commit();
+        } catch (Exception e) {
+            System.out.println(e.toString());
+        } finally {
+            session.close();
+        }
     }
 
     public void eliminarFactura(Factura factura) {
-        Session session =HibernateUtil.getSessionFactory().openSession();
-       try{
-           session.beginTransaction();
-           session.delete(factura);
-           session.getTransaction().commit();
-       }catch(Exception e ){
-         System.out.println(e.toString());
-       }finally{
-         session.close();
-       }
+        Session session = HibernateUtil.getSessionFactory().openSession();
+        try {
+            session.beginTransaction();
+            session.delete(factura);
+            session.getTransaction().commit();
+        } catch (Exception e) {
+            System.out.println(e.toString());
+        } finally {
+            session.close();
+        }
     }
 
     public void actualizarEmpresa(Factura factura) {
-        Session session =HibernateUtil.getSessionFactory().openSession();
-       try{
-           session.beginTransaction();
-           session.update(factura);
-           session.getTransaction().commit();
-       }catch(Exception e ){
-         System.out.println(e.toString());
-       }finally{
-         session.close();
-       }
+        Session session = HibernateUtil.getSessionFactory().openSession();
+        try {
+            session.beginTransaction();
+            session.update(factura);
+            session.getTransaction().commit();
+        } catch (Exception e) {
+            System.out.println(e.toString());
+        } finally {
+            session.close();
+        }
     }
 
     public List facturasPorAnio(int anio) {
-        Session session =HibernateUtil.getSessionFactory().openSession();
+        Session session = HibernateUtil.getSessionFactory().openSession();
         List facturas = null;
-        try{
+        try {
             session.beginTransaction();
             Query getFacturas = session.createQuery("from Factura fact where year(fact.fecha) = :var1");
             getFacturas.setInteger("var1", anio); // la funcion esta Deprecated hay que buscar otra
+
             facturas = getFacturas.list();
-            
-        }catch(Exception e){
-          System.out.println(e.toString());
-        }finally{
-        session.close();
+
+        } catch (Exception e) {
+            System.out.println(e.toString());
+        } finally {
+            session.close();
         }
         return facturas;
     }
 
+    public List facturasPorFecha(int anioDesde, int anioHasta, int mesDesde, int mesHasta) {
+        Session session = HibernateUtil.getSessionFactory().openSession();
+        List facturas = null;
+        try {
+            session.beginTransaction();
+            Query getFacturas = session.createQuery("from Factura fact where year(fact.fecha) >= :adesde && where year(fact.fecha) <= :ahasta && where month(fact.fecha) >= :mdesde && where month(fact.fecha) <= :mhasta");
+            getFacturas.setInteger("adesde", anioDesde);
+            getFacturas.setInteger("ahasta", anioHasta);
+            getFacturas.setInteger("mdesde", mesDesde);
+            getFacturas.setInteger("mhasta", mesHasta);
+            facturas = getFacturas.list();
+
+        } catch (Exception e) {
+            System.out.println(e.toString());
+        } finally {
+            session.close();
+        }
+        return facturas;
+    }
+
+    public List facturasPorCliente(String nombreCliente) {
+        Session session = HibernateUtil.getSessionFactory().openSession();
+        List facturas = null;
+        try {
+            session.beginTransaction();
+            Query getFacturas = session.createQuery("from Factura fact where fact.cliente = :ncliente");
+            getFacturas.setString("ncliente", nombreCliente);
+            facturas = getFacturas.list();
+
+        } catch (Exception e) {
+            System.out.println(e.toString());
+        } finally {
+            session.close();
+        }
+        return facturas;
+    }
+    
+        public List facturasAnuladasPorMes(int mes) {
+        Session session = HibernateUtil.getSessionFactory().openSession();
+        List facturas = null;
+        try {
+            session.beginTransaction();
+            Query getFacturas = session.createQuery("from Factura fact where month(fact.fecha) = :var1 && where fact.is_anulado = :estado");
+            getFacturas.setInteger("var1", mes);
+            getFacturas.setBoolean("estado", true);
+
+            facturas = getFacturas.list();
+
+        } catch (Exception e) {
+            System.out.println(e.toString());
+        } finally {
+            session.close();
+        }
+        return facturas;
+    }
+    
 }
