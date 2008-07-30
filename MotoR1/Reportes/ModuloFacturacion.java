@@ -25,14 +25,33 @@ public class ModuloFacturacion {
         FacturaDaoImpl factura = new FacturaDaoImpl();
         List factList = factura.facturasPorFecha(anioDesde, anioHasta, mesDesde, mesHasta);
         Iterator itFact = factList.iterator();
+        crearExcel(itFact, "FacturasPorFecha.xls", "Facturas_por_fecha", "REPORTE DE FACTURAS POR FECHA");
+
+    }
+
+    public void facturasPorCliente(String nombreCliente) {
+        FacturaDaoImpl factura = new FacturaDaoImpl();
+        List factList = factura.facturasPorCliente(nombreCliente);
+        Iterator itFact = factList.iterator();
+        crearExcel(itFact, "FacturasPorCliente.xls", "Facturas_por_cliente", "REPORTE DE FACTURAS POR CLIENTE");
+    }
+
+    public void facturasAnuladasPorMes(int mes) {
+        FacturaDaoImpl factura = new FacturaDaoImpl();
+        List factList = factura.facturasAnuladasPorMes(mes);
+        Iterator itFact = factList.iterator();
+        crearExcel(itFact, "FacturasAnuladasPorMes.xls", "Facturas_anuladas_por_mes", "REPORTE DE FACTURAS ANULADAS POR MES");
+    }
+    
+    public void crearExcel(Iterator itFact, String nombreArchivo, String nombreHoja, String nombreReporte){
         Factura factTemp;
 
         try {
             //Se crea el libro Excel
-            WritableWorkbook workbook = Workbook.createWorkbook(new File("FacturasPorFecha.xls"));
+            WritableWorkbook workbook = Workbook.createWorkbook(new File(nombreArchivo));
 
             //Se crea una nueva hoja dentro del libro
-            WritableSheet sheet = workbook.createSheet("Facturas_por_fecha", 0);
+            WritableSheet sheet = workbook.createSheet(nombreHoja, 0);
 
             //Creamos una celda de tipo fecha y la mostramos
             //indicando un patron de formato
@@ -41,7 +60,7 @@ public class ModuloFacturacion {
             WritableCellFormat dateFormat = new WritableCellFormat(customDateFormat);
 
             //Creamos celdas de varios tipos
-            sheet.addCell(new jxl.write.Label(2, 0, "REPORTE DE FACTURAS POR FECHA")); //(columna+1) & (fila+1) & (dato)
+            sheet.addCell(new jxl.write.Label(2, 0, nombreReporte)); //(columna+1) & (fila+1) & (dato)
             sheet.addCell(new jxl.write.Label(0, 3, "CODIGO DE FACTURA"));
             sheet.addCell(new jxl.write.Label(1, 3, "¿Anulada?"));
             sheet.addCell(new jxl.write.Label(2, 3, "FECHA"));
@@ -97,12 +116,5 @@ public class ModuloFacturacion {
         } catch (WriteException ex) {
             System.out.println("Error al escribir el fichero.");
         }
-
-    }
-
-    public void facturasPorCliente() {
-    }
-
-    public void facturasAnuladasPorFecha() {
     }
 }
