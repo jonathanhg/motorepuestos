@@ -7,7 +7,7 @@ import java.util.LinkedList;
 import java.util.List;
 import model.Producto;
 
-import Reportes.ModuloFacturacion;
+import Reportes.*;
 /*
  * To change this template, choose Tools | Templates
  * and open the template in the editor.
@@ -33,30 +33,35 @@ public class chrge {
         Producto product1 = new Producto();
         product1.setId("Yamaha09");
         product1.setDescripcion("Casco de moto");
-        product1.setFecha(new Date());
+        product1.setFechaIngreso(new Date());
         product1.setExistencias(24);
         product1.setMinimos(6);
-        product1.setPrecio(7890);
+        product1.setPrecioUnitario(7890);
         
         Producto product2 = new Producto();
         product2.setId("Kawasaky85");
         product2.setDescripcion("Candelar");
-        product2.setFecha(new Date());
-        product2.setExistencias(30);
+        product2.setFechaIngreso(new Date());
+        product2.setExistencias(9);
         product2.setMinimos(10);
-        product2.setPrecio(9500);
+        product2.setPrecioUnitario(9500);
         
         productos.add(product1);
         productos.add(product2);
         
         fact1.setCliente("jon");
         fact1.setProductos(productos);
-        fact1.setFecha(new Date());       
+        fact1.setFecha(new Date()); 
+        fact1.setTotal(7890+9500);
         
         fact.agregarFactura(fact1);
      
        ModuloFacturacion prueba = new ModuloFacturacion();
        prueba.facturasPorCliente("jon");
+        
+//        ModuloInventario prueba2 = new ModuloInventario();
+//        prueba2.reporteInventario();
+//        prueba2.reporteMinimos();
     }
 
 }

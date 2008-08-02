@@ -79,7 +79,7 @@ public class ComprasDaoImpl implements ComprasDao {
         List compras = null;
         try{
             session.beginTransaction();
-            Query getCompras = session.createQuery("from Compras compra where year(compra.fecha) = :var1");
+            Query getCompras = session.createQuery("from Compras compra where month(compra.fecha) = :var1");
             getCompras.setInteger("var1", mes); // la funcion esta Deprecated hay que buscar otra
             compras = getCompras.list();
             

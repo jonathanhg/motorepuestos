@@ -34,7 +34,7 @@ public class Producto {
     // <editor-fold defaultstate="collapsed" desc=" UML Marker "> 
     // #[regen=yes,id=DCE.653935D6-03CC-5F0D-68E3-02E0B976AFF3]
     // </editor-fold> 
-    private Date fecha;
+    private Date fechaIngreso;
 
     // <editor-fold defaultstate="collapsed" desc=" UML Marker "> 
     // #[regen=yes,id=DCE.7EDA296F-B66E-4E16-DF81-C2097115C137]
@@ -49,7 +49,7 @@ public class Producto {
     // <editor-fold defaultstate="collapsed" desc=" UML Marker "> 
     // #[regen=yes,id=DCE.A1EDBB73-8722-68B6-8819-CF19D056F485]
     // </editor-fold> 
-    private double precio;
+    private double precioUnitario;
 
     // <editor-fold defaultstate="collapsed" desc=" UML Marker "> 
     // #[regen=yes,id=DCE.E36533B3-F535-75D4-8568-22F25F8CED55]
@@ -89,15 +89,15 @@ public class Producto {
     // <editor-fold defaultstate="collapsed" desc=" UML Marker "> 
     // #[regen=yes,regenBody=yes,id=DCE.DD684D74-CBB4-A44F-C1D7-312AC4164C54]
     // </editor-fold> 
-    public double getPrecio () {
-        return precio;
+    public double getPrecioUnitario () {
+        return precioUnitario;
     }
 
     // <editor-fold defaultstate="collapsed" desc=" UML Marker "> 
     // #[regen=yes,regenBody=yes,id=DCE.3EA1AABF-F749-A917-20C2-D5A10F1BAE0C]
     // </editor-fold> 
-    public void setPrecio (double val) {
-        this.precio = val;
+    public void setPrecioUnitario (double val) {
+        this.precioUnitario = val;
     }
 
     // <editor-fold defaultstate="collapsed" desc=" UML Marker "> 
@@ -118,15 +118,15 @@ public class Producto {
     // #[regen=yes,regenBody=yes,id=DCE.545DF09C-C253-0F4D-F070-20E7BC8C20FB]
     // </editor-fold> 
     @Temporal(TemporalType.DATE)
-    public Date getFecha () {
-        return fecha;
+    public Date getFechaIngreso () {
+        return fechaIngreso;
     }
 
     // <editor-fold defaultstate="collapsed" desc=" UML Marker "> 
     // #[regen=yes,regenBody=yes,id=DCE.935422E5-49E5-3D12-0B84-C260121348CC]
     // </editor-fold> 
-    public void setFecha (Date val) {
-        this.fecha = val;
+    public void setFechaIngreso (Date val) {
+        this.fechaIngreso = val;
     }
 
     // <editor-fold defaultstate="collapsed" desc=" UML Marker "> 
