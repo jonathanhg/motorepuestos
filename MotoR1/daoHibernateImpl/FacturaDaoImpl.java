@@ -130,5 +130,22 @@ public class FacturaDaoImpl implements FacturaDao {
         }
         return facturas;
     }
+        
+            public List facturaPorCodigo(int codigo) {
+        Session session = HibernateUtil.getSessionFactory().openSession();
+        List facturas = null;
+        try {
+            session.beginTransaction();
+            Query getFacturas = session.createQuery("from Factura fact where fact.id = :ncodigo");
+            getFacturas.setInteger("ncodigo", codigo);
+            facturas = getFacturas.list();
+
+        } catch (Exception e) {
+            System.out.println(e.toString());
+        } finally {
+            session.close();
+        }
+        return facturas;
+    }
     
 }
