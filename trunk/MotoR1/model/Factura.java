@@ -11,6 +11,7 @@ import javax.persistence.Column;
 
 
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -111,19 +112,9 @@ public class Factura implements Serializable  {
         this.cliente = val;
     }
 
-    // <editor-fold defaultstate="collapsed" desc=" UML Marker "> 
-    // #[regen=yes,regenBody=yes,id=DCE.5C8CB951-485B-E978-11AF-67B1CEBA1B61]
-    // </editor-fold> 
-    public String getCodigo () {
-        return codigo;
-    }
 
-    // <editor-fold defaultstate="collapsed" desc=" UML Marker "> 
-    // #[regen=yes,regenBody=yes,id=DCE.C5833075-8419-FBB4-713D-EDFDFFFCBDA9]
-    // </editor-fold> 
-    public void setCodigo (String val) {
-        this.codigo = val;
-    }
+
+
 
     // <editor-fold defaultstate="collapsed" desc=" UML Marker "> 
     // #[regen=yes,regenBody=yes,id=DCE.CF837DC0-25C8-6C7E-1A77-D780A43E788C]
@@ -142,7 +133,7 @@ public class Factura implements Serializable  {
     // <editor-fold defaultstate="collapsed" desc=" UML Marker "> 
     // #[regen=yes,regenBody=yes,id=DCE.DF30B582-7376-A399-600B-36DE9035D088]
     // </editor-fold> 
-    @Temporal(TemporalType.TIMESTAMP)
+    @Temporal(TemporalType.DATE)
     public Date getFecha () {
         return fecha;
     }
@@ -203,7 +194,7 @@ public class Factura implements Serializable  {
 
     // Borra todos los productos cuando se elimina factura ,  
     //crea nuevos productos en la factura sin tener que consultarlos antes para insertarlos , 
-    @OneToMany(cascade=CascadeType.ALL)  
+    @OneToMany(cascade=CascadeType.ALL , fetch=FetchType.EAGER) 
     @JoinTable(
         name="FactProductos",
         joinColumns={@JoinColumn(name="fact_id")},

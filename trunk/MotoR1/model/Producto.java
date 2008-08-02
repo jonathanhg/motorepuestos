@@ -29,7 +29,7 @@ public class Producto {
     // <editor-fold defaultstate="collapsed" desc=" UML Marker "> 
     // #[regen=yes,id=DCE.793DC6F0-0CFA-3C8F-9507-40DA6FF677BD]
     // </editor-fold> 
-    private Integer id;
+    private String id;
 
     // <editor-fold defaultstate="collapsed" desc=" UML Marker "> 
     // #[regen=yes,id=DCE.653935D6-03CC-5F0D-68E3-02E0B976AFF3]
@@ -133,16 +133,15 @@ public class Producto {
     // #[regen=yes,regenBody=yes,id=DCE.6B76175B-76E7-F817-E929-BC23663ED0FD]
     // </editor-fold> 
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
     @Column(name="id", unique=true)
-    public Integer getId () {
+    public String getId () {
         return id;
     }
 
     // <editor-fold defaultstate="collapsed" desc=" UML Marker "> 
     // #[regen=yes,regenBody=yes,id=DCE.A304E80D-34DD-55C6-575E-D5B3273966A9]
     // </editor-fold> 
-    public void setId (Integer val) {
+    public void setId (String val) {
         this.id = val;
     }
 

@@ -80,7 +80,7 @@ public class FacturaDaoImpl implements FacturaDao {
         List facturas = null;
         try {
             session.beginTransaction();
-            Query getFacturas = session.createQuery("from Factura fact where year(fact.fecha) >= :adesde && where year(fact.fecha) <= :ahasta && where month(fact.fecha) >= :mdesde && where month(fact.fecha) <= :mhasta");
+            Query getFacturas = session.createQuery("from Factura fact where year(fact.fecha) >= :adesde and where year(fact.fecha) <= :ahasta and where month(fact.fecha) >= :mdesde and where month(fact.fecha) <= :mhasta");
             getFacturas.setInteger("adesde", anioDesde);
             getFacturas.setInteger("ahasta", anioHasta);
             getFacturas.setInteger("mdesde", mesDesde);
@@ -117,7 +117,7 @@ public class FacturaDaoImpl implements FacturaDao {
         List facturas = null;
         try {
             session.beginTransaction();
-            Query getFacturas = session.createQuery("from Factura fact where month(fact.fecha) = :var1 && where fact.is_anulado = :estado");
+            Query getFacturas = session.createQuery("from Factura fact where month(fact.fecha) = :var1 and where fact.is_anulado = :estado");
             getFacturas.setInteger("var1", mes);
             getFacturas.setBoolean("estado", true);
 

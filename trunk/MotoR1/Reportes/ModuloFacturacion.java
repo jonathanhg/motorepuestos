@@ -8,7 +8,8 @@ import daoHibernateImpl.FacturaDaoImpl;
 import model.Factura;
 
 import java.io.*;
-import java.util.Date;
+//import java.util.Date;
+import java.sql.Date;
 import java.util.Iterator;
 import java.util.List;
 import jxl.*;
@@ -74,13 +75,17 @@ public class ModuloFacturacion {
                 factTemp = (Factura) itFact.next();
                                 
                 //Genera los datos de las filas para la columna Codigo de Factura
-                sheet.addCell(new jxl.write.Label(0, fila, factTemp.getCodigo()));
+                sheet.addCell(new jxl.write.Number(0, fila, factTemp.getId()));
 
                 //Genera los datos de las filas para la columna Estado
                 sheet.addCell(new jxl.write.Boolean(1, fila, factTemp.getIs_anulado()));
 
                 //Genera los datos de las filas para la columna Fecha
+                //DateTime fecha = new DateTime(2, fila, factTemp.getFecha(),dateFormat);
+                
                 sheet.addCell(new jxl.write.DateTime(2, fila, factTemp.getFecha(), dateFormat));
+                
+                //sheet.addCell(new jxl.write.DateTime(2, fila, factTemp.getFecha(), dateFormat));
 
                 //Genera los datos de las filas para la columna Cliente
                 sheet.addCell(new jxl.write.Label(3, fila, factTemp.getCliente()));
@@ -91,8 +96,9 @@ public class ModuloFacturacion {
                 Iterator itProd = productos.iterator();
                 while (itProd.hasNext()) {
                     prodTemp = (Producto) itProd.next();
-                    sheet.addCell(new jxl.write.Label(4, fila++, prodTemp.getDescripcion()));
                     sheet.addCell(new jxl.write.Number(5, fila, prodTemp.getPrecio())); // cómo hago --> cantidad comprada * precio unitario?
+                    sheet.addCell(new jxl.write.Label(4, fila++, prodTemp.getDescripcion()));
+                    
                 }
 
                 //Genera los datos de las filas para la columna Total
