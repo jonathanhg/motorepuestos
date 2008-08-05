@@ -35,6 +35,7 @@ public class FactProduct implements Serializable {
     // </editor-fold> 
     private double impuestoVentas;
     private int cantidad;
+    private double subtotal;
     // <editor-fold defaultstate="collapsed" desc=" UML Marker "> 
     // #[regen=yes,regenBody=yes,id=DCE.DD684D74-CBB4-A44F-C1D7-312AC4164C54]
     // </editor-fold> 
@@ -110,6 +111,14 @@ public class FactProduct implements Serializable {
 
     public void setCantidad(int cantidad) {
         this.cantidad = cantidad;
+    }
+
+    public double getSubtotal() {
+        return subtotal;
+    }
+
+    public void setSubtotal(double subtotal) {
+        this.subtotal = subtotal;
     }
 }
 

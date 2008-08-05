@@ -14,6 +14,7 @@ import java.util.Iterator;
 import java.util.List;
 import jxl.*;
 import jxl.write.*;
+import model.FactProduct;
 import model.Producto;
 
 /**
@@ -75,7 +76,8 @@ public class ModuloFacturacion {
             sheet.addCell(new jxl.write.Label(4, 3, "PRODUCTOS"));
             sheet.addCell(new jxl.write.Label(5, 3, "CANTIDAD"));
             sheet.addCell(new jxl.write.Label(6, 3, "PRECIO UNITARIO"));
-            sheet.addCell(new jxl.write.Label(7, 3, "TOTAL"));
+            sheet.addCell(new jxl.write.Label(7, 3, "SUBTOTAL"));
+            sheet.addCell(new jxl.write.Label(8, 3, "TOTAL"));
 
             double montoTotal = 0.0;
 
@@ -95,19 +97,20 @@ public class ModuloFacturacion {
                 //Genera los datos de las filas para la columna Cliente
                 sheet.addCell(new jxl.write.Label(3, fila, factTemp.getCliente()));
 
-                //Genera los datos de las filas para la columna Productos, cantdad) y Descripcion
-                Producto prodTemp = new Producto();
+                //Genera los datos de las filas para la columna Productos, cantidad y Descripcion,etc
+                FactProduct prodTemp = new FactProduct();
                 List productos = factTemp.getProductos();
                 Iterator itProd = productos.iterator();
                 while (itProd.hasNext()) {
-                    prodTemp = (Producto) itProd.next();
-                    sheet.addCell(new jxl.write.Label(5, fila, "Not yet implemented...")); 
-                    sheet.addCell(new jxl.write.Number(6, fila, prodTemp.getPrecioUnitario())); 
+                    prodTemp = (FactProduct) itProd.next();
+                    sheet.addCell(new jxl.write.Number(5, fila, prodTemp.getCantidad())); 
+                    sheet.addCell(new jxl.write.Number(6, fila, prodTemp.getPrecio())); 
+                    sheet.addCell(new jxl.write.Number(7, fila,prodTemp.getSubtotal())); 
                     sheet.addCell(new jxl.write.Label(4, fila++, prodTemp.getDescripcion()));           
                 }
 
                 //Genera los datos de las filas para la columna Total
-                sheet.addCell(new jxl.write.Number(7, fila++, factTemp.getTotal()));
+                sheet.addCell(new jxl.write.Number(8, fila++, factTemp.getTotal()));
                 montoTotal +=factTemp.getTotal();
                 
                 sheet.addCell(new jxl.write.Label(0, fila++, "____________________________________________________________________"));
@@ -115,8 +118,8 @@ public class ModuloFacturacion {
             }
 
             //Genera los datos para el monto total acumulado
-            sheet.addCell(new jxl.write.Label(7, fila++, "SUMA TOTALES"));
-            sheet.addCell(new jxl.write.Number(7, fila, montoTotal));
+            sheet.addCell(new jxl.write.Label(8, fila++, "SUMA TOTALES"));
+            sheet.addCell(new jxl.write.Number(8, fila, montoTotal));
 
             //Escribimos los resultados al fichero Excel
             workbook.write();

@@ -12,6 +12,8 @@ import Reportes.*;
  * To change this template, choose Tools | Templates
  * and open the template in the editor.
  */
+import daoHibernateImpl.ProductoDaoImpl;
+import model.FactProduct;
 
 /**
  *
@@ -28,31 +30,45 @@ public class chrge {
         
         fact1.setPrecio(99999);
         
-        List<Producto> productos = new ArrayList<Producto>();
+        ProductoDaoImpl prodManager = new ProductoDaoImpl();
+        List<FactProduct> factProduct = new ArrayList<FactProduct>();
         
-        Producto product1 = new Producto();
-        product1.setId("Yamaha09");
-        product1.setDescripcion("Casco de moto");
-        product1.setFechaIngreso(new Date());
-        product1.setExistencias(24);
-        product1.setMinimos(6);
-        product1.setPrecioUnitario(7890);
+        Producto producto1 = new Producto();
+        producto1.setId("Yamaha09");
+        producto1.setDescripcion("Casco de moto");
+        producto1.setFechaIngreso(new Date());
+        producto1.setExistencias(24);
+        producto1.setMinimos(6);
+        producto1.setPrecioUnitario(7890);
         
-        Producto product2 = new Producto();
-        product2.setId("Kawasaky85");
-        product2.setDescripcion("Candelar");
-        product2.setFechaIngreso(new Date());
-        product2.setExistencias(9);
-        product2.setMinimos(10);
-        product2.setPrecioUnitario(9500);
+        Producto producto2 = new Producto();
+        producto2.setId("Kawasaky85");
+        producto2.setDescripcion("Candelar");
+        producto2.setFechaIngreso(new Date());
+        producto2.setExistencias(9);
+        producto2.setMinimos(10);
+        producto2.setPrecioUnitario(9500);
         
-        productos.add(product1);
-        productos.add(product2);
+        
+        FactProduct prodFact = new FactProduct();
+        prodFact.setId(producto1.getId());
+        prodFact.setDescripcion(producto1.getDescripcion());
+        prodFact.setPrecio(producto1.getPrecioUnitario());
+        prodFact.setCantidad(4);
+        prodFact.setSubtotal(producto1.getPrecioUnitario()*prodFact.getCantidad());
+        producto1.setExistencias(producto1.getExistencias()-prodFact.getCantidad());
+        
+        prodManager.agregarProducto(producto1);
+        prodManager.agregarProducto(producto2);
+        
+        factProduct.add(prodFact);
+        
+        //productos.add(producto2);
         
         fact1.setCliente("jon");
-        fact1.setProductos(productos);
+        fact1.setProductos(factProduct);
         fact1.setFecha(new Date()); 
-        fact1.setTotal(7890+9500);
+        fact1.setTotal(123456789);
         
         fact.agregarFactura(fact1);
      
