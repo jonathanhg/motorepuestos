@@ -190,21 +190,22 @@ public class Factura implements Serializable  {
         this.total = val;
     }
     
-    private List<Producto> productos;
+    private List<FactProduct> productos;
 
     // Borra todos los productos cuando se elimina factura ,  
     //crea nuevos productos en la factura sin tener que consultarlos antes para insertarlos , 
+    //se utliza Eager para que traiga los campos ya inicializados
     @OneToMany(cascade=CascadeType.ALL , fetch=FetchType.EAGER) 
     @JoinTable(
         name="FactProductos",
         joinColumns={@JoinColumn(name="fact_id")},
         inverseJoinColumns= @JoinColumn(name="product_id")
     )
-    public List<Producto> getProductos() {
+    public List<FactProduct> getProductos() {
         return productos;
     }
 
-    public void setProductos(List<Producto> productos) {
+    public void setProductos(List<FactProduct> productos) {
         this.productos = productos;
     }
 
