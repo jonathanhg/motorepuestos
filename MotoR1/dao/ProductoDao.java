@@ -5,6 +5,7 @@
 
 package dao;
 
+import java.util.List;
 import model.Producto;
 /**
  *
@@ -18,6 +19,9 @@ public interface  ProductoDao {
     
     public void actualizarProducto(Producto producto);
     
+    public List obtenerProductos();
+    
+    public List obtenerMinimos();
     
 
 }
