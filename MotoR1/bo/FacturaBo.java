@@ -12,7 +12,7 @@ import model.Factura;
  */
 public interface FacturaBo {
     
-    public double save(Factura fact);
+    public int save(Factura fact);
     
     
 }
