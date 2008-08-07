@@ -22,10 +22,13 @@ public interface  FacturaDao {
     
     public List facturasPorMes(int mes);
     
+    public List facturasPorAnio(int anio);
+    
     public List facturasPorFecha(int anioDesde, int anioHasta, int mesDesde, int mesHasta);
     
     public List facturasPorCliente(String nombreCliente);
     
     public List facturasAnuladasPorMes(int mes);
-
+    
+    public Factura facturaPorCodigo(int codigo);
 }

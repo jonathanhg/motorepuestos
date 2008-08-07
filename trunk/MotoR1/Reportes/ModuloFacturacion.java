@@ -8,8 +8,9 @@ import daoHibernateImpl.FacturaDaoImpl;
 import model.Factura;
 
 import java.io.*;
-//import java.util.Date;
-import java.sql.Date;
+import java.util.Date;
+//import java.sql.Date;
+import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 import jxl.*;
@@ -24,8 +25,10 @@ import model.Producto;
 public class ModuloFacturacion {
 
     public void facturaPorCodigo(int codigoFactura) {
-        FacturaDaoImpl factura = new FacturaDaoImpl();
-        List factList = factura.facturaPorCodigo(codigoFactura);
+        FacturaDaoImpl facturaManager = new FacturaDaoImpl();
+        Factura factura = facturaManager.facturaPorCodigo(codigoFactura);
+        List<Factura> factList = new ArrayList<Factura>();
+        factList.add(factura);
         Iterator itFact = factList.iterator();
         crearExcel(itFact, "FacturaPorCodigo.xls", "Factura_por_codigo", "REPORTE DE FACTURA POR CODIGO");
     }
@@ -75,7 +78,9 @@ public class ModuloFacturacion {
             WritableCellFormat dateFormat = new WritableCellFormat(customDateFormat);
             //Creamos celdas de los titulos
             sheet.addCell(new jxl.write.Label(2, 0, nombreReporte)); //(columna+1) & (fila+1) & (dato)
-
+            sheet.addCell(new jxl.write.Label(0, 1, "Fecha de creacion:"));
+            sheet.addCell(new jxl.write.DateTime(1, 1, new Date(), dateFormat));
+            
             sheet.addCell(new jxl.write.Label(0, 3, "CODIGO DE FACTURA"));
             sheet.addCell(new jxl.write.Label(1, 3, "¿Anulada?"));
             sheet.addCell(new jxl.write.Label(2, 3, "FECHA"));

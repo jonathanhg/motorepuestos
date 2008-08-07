@@ -57,6 +57,23 @@ public class ProductoDaoImpl implements ProductoDao {
         }
     }
 
+        public Producto obtenerProducto(String codigo) {
+        Session session = HibernateUtil.getSessionFactory().openSession();
+       Producto producto = null;
+        try {
+            session.beginTransaction();
+            Query getFacturas = session.createQuery("from Producto prod where prod.id = :ncodigo");
+            getFacturas.setString("ncodigo", codigo);
+            producto = (Producto)getFacturas.uniqueResult();
+
+        } catch (Exception e) {
+            System.out.println(e.toString());
+        } finally {
+            session.close();
+        }
+        return producto;
+    }
+    
     public List obtenerProductos() {
         Session session = HibernateUtil.getSessionFactory().openSession();
         List facturas = null;

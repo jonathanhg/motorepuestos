@@ -76,6 +76,25 @@ public class FacturaDaoImpl implements FacturaDao {
         return facturas;
     }
 
+        public List facturasPorAnio(int anio) {
+        Session session = HibernateUtil.getSessionFactory().openSession();
+        List facturas = null;
+        try {
+            session.beginTransaction();
+            Query getFacturas = session.createQuery("from Factura fact where year(fact.fecha) = :var1 and where fact.is_anulado = :estado");
+            getFacturas.setInteger("var1", anio); // la funcion esta Deprecated hay que buscar otra
+            getFacturas.setBoolean("estado", false);
+
+            facturas = getFacturas.list();
+
+        } catch (Exception e) {
+            System.out.println(e.toString());
+        } finally {
+            session.close();
+        }
+        return facturas;
+    }
+    
     public List facturasPorFecha(int anioDesde, int anioHasta, int mesDesde, int mesHasta) {
         Session session = HibernateUtil.getSessionFactory().openSession();
         List facturas = null;
@@ -135,20 +154,20 @@ public class FacturaDaoImpl implements FacturaDao {
         return facturas;
     }
 
-    public List facturaPorCodigo(int codigo) {
+    public Factura facturaPorCodigo(int codigo) {
         Session session = HibernateUtil.getSessionFactory().openSession();
-        List facturas = null;
+        Factura factura = null;
         try {
             session.beginTransaction();
             Query getFacturas = session.createQuery("from Factura fact where fact.id = :ncodigo");
             getFacturas.setInteger("ncodigo", codigo);
-            facturas = getFacturas.list();
+            factura = (Factura)getFacturas.uniqueResult();
 
         } catch (Exception e) {
             System.out.println(e.toString());
         } finally {
             session.close();
         }
-        return facturas;
+        return factura;
     }
 }
