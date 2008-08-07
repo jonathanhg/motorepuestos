@@ -7,22 +7,32 @@ package view;
 
 
 
+import boImpl.FacturaBoImpl;
+import daoHibernateImpl.FacturaDaoImpl;
 import javax.swing.GroupLayout;
 import javax.swing.JInternalFrame;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
 import javax.swing.table.AbstractTableModel;
-
+import model.Factura;
 /**
  *
  * @author Administrator
  */
 public class InternalFact extends JInternalFrame {
 
-        public JTable tableProduct;
+    public JTable tableProduct;
     
-    public InternalFact (){
-       
+    private FacturaBoImpl factBo;
+    
+    public InternalFact (Factura factura){
+     factBo = new FacturaBoImpl();
+        if(factura == null){
+         factura = new Factura();
+         double idFact   =  factBo.save(factura);
+         
+         double temp = idFact;
+       }
        tableProduct = new JTable(new FactTableModel() );
         
        JScrollPane scrollPane = new JScrollPane(tableProduct);

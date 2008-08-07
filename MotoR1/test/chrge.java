@@ -80,8 +80,8 @@ public class chrge {
 //        prueba2.reporteMinimos();
 
 //          PRUEBA DE IMPRESION
-//        Impresora impresora = new Impresora();
-//        impresora.imprimir(fact1);
+        Impresora impresora = new Impresora();
+        impresora.imprimir(fact1);
 
     }
 }

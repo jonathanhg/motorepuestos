@@ -23,6 +23,7 @@ public class FacturaDaoImpl implements FacturaDao {
         try {
             session.beginTransaction();
             session.save(factura);
+            
             session.getTransaction().commit();
         } catch (Exception e) {
             System.out.println(e.toString());
@@ -62,9 +63,9 @@ public class FacturaDaoImpl implements FacturaDao {
         List facturas = null;
         try {
             session.beginTransaction();
-            Query getFacturas = session.createQuery("from Factura fact where month(fact.fecha) = :var1 and where fact.is_anulado = :estado");
+            Query getFacturas = session.createQuery("from Factura fact where month(fact.fecha) = :var1 and  fact.is_anulado = :estado");
             getFacturas.setInteger("var1", mes); // la funcion esta Deprecated hay que buscar otra
-            getFacturas.setBoolean("estado", false);
+            getFacturas.setString("estado", "N");
 
             facturas = getFacturas.list();
 
@@ -100,12 +101,12 @@ public class FacturaDaoImpl implements FacturaDao {
         List facturas = null;
         try {
             session.beginTransaction();
-            Query getFacturas = session.createQuery("from Factura fact where year(fact.fecha) >= :adesde and where year(fact.fecha) <= :ahasta and where month(fact.fecha) >= :mdesde and where month(fact.fecha) <= :mhasta and where fact.is_anulado = :estado");
+            Query getFacturas = session.createQuery("from Factura fact where year(fact.fecha) >= :adesde and  year(fact.fecha) <= :ahasta and where month(fact.fecha) >= :mdesde and where month(fact.fecha) <= :mhasta and where fact.is_anulado = :estado");
             getFacturas.setInteger("adesde", anioDesde);
             getFacturas.setInteger("ahasta", anioHasta);
             getFacturas.setInteger("mdesde", mesDesde);
             getFacturas.setInteger("mhasta", mesHasta);
-            getFacturas.setBoolean("estado", false);
+             getFacturas.setString("estado", "N");
             facturas = getFacturas.list();
 
 
@@ -122,9 +123,9 @@ public class FacturaDaoImpl implements FacturaDao {
         List facturas = null;
         try {
             session.beginTransaction();
-            Query getFacturas = session.createQuery("from Factura fact where fact.cliente = :ncliente and where fact.is_anulado = :estado");
+            Query getFacturas = session.createQuery("from Factura fact where fact.cliente = :ncliente and  fact.is_anulado = :estado");
             getFacturas.setString("ncliente", nombreCliente);
-            getFacturas.setBoolean("estado", false);
+            getFacturas.setString("estado", "Y");
             facturas = getFacturas.list();
 
         } catch (Exception e) {
@@ -140,9 +141,9 @@ public class FacturaDaoImpl implements FacturaDao {
         List facturas = null;
         try {
             session.beginTransaction();
-            Query getFacturas = session.createQuery("from Factura fact where month(fact.fecha) = :var1 and where fact.is_anulado = :estado");
+            Query getFacturas = session.createQuery("from Factura fact where month(fact.fecha) = :var1 and  fact.is_anulado = :estado");
             getFacturas.setInteger("var1", mes);
-            getFacturas.setBoolean("estado", true);
+             getFacturas.setString("estado", "N");
 
             facturas = getFacturas.list();
 

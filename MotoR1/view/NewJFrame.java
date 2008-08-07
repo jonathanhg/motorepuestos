@@ -85,7 +85,7 @@ createInternalFrameFact();
 }//GEN-LAST:event_jMenuItem1ActionPerformed
 
 private void createInternalFrameFact(){
-        InternalFact fact = new InternalFact();
+        InternalFact fact = new InternalFact(null);
         fact.setResizable(true);
         fact.setSize(200, 200);
         try {
