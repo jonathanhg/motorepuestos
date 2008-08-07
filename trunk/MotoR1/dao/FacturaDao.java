@@ -20,7 +20,7 @@ public interface  FacturaDao {
     
     public void actualizarEmpresa(Factura factura);
     
-    public List facturasPorAnio(int anio);
+    public List facturasPorMes(int mes);
     
     public List facturasPorFecha(int anioDesde, int anioHasta, int mesDesde, int mesHasta);
     

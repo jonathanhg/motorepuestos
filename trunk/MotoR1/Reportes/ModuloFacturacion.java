@@ -44,6 +44,13 @@ public class ModuloFacturacion {
         crearExcel(itFact, "FacturasPorCliente.xls", "Facturas_por_cliente", "REPORTE DE FACTURAS POR CLIENTE");
     }
 
+    public void facturasPorMes(int mes) {
+        FacturaDaoImpl factura = new FacturaDaoImpl();
+        List factList = factura.facturasPorMes(mes);
+        Iterator itFact = factList.iterator();
+        crearExcel(itFact, "FacturasPorMes.xls", "Facturas_por_mes", "REPORTE DE FACTURAS POR MES");
+    }
+    
     public void facturasAnuladasPorMes(int mes) {
         FacturaDaoImpl factura = new FacturaDaoImpl();
         List factList = factura.facturasAnuladasPorMes(mes);
