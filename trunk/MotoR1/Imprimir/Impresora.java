@@ -54,7 +54,7 @@ public class Impresora {
     private Iterator getTexto(Factura factura) {
         Iterator iProductos = factura.getProductos().iterator();
         FactProduct prodTemp = new FactProduct();
-        ArrayList texto = new ArrayList();
+        ArrayList<String> texto = new ArrayList<String>();
         int total;
         texto.add("     MOTO REPUESTOS SAN PEDRO");
         texto.add("      XINIA CASTILLO HIDALGO");

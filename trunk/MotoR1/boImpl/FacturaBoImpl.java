@@ -17,15 +17,16 @@ public class FacturaBoImpl implements FacturaBo {
     
     public FacturaDaoImpl dao;
     
-    public void FacturaBoImpl(){
+    public  FacturaBoImpl(){
         dao = new FacturaDaoImpl();
     }
     
-    public double save(Factura fact) {
-      dao.agregarFactura(fact);
-     
+    public int save(Factura fact) {
       
-      return fact.getId();
+        dao.agregarFactura(fact);
+        Factura temp = fact;
+      
+      return fact.getId() ;
     }
 
 }

@@ -11,8 +11,10 @@ import boImpl.FacturaBoImpl;
 import daoHibernateImpl.FacturaDaoImpl;
 import javax.swing.GroupLayout;
 import javax.swing.JInternalFrame;
+import javax.swing.JLabel;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
+import javax.swing.JTextField;
 import javax.swing.table.AbstractTableModel;
 import model.Factura;
 /**
@@ -27,28 +29,34 @@ public class InternalFact extends JInternalFrame {
     
     public InternalFact (Factura factura){
      factBo = new FacturaBoImpl();
+     int idFact = 0;
         if(factura == null){
-         factura = new Factura();
-         double idFact   =  factBo.save(factura);
+           factura = new Factura();
          
-         double temp = idFact;
+             idFact   =  factBo.save(factura);
+          
+        
        }
        tableProduct = new JTable(new FactTableModel() );
         
        JScrollPane scrollPane = new JScrollPane(tableProduct);
         //tableProduct.setFillsViewportHeight(true);
-       
+       JTextField fieldId = new JTextField(Integer.toString(idFact));
+       fieldId.setEditable(false);
+       fieldId.setSize(20,20);
         GroupLayout layout = new GroupLayout(this.getContentPane());
         this.getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createSequentialGroup()
+            .addComponent(fieldId)   
             .addComponent(scrollPane)
-                
+             
          );
         layout.setVerticalGroup(
                 layout.createSequentialGroup()
+                .addComponent(fieldId) 
                 .addComponent(scrollPane)
-                
+                 
                 );
         
     }
