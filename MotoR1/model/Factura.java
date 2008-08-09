@@ -91,6 +91,8 @@ public class Factura implements Serializable  {
     // #[regen=yes,id=DCE.2D02A437-35E0-78AD-1601-DBEE9A64244B]
     // </editor-fold> 
     private boolean is_anulado;
+    
+    private boolean sin_impuesto;
 
     // <editor-fold defaultstate="collapsed" desc=" UML Marker "> 
     // #[regen=yes,id=DCE.77586E61-C6F3-81AB-C3F5-46C95807EF05]
@@ -206,6 +208,16 @@ public class Factura implements Serializable  {
 
     public void setProductos(List<FactProduct> productos) {
         this.productos = productos;
+    }
+
+    public boolean isSin_impuesto() {
+        return sin_impuesto;
+    }
+
+    public void setSin_impuesto(boolean yaImplementado) {
+        double impuesto = this.getTotal()*0.13;
+        this.setTotal(this.getTotal()-impuesto);
+        this.sin_impuesto = true;
     }
 
 }

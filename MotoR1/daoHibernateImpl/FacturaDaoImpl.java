@@ -141,7 +141,7 @@ public class FacturaDaoImpl implements FacturaDao {
         List facturas = null;
         try {
             session.beginTransaction();
-            Query getFacturas = session.createQuery("from Factura fact where month(fact.fecha) = :var1 and  fact.is_anulado = :isAnulada");
+            Query getFacturas = session.createQuery("from Factura fact where month(fact.fecha) = :var1 and fact.is_anulado = :isAnulada");
             getFacturas.setInteger("var1", mes);
              getFacturas.setString("isAnulada", "Y");
 
@@ -177,8 +177,8 @@ public class FacturaDaoImpl implements FacturaDao {
          List facturas = null;
         try {
             session.beginTransaction();
-            Query getFacturas = session.createQuery("from Factura fact where fact.sin_impuesto = :estado where month(fact.fecha) = :var1");
-            getFacturas.setInteger("var1", mes);
+            Query getFacturas = session.createQuery("from Factura fact where fact.sin_impuesto = :estado and month(fact.fecha) = :pMes");
+            getFacturas.setInteger("pMes", mes);
             getFacturas.setBoolean("estado", true);
             facturas = getFacturas.list();
 
