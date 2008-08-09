@@ -63,9 +63,9 @@ public class FacturaDaoImpl implements FacturaDao {
         List facturas = null;
         try {
             session.beginTransaction();
-            Query getFacturas = session.createQuery("from Factura fact where month(fact.fecha) = :var1 and  fact.is_anulado = :estado");
+            Query getFacturas = session.createQuery("from Factura fact where month(fact.fecha) = :var1 and  fact.is_anulado = :isAnulada");
             getFacturas.setInteger("var1", mes); // la funcion esta Deprecated hay que buscar otra
-            getFacturas.setString("estado", "N");
+            getFacturas.setString("isAnulada", "N");
 
             facturas = getFacturas.list();
 
@@ -82,9 +82,9 @@ public class FacturaDaoImpl implements FacturaDao {
         List facturas = null;
         try {
             session.beginTransaction();
-            Query getFacturas = session.createQuery("from Factura fact where year(fact.fecha) = :var1 and where fact.is_anulado = :estado");
+            Query getFacturas = session.createQuery("from Factura fact where year(fact.fecha) = :var1 and where fact.is_anulado = :isAnulada");
             getFacturas.setInteger("var1", anio); // la funcion esta Deprecated hay que buscar otra
-            getFacturas.setBoolean("estado", false);
+            getFacturas.setBoolean("isAnulada", false);
 
             facturas = getFacturas.list();
 
@@ -101,12 +101,12 @@ public class FacturaDaoImpl implements FacturaDao {
         List facturas = null;
         try {
             session.beginTransaction();
-            Query getFacturas = session.createQuery("from Factura fact where year(fact.fecha) >= :adesde and  year(fact.fecha) <= :ahasta and where month(fact.fecha) >= :mdesde and where month(fact.fecha) <= :mhasta and where fact.is_anulado = :estado");
+            Query getFacturas = session.createQuery("from Factura fact where year(fact.fecha) >= :adesde and  year(fact.fecha) <= :ahasta and where month(fact.fecha) >= :mdesde and where month(fact.fecha) <= :mhasta and where fact.is_anulado = :isAnulada");
             getFacturas.setInteger("adesde", anioDesde);
             getFacturas.setInteger("ahasta", anioHasta);
             getFacturas.setInteger("mdesde", mesDesde);
             getFacturas.setInteger("mhasta", mesHasta);
-             getFacturas.setString("estado", "N");
+             getFacturas.setString("isAnulada", "N");
             facturas = getFacturas.list();
 
 
@@ -123,9 +123,9 @@ public class FacturaDaoImpl implements FacturaDao {
         List facturas = null;
         try {
             session.beginTransaction();
-            Query getFacturas = session.createQuery("from Factura fact where fact.cliente = :ncliente and  fact.is_anulado = :estado");
+            Query getFacturas = session.createQuery("from Factura fact where fact.cliente = :ncliente and  fact.is_anulado = :isAnulada");
             getFacturas.setString("ncliente", nombreCliente);
-            getFacturas.setString("estado", "Y");
+            getFacturas.setString("isAnulada", "N");
             facturas = getFacturas.list();
 
         } catch (Exception e) {
@@ -141,9 +141,9 @@ public class FacturaDaoImpl implements FacturaDao {
         List facturas = null;
         try {
             session.beginTransaction();
-            Query getFacturas = session.createQuery("from Factura fact where month(fact.fecha) = :var1 and  fact.is_anulado = :estado");
+            Query getFacturas = session.createQuery("from Factura fact where month(fact.fecha) = :var1 and  fact.is_anulado = :isAnulada");
             getFacturas.setInteger("var1", mes);
-             getFacturas.setString("estado", "N");
+             getFacturas.setString("isAnulada", "Y");
 
             facturas = getFacturas.list();
 
@@ -170,5 +170,23 @@ public class FacturaDaoImpl implements FacturaDao {
             session.close();
         }
         return factura;
+    }
+    
+    public List facturasSinImpuesto(int mes) {
+        Session session = HibernateUtil.getSessionFactory().openSession();
+         List facturas = null;
+        try {
+            session.beginTransaction();
+            Query getFacturas = session.createQuery("from Factura fact where fact.sin_impuesto = :estado where month(fact.fecha) = :var1");
+            getFacturas.setInteger("var1", mes);
+            getFacturas.setBoolean("estado", true);
+            facturas = getFacturas.list();
+
+        } catch (Exception e) {
+            System.out.println(e.toString());
+        } finally {
+            session.close();
+        }
+        return facturas;
     }
 }

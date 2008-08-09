@@ -8,18 +8,16 @@ import javax.persistence.Table;
 // #[regen=yes,id=DCE.0737157A-05DB-2346-7A84-5B3D356EEFE3]
 // </editor-fold> 
 
-//una factura tiene muchas factProduct .. las caracteristicas principales del producto se copian a la hora 
-// de escojer el producto a la factura a esta tabla en tiempo de ejecucion.. para que tenga consistencia de datos
+// Se trae el join de compraProduct 
 @Entity
-@Table(name = "factura_producto")
-public class FactProduct implements Serializable {
+@Table(name = "compra_producto")
+public class CompraProducto implements Serializable {
 
     // <editor-fold defaultstate="collapsed" desc=" UML Marker "> 
     // #[regen=yes,id=DCE.CBD9D987-0AAF-95DE-26F6-1B4D043B1F68]
     // </editor-fold> 
-    public FactProduct() {
-    }    
-    // <editor-fold defaultstate="collapsed" desc=" UML Marker "> 
+    public CompraProducto() {
+    }    // <editor-fold defaultstate="collapsed" desc=" UML Marker "> 
     // #[regen=yes,id=DCE.793DC6F0-0CFA-3C8F-9507-40DA6FF677BD]
     // </editor-fold> 
     private String id;    // <editor-fold defaultstate="collapsed" desc=" UML Marker "> 

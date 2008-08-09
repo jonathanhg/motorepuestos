@@ -81,7 +81,7 @@ public class ProductoDaoImpl implements ProductoDao {
             session.beginTransaction();
             Query getFacturas = session.createQuery("from Producto prod order by prod.existencias");
             facturas = getFacturas.list();
-
+    
         } catch (Exception e) {
             System.out.println(e.toString());
         } finally {
@@ -90,14 +90,14 @@ public class ProductoDaoImpl implements ProductoDao {
         return facturas;
     }
     
-        public List obtenerMinimos() { //productos donde (existencias <=minimo)
+    public List obtenerMinimos() { //productos donde (existencias <=minimo)
         Session session = HibernateUtil.getSessionFactory().openSession();
         List facturas = null;
         try {
             session.beginTransaction();
             Query getFacturas = session.createQuery("from Producto prod where prod.existencias <= prod.minimos");
             facturas = getFacturas.list();
-
+    
         } catch (Exception e) {
             System.out.println(e.toString());
         } finally {
