@@ -46,7 +46,14 @@ public class ModuloFacturacion {
         Iterator itFact = factList.iterator();
         crearExcel(itFact, "FacturasPorCliente.xls", "Facturas_por_cliente", "REPORTE DE FACTURAS POR CLIENTE");
     }
-
+    
+    public void facturasSinImpuesto(int mes) {
+        FacturaDaoImpl factura = new FacturaDaoImpl();
+        List factList = factura.facturasSinImpuesto(mes);
+        Iterator itFact = factList.iterator();
+        crearExcel(itFact, "FacturasSinImpuesto.xls", "Facturas_sin_impuesto", "REPORTE DE FACTURAS SIN IMPUESTO");
+    }    
+    
     public void facturasPorMes(int mes) {
         FacturaDaoImpl factura = new FacturaDaoImpl();
         List factList = factura.facturasPorMes(mes);
