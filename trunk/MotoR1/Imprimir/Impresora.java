@@ -57,7 +57,7 @@ public class Impresora {
         ArrayList<String> texto = new ArrayList<String>();
         int total;
         texto.add("     MOTO REPUESTOS SAN PEDRO");
-        texto.add("      XINIA CASTILLO HIDALGO");
+        texto.add("       XINIA CASTILLO HIDALGO");
         texto.add("         Cedula: 1-602-294");
         texto.add("B. SAPRISSA; SN PEDRO MONT. DE OCA");
         texto.add("400NE S. TACHO");
@@ -69,20 +69,19 @@ public class Impresora {
         texto.add("CLIENTE: ");
         texto.add(factura.getCliente());
         texto.add("______________________________________");
-        texto.add("CODIGO    CANTIDAD    PRECIO     TOTAL");
+        texto.add("CODIGO     CANTIDAD    PRECIO     TOTAL");
         while (iProductos.hasNext()) {
             prodTemp = (FactProduct) iProductos.next();
-            texto.add("P6995       1          4100      4100");
-            texto.add(prodTemp.getId()+"          "+prodTemp.getCantidad()+"           "+prodTemp.getPrecio());
-            texto.add(prodTemp.getDescripcion()+"                                "+prodTemp.getSubtotal());
+            texto.add(prodTemp.getId()+"          "+prodTemp.getCantidad()+"            "+prodTemp.getPrecio());
+            texto.add(prodTemp.getDescripcion()+"                                    "+prodTemp.getSubtotal());
         }
         texto.add("______________________________________");
-        texto.add("TOTAL ¢                         "+factura.getTotal());
+        texto.add("TOTAL ¢ "+factura.getTotal());
         texto.add("______________________________________");
         texto.add("Impuesto de venta incluido");
         texto.add("AUTORIZADO MEDIANTE OFICIO NUMERO");
         texto.add("01-0308-8 DEL 05-D9-1997   D.G.T");
-        texto.add("          WWW.MRSANPEDRO.COM");
+        texto.add("             WWW.MRSANPEDRO.COM");
 
         return texto.listIterator();
     }
