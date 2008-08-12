@@ -132,12 +132,23 @@ private void jAgregarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:ev
     if (manager.obtenerProducto(jCodigo.getText()) != null) {
 
         Producto producto = new Producto();
-        producto.setPrecioUnitario(Double.parseDouble(jPrecio.getText()));
+        try {
+            producto.setPrecioUnitario(Double.parseDouble(jPrecio.getText()));
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(rootPane, "Precio: debe ser un valor numérico");
+        }
         producto.setId(jCodigo.getText());
-        producto.setMinimos(Integer.parseInt(jMinimos.getText()));
+        try {
+            producto.setMinimos(Integer.parseInt(jMinimos.getText()));
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(rootPane, "Mínimos: debe ser un valor entero");
+        }
         producto.setDescripcion(jDescripcion.getText());
-        producto.setExistencias(Integer.parseInt(jExistencias.getText()));
-
+        try {
+            producto.setExistencias(Integer.parseInt(jExistencias.getText()));
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(rootPane, "Existencias: debe ser un valor entero");
+        }
         manager.agregarProducto(producto);
 
         jCodigo.setText("");
