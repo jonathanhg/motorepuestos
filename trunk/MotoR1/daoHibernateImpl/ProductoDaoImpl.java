@@ -44,10 +44,15 @@ public class ProductoDaoImpl implements ProductoDao {
         }
     }
 
-    public void actualizarProducto(Producto producto) {
+    public void actualizarProducto(Producto xProducto) {
         Session session = HibernateUtil.getSessionFactory().openSession();
         try {
             session.beginTransaction();
+            Producto producto = (Producto) session.load(Producto.class, xProducto.getId());
+            producto.setDescripcion(xProducto.getDescripcion());
+            producto.setExistencias(xProducto.getExistencias());
+            producto.setMinimos(xProducto.getMinimos());
+            producto.setPrecioUnitario(xProducto.getPrecioUnitario());
             session.update(producto);
             session.getTransaction().commit();
         } catch (Exception e) {
