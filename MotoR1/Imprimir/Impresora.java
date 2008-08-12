@@ -22,7 +22,7 @@ public class Impresora {
     int margenSup = 15;
     int margenIzq = 30;
     int tamLetra = 9;
-    int interlineado = 10;
+    int interlineado = 11;
     Font fuente = new Font("Dialog", Font.PLAIN, tamLetra);
     PrintJob pj;
     Graphics pagina;
@@ -56,31 +56,31 @@ public class Impresora {
         FactProduct prodTemp = new FactProduct();
         ArrayList<String> texto = new ArrayList<String>();
         int total;
-        texto.add("     MOTO REPUESTOS SAN PEDRO");
-        texto.add("       XINIA CASTILLO HIDALGO");
-        texto.add("         Cedula: 1-602-294");
+        texto.add("       MOTO REPUESTOS SAN PEDRO");
+        texto.add("            XINIA CASTILLO HIDALGO");
+        texto.add("                   Cedula: 1-602-294");
         texto.add("B. SAPRISSA; SN PEDRO MONT. DE OCA");
         texto.add("400NE S. TACHO");
         texto.add("TELEFONO:22340718");
         texto.add("______________________________________");
-        texto.add("No.FACTURA: " + factura.getId());
-        texto.add("HORA: " + new Date().getHours() + ":" + new Date().getMinutes() + ":" + new Date().getSeconds());
-        texto.add("FECHA: " + factura.getFecha());
+        texto.add("HORA: " + new Date().getHours() + ":" + new Date().getMinutes() + ":" + new Date().getSeconds() + "                       "+"No.FACTURA");
+        texto.add("FECHA: " + factura.getFecha().getDate()+"/"+factura.getFecha().getMonth()+"/"+String.valueOf(factura.getFecha().getYear()).substring(1)+"                       "+factura.getId()+"");
         texto.add("CLIENTE: ");
         texto.add(factura.getCliente());
         texto.add("______________________________________");
-        texto.add("CODIGO     CANTIDAD    PRECIO     TOTAL");
+        texto.add("CODIGO           CANTIDAD         TOTAL");
         while (iProductos.hasNext()) {
             prodTemp = (FactProduct) iProductos.next();
-            texto.add(prodTemp.getId()+"          "+prodTemp.getCantidad()+"            "+prodTemp.getPrecio());
-            texto.add(prodTemp.getDescripcion()+"                                    "+prodTemp.getSubtotal());
+            texto.add(prodTemp.getId()+"              "+prodTemp.getCantidad()+"                 "+prodTemp.getSubtotal());
+            String descripcion;if(prodTemp.getDescripcion().length()>23){ descripcion = prodTemp.getDescripcion().substring(0,22);}else{descripcion = prodTemp.getDescripcion();}
+            texto.add(descripcion+"  (Precio ¢"+prodTemp.getPrecio()+")");
         }
         texto.add("______________________________________");
         texto.add("TOTAL ¢ "+factura.getTotal());
         texto.add("______________________________________");
-        texto.add("Impuesto de venta incluido");
+        texto.add("              Impuesto de ventas incluido");
         texto.add("AUTORIZADO MEDIANTE OFICIO NUMERO");
-        texto.add("01-0308-8 DEL 05-D9-1997   D.G.T");
+        texto.add("01-0308-8 DEL 05-D9-1997   D.G.T.D");
         texto.add("             WWW.MRSANPEDRO.COM");
 
         return texto.listIterator();

@@ -18,12 +18,7 @@ public class ManProductos extends javax.swing.JInternalFrame {
 
     /** Creates new form ManProductos */
     public ManProductos(JDesktopPane main) {
-        jCodigo.setEnabled(false);
-        jDescripcion.setEnabled(false);
-        jMinimos.setEnabled(false);
-        jPrecio.setEnabled(false);
-        jAgregar.setEnabled(false);
-        jExistencias.setEnabled(false);
+        isCamposHabilitados(false);
         initComponents();
     }
 
@@ -54,11 +49,11 @@ public class ManProductos extends javax.swing.JInternalFrame {
         jLabel6 = new javax.swing.JLabel();
         jExistencias = new javax.swing.JTextField();
         jLabel7 = new javax.swing.JLabel();
-        jFormat = new javax.swing.JFormattedTextField();
+        jCambiar = new javax.swing.JButton();
 
         jPanel1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        jLabel1.setFont(new java.awt.Font("Tahoma", 0, 24)); // NOI18N
+        jLabel1.setFont(new java.awt.Font("Tahoma", 0, 24));
         jLabel1.setText("Mantenimiento de Productos");
         jPanel1.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 0, -1, -1));
 
@@ -86,6 +81,11 @@ public class ManProductos extends javax.swing.JInternalFrame {
         jPanel1.add(jBuscar, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 50, -1, -1));
 
         jModificar.setText("Modificar");
+        jModificar.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jModificarMouseClicked(evt);
+            }
+        });
         jPanel1.add(jModificar, new org.netbeans.lib.awtextra.AbsoluteConstraints(210, 50, -1, -1));
 
         jAgregar.setText("Agregar");
@@ -109,7 +109,14 @@ public class ManProductos extends javax.swing.JInternalFrame {
 
         jLabel7.setText("¢");
         jPanel1.add(jLabel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 190, -1, -1));
-        jPanel1.add(jFormat, new org.netbeans.lib.awtextra.AbsoluteConstraints(220, 90, 90, -1));
+
+        jCambiar.setText("Cambiar");
+        jCambiar.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jCambiarMouseClicked(evt);
+            }
+        });
+        jPanel1.add(jCambiar, new org.netbeans.lib.awtextra.AbsoluteConstraints(280, 200, -1, -1));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -129,34 +136,29 @@ public class ManProductos extends javax.swing.JInternalFrame {
 
 private void jAgregarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jAgregarMouseClicked
     ProductoDaoImpl manager = new ProductoDaoImpl();
-    if (manager.obtenerProducto(jCodigo.getText()) != null) {
+    if (manager.obtenerProducto(jCodigo.getText()) == null) {
 
         Producto producto = new Producto();
+        producto.setId(jCodigo.getText());
+        producto.setDescripcion(jDescripcion.getText());
         try {
             producto.setPrecioUnitario(Double.parseDouble(jPrecio.getText()));
         } catch (Exception e) {
             JOptionPane.showMessageDialog(rootPane, "Precio: debe ser un valor numérico");
         }
-        producto.setId(jCodigo.getText());
         try {
             producto.setMinimos(Integer.parseInt(jMinimos.getText()));
         } catch (Exception e) {
-            JOptionPane.showMessageDialog(rootPane, "Mínimos: debe ser un valor entero");
+            JOptionPane.showMessageDialog(rootPane, "Mínimos: debe ser un valor numérico");
         }
-        producto.setDescripcion(jDescripcion.getText());
         try {
             producto.setExistencias(Integer.parseInt(jExistencias.getText()));
         } catch (Exception e) {
-            JOptionPane.showMessageDialog(rootPane, "Existencias: debe ser un valor entero");
+            JOptionPane.showMessageDialog(rootPane, "Existencias: debe ser un valor numérico");
         }
         manager.agregarProducto(producto);
 
-        jCodigo.setText("");
-        jDescripcion.setText("");
-        jMinimos.setText("");
-        jPrecio.setText("");
-        jAgregar.setText("");
-        jExistencias.setText("");
+        limpiarCampos();
 
         JOptionPane.showMessageDialog(rootPane, "El producto ha sido agregado");
     } else {
@@ -165,21 +167,75 @@ private void jAgregarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:ev
 }//GEN-LAST:event_jAgregarMouseClicked
 
 private void jNuevoMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jNuevoMouseClicked
-    jCodigo.setEnabled(true);
-    jDescripcion.setEnabled(true);
-    jMinimos.setEnabled(true);
-    jPrecio.setEnabled(true);
-    jAgregar.setEnabled(true);
-    jExistencias.setEnabled(true);
+    isCamposHabilitados(true);
+    jCambiar.setEnabled(false);
 }//GEN-LAST:event_jNuevoMouseClicked
+
+private void jModificarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jModificarMouseClicked
+    limpiarCampos();
+    isCamposHabilitados(false);
+    jCodigo.setEnabled(true);
+}//GEN-LAST:event_jModificarMouseClicked
+
+private void jCambiarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jCambiarMouseClicked
+ ProductoDaoImpl manager = new ProductoDaoImpl();
+    if (manager.obtenerProducto(jCodigo.getText()) != null) {
+
+        Producto producto = new Producto();
+        producto.setId(jCodigo.getText());
+        producto.setDescripcion(jDescripcion.getText());
+        try {
+            producto.setPrecioUnitario(Double.parseDouble(jPrecio.getText()));
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(rootPane, "Precio: debe ser un valor numérico");
+        }
+        try {
+            producto.setMinimos(Integer.parseInt(jMinimos.getText()));
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(rootPane, "Mínimos: debe ser un valor numérico");
+        }
+        try {
+            producto.setExistencias(Integer.parseInt(jExistencias.getText()));
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(rootPane, "Existencias: debe ser un valor numérico");
+        }
+        manager.actualizarProducto(producto);
+
+        limpiarCampos();
+
+        JOptionPane.showMessageDialog(rootPane, "El producto ha sido cambiado");
+    } else {
+        JOptionPane.showMessageDialog(rootPane, "No se pudo cambiar: El producto no está en el sistema");
+    }
+ limpiarCampos();
+ isCamposHabilitados(false);
+}//GEN-LAST:event_jCambiarMouseClicked
+
+    private void limpiarCampos() {
+        jCodigo.setText("");
+        jDescripcion.setText("");
+        jMinimos.setText("");
+        jPrecio.setText("");
+        jExistencias.setText("");
+    }
+    
+    private void isCamposHabilitados(boolean estado){
+        jCodigo.setEnabled(estado);
+        jDescripcion.setEnabled(estado);
+        jMinimos.setEnabled(estado);
+        jPrecio.setEnabled(estado);
+        jAgregar.setEnabled(estado);
+        jExistencias.setEnabled(estado);
+        jCambiar.setEnabled(estado);
+    }
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jAgregar;
     private javax.swing.JButton jBuscar;
+    private javax.swing.JButton jCambiar;
     private javax.swing.JTextField jCodigo;
     private javax.swing.JTextField jDescripcion;
     private javax.swing.JButton jEliminar;
     private javax.swing.JTextField jExistencias;
-    private javax.swing.JFormattedTextField jFormat;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
