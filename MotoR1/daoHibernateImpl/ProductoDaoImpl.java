@@ -8,6 +8,7 @@ import dao.ProductoDao;
 import java.util.Date;
 import java.util.List;
 import model.Producto;
+import model.Producto;
 import org.hibernate.Query;
 import org.hibernate.Session;
 import util.HibernateUtil;
@@ -101,6 +102,23 @@ public class ProductoDaoImpl implements ProductoDao {
         try {
             session.beginTransaction();
             Query getFacturas = session.createQuery("from Producto prod where prod.existencias <= prod.minimos");
+            facturas = getFacturas.list();
+    
+        } catch (Exception e) {
+            System.out.println(e.toString());
+        } finally {
+            session.close();
+        }
+        return facturas;
+    }
+
+    public List obtenerProductos(String criterio) {
+        Session session = HibernateUtil.getSessionFactory().openSession();
+        List facturas = null;
+        try {
+            session.beginTransaction();
+            Query getFacturas = session.createQuery("from Producto prod where prod.id like '%"+criterio+"%' or prod.descripcion like '%"+criterio+"%'");
+           
             facturas = getFacturas.list();
     
         } catch (Exception e) {

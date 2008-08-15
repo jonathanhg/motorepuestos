@@ -33,6 +33,16 @@ public class chrge {
         producto.setExistencias(100);
         FactProduct product1 = new FactProduct();
         
+         Producto producto2 = new Producto();
+         producto2.setId("bujia");
+        producto2.setDescripcion("bujia moto");
+        producto2.setExistencias(100);
+        FactProduct product3 = new FactProduct();
+        
+        product1.setId(producto.getId());
+        product1.setDescripcion(producto.getDescripcion());
+        product1.setCantidad(10);
+        producto.setExistencias(producto.getExistencias()-10);
         product1.setId(producto.getId());
         product1.setDescripcion(producto.getDescripcion());
         product1.setCantidad(10);
