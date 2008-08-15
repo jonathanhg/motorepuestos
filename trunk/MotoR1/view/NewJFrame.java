@@ -47,6 +47,7 @@ public class NewJFrame extends javax.swing.JFrame {
         jMenuItem1 = new javax.swing.JMenuItem();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
 
         jMenu1.setText("File");
         jMenuBar1.add(jMenu1);
@@ -70,11 +71,11 @@ public class NewJFrame extends javax.swing.JFrame {
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jDesktopPane1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 400, Short.MAX_VALUE)
+            .addComponent(jDesktopPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 738, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jDesktopPane1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 279, Short.MAX_VALUE)
+            .addComponent(jDesktopPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 478, Short.MAX_VALUE)
         );
 
         pack();
@@ -85,9 +86,9 @@ createInternalFrameFact();
 }//GEN-LAST:event_jMenuItem1ActionPerformed
 
 private void createInternalFrameFact(){
-        InternalFact fact = new InternalFact(null);
+        InternalFact fact = new InternalFact(null,jDesktopPane1);
         fact.setResizable(true);
-        fact.setSize(200, 200);
+        fact.setSize(400, 400);
         try {
             fact.setIcon(false);
         } catch (PropertyVetoException ex) {
@@ -95,6 +96,7 @@ private void createInternalFrameFact(){
         }
         fact.setMaximizable(true);
         fact.setResizable(true);
+        
         jDesktopPane1.add(fact);
         fact.setVisible(true);
 

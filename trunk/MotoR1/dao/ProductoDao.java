@@ -23,5 +23,6 @@ public interface  ProductoDao {
     
     public List obtenerMinimos();
     
+    public List obtenerProductos(String criterio);
 
 }

@@ -9,12 +9,14 @@ package view;
 
 import boImpl.FacturaBoImpl;
 import daoHibernateImpl.FacturaDaoImpl;
+import daoHibernateImpl.ProductoDaoImpl;
 import java.awt.Point;
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
 import java.util.ArrayList;
 import java.util.List;
 import javax.swing.GroupLayout;
+import javax.swing.JDesktopPane;
 import javax.swing.JInternalFrame;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
@@ -36,20 +38,24 @@ public class InternalFact extends JInternalFrame {
 
     public JTable tableProduct;
     
+ 
     private FacturaBoImpl factBo;
     
     private List<FactProduct> productos;
     
-    public InternalFact (Factura factura){
+    private JDesktopPane panel;
+    
+    public InternalFact (Factura factura,JDesktopPane panel){
      factBo = new FacturaBoImpl();
      int idFact = 0;
+     this.panel = panel;
         if(factura == null){
            factura = new Factura();
             productos = new ArrayList<FactProduct>();
              idFact   =  factBo.save(factura);
              FactProduct factNew = new FactProduct();
             productos.add(factNew);
-            
+           
        
        }
        tableProduct = new JTable(new FactTableModel() );
@@ -165,6 +171,18 @@ public class InternalFact extends JInternalFrame {
              switch (col) {
                 case 0: //Id
                  product.setId(value.toString());
+                 ProductoDaoImpl productDao = new ProductoDaoImpl();
+                 Producto temp =  productDao.obtenerProducto(value.toString());
+                 if(temp != null){
+                 product.setDescripcion(temp.getDescripcion());
+                 product.setPrecio(temp.getPrecioUnitario());
+                 }else{
+                    SearchProduct busquedaProducto = new SearchProduct();
+                    busquedaProducto.setVisible(true);
+                    panel.add(busquedaProducto);
+                    return;
+                 }
+                 
                  break;
                 case 1: //descripcion
                     
@@ -184,11 +202,13 @@ public class InternalFact extends JInternalFrame {
                              new KeyAdapter() {
                              public void keyTyped(KeyEvent e){
                                  if( e.getKeyChar() == 'd'){
-                                   Integer i = tableProduct.getSelectedRow();
-                                    JOptionPane.showMessageDialog(null, "aasd"+productos.size());
-                                   productos.remove(i);
-                                   JOptionPane.showMessageDialog(null, "aasd"+i.toString());
+                                 //  Integer i = tableProduct.getSelectedRow();
+                                   // JOptionPane.showMessageDialog(null, "aasd"+productos.size());
+                                  // productos.remove(i);
+                                  // JOptionPane.showMessageDialog(null, "aasd"+i.toString());
+                                  
                                    
+                                           
                                  }
                              }
                      
