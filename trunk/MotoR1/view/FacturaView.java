@@ -7,16 +7,14 @@
 package view;
 
 import boImpl.FacturaBoImpl;
-import com.puppycrawl.tools.checkstyle.gui.AbstractCellEditor;
 import daoHibernateImpl.ProductoDaoImpl;
 import java.awt.Component;
-import java.awt.event.MouseEvent;
+import java.awt.Dimension;
 import java.beans.PropertyVetoException;
 import java.text.NumberFormat;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
-import java.util.EventObject;
 import java.util.List;
 import java.util.Locale;
 import java.util.logging.Level;
@@ -26,7 +24,6 @@ import javax.swing.JInternalFrame;
 import javax.swing.JLabel;
 import javax.swing.JSpinner;
 import javax.swing.JTable;
-import javax.swing.SpinnerListModel;
 import javax.swing.SwingConstants;
 import javax.swing.SwingUtilities;
 import javax.swing.event.ChangeEvent;
@@ -35,7 +32,6 @@ import javax.swing.event.InternalFrameAdapter;
 import javax.swing.event.InternalFrameEvent;
 import javax.swing.table.AbstractTableModel;
 import javax.swing.table.DefaultTableCellRenderer;
-import javax.swing.table.TableCellEditor;
 import javax.swing.table.TableColumn;
 import javax.swing.table.TableColumnModel;
 import model.FactProduct;
@@ -47,27 +43,40 @@ import model.Producto;
  * @author  luisj
  */
 public class FacturaView extends javax.swing.JInternalFrame {
-
+    
+    public boolean isProforma=false;
     
     /** Creates new form Factura */
-    public FacturaView(Factura factura,JDesktopPane panel) {
+    public FacturaView(Factura factura,JDesktopPane panel,boolean isProforma) {
          super("", true, false, true, true);
+          
          factBo = new FacturaBoImpl();
         int idFact = 0;
         this.panel = panel;
+        this.isProforma = isProforma;
         if(factura == null){
             factura = new Factura();
             productos = new ArrayList<FactProduct>();
-            idFact= factBo.save(factura);
+            if(!isProforma){
+                idFact= factBo.save(factura);
+            }
+            
             FactProduct factNew = new FactProduct();
             productos.add(factNew);
             this.setTitle("Factura : "+idFact );
+            if(isProforma){
+                this.setTitle("Factura : Proforma");
             
+            }
             
            
+       }else{
+            productos = factura.getProductos();
+       
        }
+       
         
-        jTableProductos = new javax.swing.JTable(new FactTableModel());
+       jTableProductos = new javax.swing.JTable(new FactTableModel());
         
         SwingUtilities.invokeLater(new Runnable() { 
           public void run(){
@@ -76,7 +85,16 @@ public class FacturaView extends javax.swing.JInternalFrame {
           }
             });
             
-        initComponents();
+       
+         
+        
+            initComponents();
+            if(isProforma){
+                jButtonProcesar.setText("Imprimir");
+            
+            }
+           
+             
         SimpleDateFormat newDateFormat = new SimpleDateFormat("yyyy/MM/dd");
         Date fecha = new Date();
          jTextFieldFecha.setEnabled(false);
@@ -361,7 +379,7 @@ private void jButtonAnularActionPerformed(java.awt.event.ActionEvent evt) {
 }
 
 private void jButtonProcesarActionPerformed(java.awt.event.ActionEvent evt) {
-// TODO add your handling code here:
+    
 }
 
 public class SpinnerListener implements ChangeListener{
@@ -408,13 +426,13 @@ public class SpinnerListener implements ChangeListener{
 
     
      public void  setBringToFrontAndBack(JInternalFrame interFrame){
-        panel.getDesktopManager().deactivateFrame(this);
-        panel.getDesktopManager().activateFrame(interFrame);    
-    
+       // panel.getDesktopManager().deactivateFrame(this);
+       // panel.getDesktopManager().activateFrame(interFrame);    
+        interFrame.toFront();
     }
      public void  setBringToBackToFront(){
        
-        panel.getDesktopManager().activateFrame(this);    
+        //panel.getDesktopManager().activateFrame(this);    
     
     }
      
@@ -574,11 +592,14 @@ public class SpinnerListener implements ChangeListener{
                  }else{
                     final SearchProduct busquedaProducto = new SearchProduct();
                     busquedaProducto.setVisible(true);
-                    
+                    //busquedaProducto.setLo
+                    Dimension d = panel.getSize();
+                     busquedaProducto.setLocation(d.width/2 - busquedaProducto.getWidth()/2, d.height/2 - busquedaProducto.getHeight()/2 );
                     panel.add(busquedaProducto);
                     setBringToFrontAndBack(busquedaProducto);
                     busquedaProducto.addInternalFrameListener( new InternalFrameAdapter() {
                         public void internalFrameClosed(InternalFrameEvent e){
+                           
                            Producto pro = busquedaProducto.getProduct();
                            product.setDescripcion(pro.getDescripcion());
                            product.setPrecio(pro.getPrecioUnitario());
@@ -595,7 +616,7 @@ public class SpinnerListener implements ChangeListener{
                             
                             );
                     
-                    setBringToBackToFront();
+                    //setBringToBackToFront();
                  }
                  
                  break;
