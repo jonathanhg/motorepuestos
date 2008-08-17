@@ -20,6 +20,7 @@ public class Empresa implements Serializable    {
     private String telefono;
     private String direccion;
     private String personaJuridica;
+    private int impuestoDeVentas;
     
     @Id
     @GeneratedValue(strategy=GenerationType.AUTO)
@@ -61,6 +62,14 @@ public class Empresa implements Serializable    {
 
     public void setPersonaJuridica(String personaJuridica) {
         this.personaJuridica = personaJuridica;
+    }
+
+    public int getImpuestoDeVentas() {
+        return impuestoDeVentas;
+    }
+
+    public void setImpuestoDeVentas(int impuestoDeVentas) {
+        this.impuestoDeVentas = impuestoDeVentas;
     }
     
    
