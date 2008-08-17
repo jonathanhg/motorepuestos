@@ -14,6 +14,7 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.UIManager;
 import javax.swing.UnsupportedLookAndFeelException;
+import model.Factura;
 
 /**
  *
@@ -89,8 +90,8 @@ createInternalFrameFact();
 }//GEN-LAST:event_jMenuItem1ActionPerformed
 
 private void createInternalFrameFact(){
-        InternalFact fact = new InternalFact(null,jDesktopPane1);
-        fact.setSize(400, 400);
+         FacturaView fact = new FacturaView(null,jDesktopPane1);
+        //fact.setSize(400, 400);
        
         try {
             fact.setIcon(false);
@@ -100,7 +101,7 @@ private void createInternalFrameFact(){
         fact.setMaximizable(true);
         fact.setResizable(true);
         Dimension d = jDesktopPane1.getSize();
-            fact.setLocation(d.width/2 , d.height/2 - fact.getHeight()/3 );
+        fact.setLocation(d.width/2 , d.height/2 - fact.getHeight()/3 );
         jDesktopPane1.add(fact);
         fact.setVisible(true);
 
