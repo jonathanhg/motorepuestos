@@ -24,6 +24,8 @@ import javax.swing.JScrollPane;
 import javax.swing.JTable;
 import javax.swing.JTextField;
 import javax.swing.SwingUtilities;
+import javax.swing.event.InternalFrameAdapter;
+import javax.swing.event.InternalFrameEvent;
 import javax.swing.event.TableModelEvent;
 import javax.swing.event.TableModelListener;
 import javax.swing.table.AbstractTableModel;
@@ -46,6 +48,7 @@ public class InternalFact extends JInternalFrame {
     private JDesktopPane panel;
     
     public InternalFact (Factura factura,JDesktopPane panel){
+        super("", true, true, true, true);
      factBo = new FacturaBoImpl();
      int idFact = 0;
      this.panel = panel;
@@ -55,8 +58,8 @@ public class InternalFact extends JInternalFrame {
              idFact   =  factBo.save(factura);
              FactProduct factNew = new FactProduct();
             productos.add(factNew);
+           this.setTitle("Factura : "+idFact );
            
-       
        }
        tableProduct = new JTable(new FactTableModel() );
         //tableProduct.setRowSelectionInterval(0,0);
@@ -92,6 +95,8 @@ public class InternalFact extends JInternalFrame {
                  .addComponent(scrollPane))
 
                 );
+        
+        
         
     }
     
@@ -167,7 +172,7 @@ public class InternalFact extends JInternalFrame {
     }
         
         public void setValueAt(Object value, int row, int col) {
-            FactProduct product =  productos.get(row);
+            final FactProduct product =  productos.get(row);
              switch (col) {
                 case 0: //Id
                  product.setId(value.toString());
@@ -177,10 +182,28 @@ public class InternalFact extends JInternalFrame {
                  product.setDescripcion(temp.getDescripcion());
                  product.setPrecio(temp.getPrecioUnitario());
                  }else{
-                    SearchProduct busquedaProducto = new SearchProduct();
+                    final SearchProduct busquedaProducto = new SearchProduct();
                     busquedaProducto.setVisible(true);
+                    
                     panel.add(busquedaProducto);
-                    return;
+                    
+                    busquedaProducto.addInternalFrameListener( new InternalFrameAdapter() {
+                        public void internalFrameClosed(InternalFrameEvent e){
+                           Producto pro = busquedaProducto.getProduct();
+                           product.setDescripcion(pro.getDescripcion());
+                           product.setPrecio(pro.getPrecioUnitario());
+                           product.setId(pro.getId());
+                            FactProduct factNew = new FactProduct();
+                            productos.add(factNew);
+                            productos.remove(productos.size()-1);
+                        }
+                    
+                    }
+                            
+                            
+                            );
+                    
+                    
                  }
                  
                  break;
