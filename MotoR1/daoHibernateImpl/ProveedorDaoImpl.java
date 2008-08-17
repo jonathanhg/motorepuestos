@@ -6,9 +6,12 @@
 package daoHibernateImpl;
 
 import dao.ProveedoresDao;
+import java.util.List;
 import model.Proveedores;
 import org.hibernate.Session;
 import util.HibernateUtil;
+import org.hibernate.Query;
+
 
 /**
  *
@@ -27,6 +30,23 @@ public class ProveedorDaoImpl implements ProveedoresDao {
        }finally{
          session.close();
        }
+    }
+    
+    public Proveedores obtenerProveedor(String codigo) {
+       Session session = HibernateUtil.getSessionFactory().openSession();
+       Proveedores Proveedores = null;
+        try {
+            session.beginTransaction();
+            Query getProveedor = session.createQuery("from Proveedores prov where prov.id = :ncodigo");
+            getProveedor.setString("ncodigo", codigo);
+            Proveedores = (Proveedores)getProveedor.uniqueResult();
+
+        } catch (Exception e) {
+            System.out.println(e.toString());
+        } finally {
+            session.close();
+        }
+        return Proveedores;
     }
 
     public void eliminarProveedor(Proveedores proveedor) {
@@ -54,7 +74,6 @@ public class ProveedorDaoImpl implements ProveedoresDao {
          session.close();
        }
     }
-    
-    
+   
     
 }
