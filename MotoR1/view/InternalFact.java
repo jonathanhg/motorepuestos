@@ -101,6 +101,12 @@ public class InternalFact extends JInternalFrame {
     }
     
     
+    public void  setBringToFrontAndBack(JInternalFrame interFrame){
+        panel.getDesktopManager().deactivateFrame(this);
+        panel.getDesktopManager().activateFrame(interFrame);    
+    
+    }
+    
     class FactTableModel extends AbstractTableModel {
           String[] columnNames = {"Codigo",
                         "Descripcion",
@@ -186,7 +192,7 @@ public class InternalFact extends JInternalFrame {
                     busquedaProducto.setVisible(true);
                     
                     panel.add(busquedaProducto);
-                    
+                    setBringToFrontAndBack(busquedaProducto);
                     busquedaProducto.addInternalFrameListener( new InternalFrameAdapter() {
                         public void internalFrameClosed(InternalFrameEvent e){
                            Producto pro = busquedaProducto.getProduct();
