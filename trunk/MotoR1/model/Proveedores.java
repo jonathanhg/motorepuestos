@@ -22,18 +22,19 @@ import javax.persistence.Table;
 public class Proveedores implements Serializable  {
     
    
-    private Integer id;
+    private String id;    
+    private String nombre;    
+    private String direccion;
+    private String telefono;
+    private String tipoCredito;
     
-    private String nombre;
-
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
     @Column(name="id", unique=true)
-    public Integer getId() {
+    public String getId() {
         return id;
     }
 
-    public void setId(Integer id) {
+    public void setId(String id) {
         this.id = id;
     }
 
@@ -43,6 +44,30 @@ public class Proveedores implements Serializable  {
     
     public void setNombre(String nombre) {
       this.nombre = nombre;
+    }
+
+    public String getDireccion() {
+        return direccion;
+    }
+
+    public void setDireccion(String direccion) {
+        this.direccion = direccion;
+    }
+
+    public String getTelefono() {
+        return telefono;
+    }
+
+    public void setTelefono(String telefono) {
+        this.telefono = telefono;
+    }
+
+    public String getTipoCredito() {
+        return tipoCredito;
+    }
+
+    public void setTipoCredito(String tipoCredito) {
+        this.tipoCredito = tipoCredito;
     }
     
 }
