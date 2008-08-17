@@ -31,7 +31,7 @@ public class NewJFrame extends javax.swing.JFrame {
             Logger.getLogger(NewJFrame.class.getName()).log(Level.SEVERE, null, ex);
         }*/
         initComponents();
-        createInternalFrameFact();
+        //createInternalFrameFact();
     }
 
     /** This method is called from within the constructor to
@@ -46,8 +46,10 @@ public class NewJFrame extends javax.swing.JFrame {
         jDesktopPane1 = new javax.swing.JDesktopPane();
         jMenuBar1 = new javax.swing.JMenuBar();
         jMenu1 = new javax.swing.JMenu();
-        jMenu2 = new javax.swing.JMenu();
+        jMenuProforma = new javax.swing.JMenu();
         jMenuItem1 = new javax.swing.JMenuItem();
+        jMenuItemBusquedaFacturaUnica = new javax.swing.JMenuItem();
+        jMenuItemproforma = new javax.swing.JMenuItem();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Moto Repuestos Facturacion");
@@ -56,18 +58,39 @@ public class NewJFrame extends javax.swing.JFrame {
         jMenu1.setText("File");
         jMenuBar1.add(jMenu1);
 
-        jMenu2.setText("Facturacion");
+        jMenuProforma.setText("Facturacion");
+        jMenuProforma.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuProformaActionPerformed(evt);
+            }
+        });
 
         jMenuItem1.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_F, java.awt.event.InputEvent.CTRL_MASK));
-        jMenuItem1.setText("Facuturacion");
+        jMenuItem1.setText("Nueva Factura");
         jMenuItem1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jMenuItem1ActionPerformed(evt);
             }
         });
-        jMenu2.add(jMenuItem1);
+        jMenuProforma.add(jMenuItem1);
 
-        jMenuBar1.add(jMenu2);
+        jMenuItemBusquedaFacturaUnica.setText("Busqueda Factura");
+        jMenuItemBusquedaFacturaUnica.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItemBusquedaFacturaUnicaActionPerformed(evt);
+            }
+        });
+        jMenuProforma.add(jMenuItemBusquedaFacturaUnica);
+
+        jMenuItemproforma.setText("Proforma");
+        jMenuItemproforma.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItemproformaActionPerformed(evt);
+            }
+        });
+        jMenuProforma.add(jMenuItemproforma);
+
+        jMenuBar1.add(jMenuProforma);
 
         setJMenuBar(jMenuBar1);
 
@@ -89,8 +112,38 @@ private void jMenuItem1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FI
 createInternalFrameFact();
 }//GEN-LAST:event_jMenuItem1ActionPerformed
 
+private void jMenuItemBusquedaFacturaUnicaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItemBusquedaFacturaUnicaActionPerformed
+SearchUniqueFact searchFact = new SearchUniqueFact(jDesktopPane1);
+ Dimension d = jDesktopPane1.getSize();
+     searchFact.setLocation(d.width/2 - searchFact.getWidth()/2, d.height/2 - searchFact.getHeight()/2 );
+     jDesktopPane1.add(searchFact);
+     searchFact.setVisible(true);
+
+}//GEN-LAST:event_jMenuItemBusquedaFacturaUnicaActionPerformed
+
+private void jMenuProformaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuProformaActionPerformed
+// TODO add your handling code here:
+    
+}//GEN-LAST:event_jMenuProformaActionPerformed
+
+private void jMenuItemproformaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItemproformaActionPerformed
+// TODO add your handling code here:
+    createInternalFrameProforma();
+}//GEN-LAST:event_jMenuItemproformaActionPerformed
+
+
+private void createInternalFrameProforma(){
+    FacturaView fact = new FacturaView(null, jDesktopPane1,true);
+    Dimension d = jDesktopPane1.getSize();
+     fact.setLocation(d.width/2 - fact.getWidth()/2 , fact.getHeight()-490 );
+     jDesktopPane1.add(fact);
+     fact.setVisible(true);
+
+
+}
+
 private void createInternalFrameFact(){
-         FacturaView fact = new FacturaView(null,jDesktopPane1);
+         FacturaView fact = new FacturaView(null,jDesktopPane1,false);
         //fact.setSize(400, 400);
        
         try {
@@ -101,7 +154,7 @@ private void createInternalFrameFact(){
         fact.setMaximizable(true);
         fact.setResizable(true);
         Dimension d = jDesktopPane1.getSize();
-        fact.setLocation(d.width/2 , d.height/2 - fact.getHeight()/3 );
+        fact.setLocation(d.width/2 - fact.getWidth()/2 ,  fact.getHeight()-490 );
         jDesktopPane1.add(fact);
         fact.setVisible(true);
 
@@ -120,9 +173,11 @@ private void createInternalFrameFact(){
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JDesktopPane jDesktopPane1;
     private javax.swing.JMenu jMenu1;
-    private javax.swing.JMenu jMenu2;
     private javax.swing.JMenuBar jMenuBar1;
     private javax.swing.JMenuItem jMenuItem1;
+    private javax.swing.JMenuItem jMenuItemBusquedaFacturaUnica;
+    private javax.swing.JMenuItem jMenuItemproforma;
+    private javax.swing.JMenu jMenuProforma;
     // End of variables declaration//GEN-END:variables
 
 }
