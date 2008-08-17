@@ -84,14 +84,14 @@ public class ModuloGerencial {
         while (itFacturas.hasNext()) {
             factTemp = (Factura) itFacturas.next();
             ProductoX producto = new ProductoX();
-            List<FactProduct> facProd = factTemp.getProductos();
+            List<FactProduct> facProd = factTemp.getProductos(); //lista con todos los productos vendidos en el mes
             Iterator itProd = facProd.iterator();
             FactProduct factProductTemp;
             while (itProd.hasNext()) {
                 factProductTemp = (FactProduct) itProd.next();
                 producto.setNombre(factProductTemp.getId());
                 producto.setDescripcion(factProductTemp.getDescripcion());
-                producto.setCantVendidas(producto.getCantVendidas() + 1);
+                producto.setCantVendidas(factProductTemp.getCantidad());
             }
 
             listaProdX.add(producto);
@@ -124,7 +124,7 @@ public class ModuloGerencial {
         int result = 0;
         for (int i = 0; i < listaProdX.size(); i++) {
             if (listaProdX.get(i).getNombre().equals(nombreProducto)) {
-                result++;
+                result+= listaProdX.get(i).getCantVendidas();
             }
         }
         return result;
