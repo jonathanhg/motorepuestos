@@ -10,6 +10,9 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JOptionPane;
 import javax.swing.JTable;
+import javax.swing.SwingUtilities;
+import javax.swing.event.InternalFrameAdapter;
+import javax.swing.event.InternalFrameEvent;
 import javax.swing.table.AbstractTableModel;
 import model.Producto;
 
@@ -28,6 +31,12 @@ public class SearchProduct extends javax.swing.JInternalFrame {
     public SearchProduct() {
         super("Busqueda",true, true, true, true);
         initComponents();
+        
+        SwingUtilities.invokeLater(new Runnable() { 
+          public void run(){
+           textFieldSearch.requestFocus();
+          }
+            });
     }
 
    
@@ -47,8 +56,15 @@ public class SearchProduct extends javax.swing.JInternalFrame {
         jTable1 = new javax.swing.JTable(factModel);
         jLabel1 = new javax.swing.JLabel();
 
-        jButton1.setText("Buscar");
-
+        //jButton1.setText("Cerrar");
+        
+        //textFieldSearch.requestFocus();
+        addInternalFrameListener(new InternalFrameAdapter() {
+             public void internalFrameOpened(InternalFrameEvent e) {
+                        textFieldSearch.requestFocus();
+             }
+        
+        });
         textFieldSearch.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyReleased(java.awt.event.KeyEvent evt) {
                 searchKeyEnterKey(evt);
@@ -106,7 +122,7 @@ public class SearchProduct extends javax.swing.JInternalFrame {
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(textFieldSearch, javax.swing.GroupLayout.DEFAULT_SIZE, 133, Short.MAX_VALUE)
                         .addGap(14, 14, 14)
-                        .addComponent(jButton1, javax.swing.GroupLayout.DEFAULT_SIZE, 82, Short.MAX_VALUE)))
+                        ))
                 .addContainerGap())
         );
         layout.setVerticalGroup(
@@ -116,7 +132,7 @@ public class SearchProduct extends javax.swing.JInternalFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(textFieldSearch)
-                    .addComponent(jButton1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    )
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 252, Short.MAX_VALUE)
                 .addContainerGap())

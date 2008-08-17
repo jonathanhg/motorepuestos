@@ -7,6 +7,8 @@
 package view;
 
 
+import java.awt.Dimension;
+import java.awt.Toolkit;
 import java.beans.PropertyVetoException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -47,6 +49,7 @@ public class NewJFrame extends javax.swing.JFrame {
         jMenuItem1 = new javax.swing.JMenuItem();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setTitle("Moto Repuestos Facturacion");
         setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
 
         jMenu1.setText("File");
@@ -71,11 +74,11 @@ public class NewJFrame extends javax.swing.JFrame {
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jDesktopPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 738, Short.MAX_VALUE)
+            .addComponent(jDesktopPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 1001, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jDesktopPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 478, Short.MAX_VALUE)
+            .addComponent(jDesktopPane1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 628, Short.MAX_VALUE)
         );
 
         pack();
@@ -87,8 +90,8 @@ createInternalFrameFact();
 
 private void createInternalFrameFact(){
         InternalFact fact = new InternalFact(null,jDesktopPane1);
-        fact.setResizable(true);
         fact.setSize(400, 400);
+       
         try {
             fact.setIcon(false);
         } catch (PropertyVetoException ex) {
@@ -96,7 +99,8 @@ private void createInternalFrameFact(){
         }
         fact.setMaximizable(true);
         fact.setResizable(true);
-        
+        Dimension d = jDesktopPane1.getSize();
+            fact.setLocation(d.width/2 , d.height/2 - fact.getHeight()/3 );
         jDesktopPane1.add(fact);
         fact.setVisible(true);
 
