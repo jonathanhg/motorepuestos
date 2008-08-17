@@ -7,20 +7,37 @@
 package view;
 
 import boImpl.FacturaBoImpl;
+import com.puppycrawl.tools.checkstyle.gui.AbstractCellEditor;
 import daoHibernateImpl.ProductoDaoImpl;
-import java.awt.event.KeyAdapter;
-import java.awt.event.KeyEvent;
+import java.awt.Component;
+import java.awt.event.MouseEvent;
+import java.beans.PropertyVetoException;
+import java.text.NumberFormat;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.EventObject;
 import java.util.List;
+import java.util.Locale;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.JDesktopPane;
 import javax.swing.JInternalFrame;
+import javax.swing.JLabel;
+import javax.swing.JSpinner;
 import javax.swing.JTable;
+import javax.swing.SpinnerListModel;
+import javax.swing.SwingConstants;
 import javax.swing.SwingUtilities;
+import javax.swing.event.ChangeEvent;
+import javax.swing.event.ChangeListener;
 import javax.swing.event.InternalFrameAdapter;
 import javax.swing.event.InternalFrameEvent;
 import javax.swing.table.AbstractTableModel;
+import javax.swing.table.DefaultTableCellRenderer;
+import javax.swing.table.TableCellEditor;
+import javax.swing.table.TableColumn;
+import javax.swing.table.TableColumnModel;
 import model.FactProduct;
 import model.Factura;
 import model.Producto;
@@ -51,7 +68,7 @@ public class FacturaView extends javax.swing.JInternalFrame {
        }
         
         jTableProductos = new javax.swing.JTable(new FactTableModel());
-         
+        
         SwingUtilities.invokeLater(new Runnable() { 
           public void run(){
             jTableProductos.requestFocusInWindow();
@@ -66,14 +83,50 @@ public class FacturaView extends javax.swing.JInternalFrame {
          jTextFieldFecha.setText(newDateFormat.format(fecha));
          factura.setFecha(fecha);
          
-         
-        
+          Locale locale = new Locale("es", "CR");
+        NumberFormat n = NumberFormat.getCurrencyInstance(locale) ;
+        CurrencyRender cellRender = new CurrencyRender(n);
+        TableColumnModel _model = jTableProductos.getColumnModel();
+        TableColumn _column = _model.getColumn(4);
+        _column.setCellRenderer(cellRender);
+        TableColumn _column1 = _model.getColumn(3);
+        _column1.setCellRenderer(cellRender);
+        // TableColumn _column2 = _model.getColumn(2);
+        //_column2.setCellEditor(new SpinnerEditor());
     }
     
     
+   /* 
+    public class SpinnerEditor extends AbstractCellEditor
+            implements TableCellEditor {
+        final JSpinner spinner = new JSpinner();
     
+        // Initializes the spinner.
+        public SpinnerEditor() {
+            //spinner.setModel(new SpinnerListModel(java.util.Arrays.asList(items)));
+        }
+    
+        // Prepares the spinner component and returns it.
+        public Component getTableCellEditorComponent(JTable table, Object value,
+                boolean isSelected, int row, int column) {
+            spinner.setValue((Integer)value);
+            return spinner;
+        }
+    
+        // Enables the editor only for double-clicks.
+        public boolean isCellEditable(EventObject evt) {
+          
+            return true;
+        }
+    
+        // Returns the spinners current value.
+        public Object getCellEditorValue() {
+            return spinner.getValue();
+        }
+    }
+
    
-    
+    */
    
 private void initComponents() {
 
@@ -162,6 +215,10 @@ private void initComponents() {
                 jButtonEliminarRowActionPerformed(evt);
             }
         });
+        
+        jSpinnerDescuento.addChangeListener(new SpinnerListener());
+        
+        
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -295,13 +352,30 @@ private void jButtonBusquedaActionPerformed(java.awt.event.ActionEvent evt) {
 }
 
 private void jButtonAnularActionPerformed(java.awt.event.ActionEvent evt) {
+        try {
 // TODO add your handling code here:
+            this.setClosed(true);
+        } catch (PropertyVetoException ex) {
+            Logger.getLogger(FacturaView.class.getName()).log(Level.SEVERE, null, ex);
+        }
 }
 
 private void jButtonProcesarActionPerformed(java.awt.event.ActionEvent evt) {
 // TODO add your handling code here:
 }
 
+public class SpinnerListener implements ChangeListener{
+
+        public void stateChanged(ChangeEvent evt) {
+            JSpinner spinner = (JSpinner)evt.getSource();
+    
+            // Get the new value
+            spinnerDescuento = (Integer)spinner.getValue();
+            calcSubTotal(spinnerDescuento);
+        }
+            
+            
+  }
 
     // Variables declaration - do not modify
     private javax.swing.JButton jButtonAnular;
@@ -329,6 +403,7 @@ private void jButtonProcesarActionPerformed(java.awt.event.ActionEvent evt) {
     private javax.swing.JDesktopPane panel;
     private FacturaBoImpl factBo;
     private List<FactProduct> productos;
+    private int spinnerDescuento ;
     // End of variables declaration
 
     
@@ -343,16 +418,69 @@ private void jButtonProcesarActionPerformed(java.awt.event.ActionEvent evt) {
     
     }
      
-    public void calcSubTotal(){
-        double tempSubTotal= 0.0;
+    public void calcSubTotal(int descuento){
+       double tempSubTotal= 0;
         for(int i=0;i< productos.size();i++){
-            tempSubTotal =productos.get(i).getTotal();
+            tempSubTotal +=productos.get(i).getTotal();
+            
+        }
+          
+        Locale locale = new Locale("es", "CR");
+        NumberFormat n = NumberFormat.getCurrencyInstance(locale) ;
+        if(descuento == -1){
+         descuento = (Integer)jSpinnerDescuento.getValue();
+        
+        }else{
             
         }
         
-    
+        tempSubTotal =  tempSubTotal - (tempSubTotal/100)*descuento;
+        String tm =       n.format(tempSubTotal);
+        textFieldSubTotal.setText(tm);
+      
+
     
     } 
+    
+    static class CurrencyRender extends DefaultTableCellRenderer{
+        NumberFormat currencyFormat;
+        
+        public CurrencyRender(NumberFormat cf){
+            currencyFormat = cf;
+        
+        }
+        
+          public Component getTableCellRendererComponent(JTable table,
+         Object value, boolean isSelected, boolean hasFocus, 
+         int row, int col) {
+            
+              String formattedValue = null;
+              Double _value = (Double)value;
+              if(value == null){
+                formattedValue = "lala";
+              } else {
+                   formattedValue = currencyFormat.format(_value);
+              }
+              JLabel testLabel = new JLabel(formattedValue,SwingConstants.RIGHT);
+   if (isSelected) {
+    testLabel.setBackground(table.getSelectionBackground());
+    testLabel.setOpaque(true);
+    testLabel.setForeground(table.getSelectionForeground());
+   }
+   if (hasFocus) {
+    testLabel.setForeground(table.getSelectionBackground());
+    testLabel.setBackground(table.getSelectionForeground());
+    testLabel.setOpaque(true);
+   }
+   return testLabel;
+  
+
+        
+        }
+        
+        
+    
+    }
     
     
      class FactTableModel extends AbstractTableModel {
@@ -509,7 +637,7 @@ private void jButtonProcesarActionPerformed(java.awt.event.ActionEvent evt) {
                              
                              );
                             */
-                     calcSubTotal();
+                     calcSubTotal(-1);
                      fireTableDataChanged();
             
           
