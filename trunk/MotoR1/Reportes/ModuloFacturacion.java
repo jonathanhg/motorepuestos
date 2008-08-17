@@ -58,14 +58,14 @@ public class ModuloFacturacion {
         FacturaDaoImpl factura = new FacturaDaoImpl();
         List factList = factura.facturasPorMes(mes);
         Iterator itFact = factList.iterator();
-        crearExcel(itFact, "FacturasPorMes.xls", "Facturas_por_mes", "REPORTE DE FACTURAS POR MES");
+        crearExcel(itFact, "FacturasPorMes.xls", "Facturas_por_mes", "REPORTE DE FACTURAS PARA EL MES: " + mes + " DEL AÑO "+ ((new Date().getYear())+1900));
     }
     
     public void facturasAnuladasPorMes(int mes) {
         FacturaDaoImpl factura = new FacturaDaoImpl();
         List factList = factura.facturasAnuladasPorMes(mes);
         Iterator itFact = factList.iterator();
-        crearExcel(itFact, "FacturasAnuladasPorMes.xls", "Facturas_anuladas_por_mes", "REPORTE DE FACTURAS ANULADAS POR MES");
+        crearExcel(itFact, "FacturasAnuladasPorMes.xls", "Facturas_anuladas_por_mes", "REPORTE DE FACTURAS ANULADAS PARA EL  MES: " + mes + " DEL AÑO "+ ((new Date().getYear())+1900));
     }
 
     private void crearExcel(Iterator itFact, String nombreArchivo, String nombreHoja, String nombreReporte) {

@@ -105,7 +105,7 @@ public class ModuloGerencial {
             producto.setCantVendidas(this.vecesRepetido(listaProdX, prodTemp.getId()));
             listaContadaProdX.add(producto);
         }
-        crearExcel(listaContadaProdX.iterator(), "CantidadVentasProducto.xls", "CantidadVentasProducto", "PRODUCTOS VENDIDOS EN EL MES: " + mes + "DEL AÑO "+ (new Date().getYear())+1900);
+        crearExcel(listaContadaProdX.iterator(), "CantidadVentasProducto.xls", "CantidadVentasProducto", "PRODUCTOS VENDIDOS EN EL MES: " + mes + " DEL AÑO "+ (new Date().getYear())+1900);
 
     }
 
