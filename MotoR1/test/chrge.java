@@ -55,7 +55,7 @@ public class chrge {
         prodFact.setDescripcion(producto1.getDescripcion());
         prodFact.setPrecio(producto1.getPrecioUnitario());
         prodFact.setCantidad(4);
-        prodFact.setSubtotal(producto1.getPrecioUnitario() * prodFact.getCantidad());
+        prodFact.setTotal(producto1.getPrecioUnitario() * prodFact.getCantidad());
         producto1.setExistencias(producto1.getExistencias() - prodFact.getCantidad());
 
          FactProduct prodFact2 = new FactProduct();
@@ -63,7 +63,7 @@ public class chrge {
         prodFact2.setDescripcion(producto2.getDescripcion());
         prodFact2.setPrecio(producto2.getPrecioUnitario());
         prodFact2.setCantidad(2);
-        prodFact2.setSubtotal(producto2.getPrecioUnitario() * prodFact.getCantidad());
+        prodFact2.setTotal(producto2.getPrecioUnitario() * prodFact.getCantidad());
         producto1.setExistencias(producto2.getExistencias() - prodFact.getCantidad());
         
         prodManager.agregarProducto(producto1);
@@ -77,7 +77,7 @@ public class chrge {
         fact1.setCliente("jon");
         fact1.setProductos(factProduct);
         fact1.setFecha(new Date());
-        fact1.setTotal(prodFact.getSubtotal()+prodFact2.getSubtotal());
+        fact1.setTotal(prodFact.getTotal()+prodFact2.getTotal());
 
         fact.agregarFactura(fact1);
         

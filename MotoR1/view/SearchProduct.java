@@ -31,10 +31,10 @@ public class SearchProduct extends javax.swing.JInternalFrame {
     public SearchProduct() {
         super("Busqueda",true, true, true, true);
         initComponents();
-        
+         
         SwingUtilities.invokeLater(new Runnable() { 
           public void run(){
-           textFieldSearch.requestFocus();
+          textFieldSearch.requestFocus();
           }
             });
     }

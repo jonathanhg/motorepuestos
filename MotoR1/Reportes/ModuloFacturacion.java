@@ -124,7 +124,7 @@ public class ModuloFacturacion {
                     prodTemp = (FactProduct) itProd.next();
                     sheet.addCell(new jxl.write.Number(5, fila, prodTemp.getCantidad())); 
                     sheet.addCell(new jxl.write.Number(6, fila, prodTemp.getPrecio())); 
-                    sheet.addCell(new jxl.write.Number(7, fila,prodTemp.getSubtotal())); 
+                    sheet.addCell(new jxl.write.Number(7, fila,prodTemp.getTotal())); 
                     sheet.addCell(new jxl.write.Label(4, fila++, prodTemp.getDescripcion()));           
                 }
 
