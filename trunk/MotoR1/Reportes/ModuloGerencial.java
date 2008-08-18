@@ -85,6 +85,7 @@ public class ModuloGerencial {
             factTemp = (Factura) itFacturas.next();
             ProductoX producto = new ProductoX();
             List<FactProduct> facProd = factTemp.getProductos(); //lista con todos los productos vendidos en el mes
+
             Iterator itProd = facProd.iterator();
             FactProduct factProductTemp;
             while (itProd.hasNext()) {
@@ -103,13 +104,15 @@ public class ModuloGerencial {
         List prodOriginales = prodManager.obtenerProductos();
         Iterator itProdOriginales = prodOriginales.iterator();
         Producto prodTemp;
+
         while (itProdOriginales.hasNext()) {
-            ProductoX producto = new ProductoX();
             prodTemp = (Producto) itProdOriginales.next();
+            ProductoX producto = new ProductoX();
             producto.setNombre(prodTemp.getId());
             producto.setDescripcion(prodTemp.getDescripcion());
-            producto.setCantVendidas(this.vecesRepetido(listaProdX, prodTemp.getId()));
+            producto.setCantVendidas(vecesRepetido(listaProdX, prodTemp.getId()));
             listaContadaProdX.add(producto);
+
         }
         crearExcel(listaContadaProdX.iterator(), "CantidadVentasProducto.xls", "CantidadVentasProducto", "PRODUCTOS VENDIDOS EN EL MES: " + mes + " DEL AÑO " + ((new Date().getYear()) + 1900));
 
@@ -124,7 +127,7 @@ public class ModuloGerencial {
         int result = 0;
         for (int i = 0; i < listaProdX.size(); i++) {
             if (listaProdX.get(i).getNombre().equals(nombreProducto)) {
-                result+= listaProdX.get(i).getCantVendidas();
+                result += listaProdX.get(i).getCantVendidas();
             }
         }
         return result;

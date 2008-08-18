@@ -5,7 +5,7 @@
  */
 package view;
 
-import daoHibernateImpl.FacturaDaoImpl;
+import Reportes.ModuloFacturacion;
 import javax.swing.JOptionPane;
 
 /**
@@ -178,9 +178,10 @@ public class ReportesFacturacion extends javax.swing.JInternalFrame {
     }// </editor-fold>//GEN-END:initComponents
 
 private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-    FacturaDaoImpl factManager = new FacturaDaoImpl();
+    
+    ModuloFacturacion factManager = new ModuloFacturacion();
     try {
-        int mes=Integer.parseInt(jCodigo.getText().toString());
+        int mes = Integer.parseInt(jCodigo.getText().toString());
         factManager.facturaPorCodigo(mes);
     } catch (Exception e) {
         System.out.println(e.getStackTrace());
@@ -190,35 +191,36 @@ private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRS
 }//GEN-LAST:event_jButton1ActionPerformed
 
 private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
-    FacturaDaoImpl factManager = new FacturaDaoImpl();
+    ModuloFacturacion factManager = new ModuloFacturacion();
     int mes = Integer.parseInt(comboMes.getSelectedItem().toString());
     factManager.facturasPorMes(mes);
     JOptionPane.showMessageDialog(rootPane, "El reporte ha sido creado");
 }//GEN-LAST:event_jButton4ActionPerformed
 
 private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
-    FacturaDaoImpl factManager = new FacturaDaoImpl();
-    factManager.facturasPorCliente(jNameCliente.getText().toString());
-    System.out.println("El NOMBRE DIGITADO FUE: "+jNameCliente.getText().toString());
+    ModuloFacturacion factManager = new ModuloFacturacion();
+    String nombreCliente = jNameCliente.getText().toString();
+    factManager.facturasPorCliente(nombreCliente);
+    System.out.println("El NOMBRE DIGITADO FUE: " + jNameCliente.getText().toString());
     JOptionPane.showMessageDialog(rootPane, "El reporte ha sido creado");
 }//GEN-LAST:event_jButton3ActionPerformed
 
 private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
-    FacturaDaoImpl factManager = new FacturaDaoImpl();
+    ModuloFacturacion factManager = new ModuloFacturacion();
     int mes = Integer.parseInt(comboMesAnuladas.getSelectedItem().toString());
     factManager.facturasAnuladasPorMes(mes);
     JOptionPane.showMessageDialog(rootPane, "El reporte ha sido creado");
 }//GEN-LAST:event_jButton2ActionPerformed
 
 private void jButton5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton5ActionPerformed
-    FacturaDaoImpl factManager = new FacturaDaoImpl();
+    ModuloFacturacion factManager = new ModuloFacturacion();
     int mes = Integer.parseInt(comboMesSinImp.getSelectedItem().toString());
     factManager.facturasSinImpuesto(mes);
     JOptionPane.showMessageDialog(rootPane, "El reporte ha sido creado");
 }//GEN-LAST:event_jButton5ActionPerformed
 
 private void jButton6ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton6ActionPerformed
-    FacturaDaoImpl factManager = new FacturaDaoImpl();
+    ModuloFacturacion factManager = new ModuloFacturacion();
     int anioDesde = Integer.parseInt(jAnioDesde.getText().toString());
     int anioHasta = Integer.parseInt(jAnioHasta.getText().toString());
     int mesDesde = Integer.parseInt(comboMesDesde.getSelectedItem().toString());
