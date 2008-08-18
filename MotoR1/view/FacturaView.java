@@ -51,6 +51,10 @@ public class FacturaView extends javax.swing.JInternalFrame {
     
     public Date fecha;
     
+    public double subTotal;
+    
+    public double total;
+    
     /** Creates new form Factura */
     public FacturaView(Factura factura,JDesktopPane panel,boolean isProforma) {
          super("", true, false, true, true);
@@ -101,7 +105,8 @@ public class FacturaView extends javax.swing.JInternalFrame {
             
             }
            
-             
+        jSpinner2.setValue(new Integer("13"));  
+        
         SimpleDateFormat newDateFormat = new SimpleDateFormat("yyyy/MM/dd");
         Date fechaT = new Date();
          jTextFieldFecha.setEnabled(false);
@@ -242,7 +247,14 @@ private void initComponents() {
         });
         
         jSpinnerDescuento.addChangeListener(new SpinnerListener());
+        jSpinner2.addChangeListener(new SpinnerListenerTotal());
         
+        jCheckBoxExonerar.addChangeListener(new ChangeListener() {
+
+            public void stateChanged(ChangeEvent e) {
+               calcTotal();
+            }
+        } );
         
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -397,9 +409,12 @@ private void jButtonProcesarActionPerformed(java.awt.event.ActionEvent evt) {
     fact.setFecha(fecha);
     fact.setCliente(jTextFieldCliente.getText());
     fact.setDescuento((Integer)jSpinnerDescuento.getValue());
-    
+    fact.setIs_anulado(false);
+    fact.setSin_impuesto(jCheckBoxExonerar.isSelected());
+    fact.setTotal(total);
     //fact.setTotal(jTextFieldTotal.getText());
     factBoo.saveFact(fact, this);
+   
 }
 
 public class SpinnerListener implements ChangeListener{
@@ -410,6 +425,21 @@ public class SpinnerListener implements ChangeListener{
             // Get the new value
             spinnerDescuento = (Integer)spinner.getValue();
             calcSubTotal(spinnerDescuento);
+            calcTotal();
+        }
+            
+            
+  }
+
+public class SpinnerListenerTotal implements ChangeListener{
+
+        public void stateChanged(ChangeEvent evt) {
+            JSpinner spinner = (JSpinner)evt.getSource();
+    
+            // Get the new value
+            spinnerDescuento = (Integer)spinner.getValue();
+            //calcSubTotal(spinnerDescuento);
+            calcTotal();
         }
             
             
@@ -473,12 +503,30 @@ public class SpinnerListener implements ChangeListener{
         }
         
         tempSubTotal =  tempSubTotal - (tempSubTotal/100)*descuento;
+        subTotal = tempSubTotal;
         String tm =       n.format(tempSubTotal);
         textFieldSubTotal.setText(tm);
       
 
     
     } 
+    
+    public void calcTotal(){
+        
+      if(jCheckBoxExonerar.isSelected()){
+           
+            total = subTotal;
+      
+      }else{
+             total = subTotal+(subTotal/100)*(Integer)jSpinner2.getValue();
+      
+      }
+        Locale locale = new Locale("es", "CR");
+        NumberFormat n = NumberFormat.getCurrencyInstance(locale) ;
+         String tm =       n.format(total);
+         jTextFieldTotal.setText(tm);
+         
+    }
     
     static class CurrencyRender extends DefaultTableCellRenderer{
         NumberFormat currencyFormat;
@@ -678,7 +726,9 @@ public class SpinnerListener implements ChangeListener{
                              
                              );
                             */
+                            
                      calcSubTotal(-1);
+                     calcTotal();
                      fireTableDataChanged();
             
           

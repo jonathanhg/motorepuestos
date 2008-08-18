@@ -65,7 +65,7 @@ public class FacturaBoImpl implements FacturaBo {
               
         }
         if(todobien){
-        dao.agregarFactura(fact);
+        dao.actualizarFactura(fact);
         mensaje = "Factura agregada con exito";
         }
         JOptionPane.showMessageDialog(jFrame, mensaje);
