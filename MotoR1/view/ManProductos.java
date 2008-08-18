@@ -12,6 +12,7 @@ import javax.swing.JDesktopPane;
 import javax.swing.JOptionPane;
 import daoHibernateImpl.*;
 import java.awt.Dimension;
+import java.util.Date;
 import javax.swing.event.InternalFrameAdapter;
 import javax.swing.event.InternalFrameEvent;
 import model.Producto;
@@ -62,6 +63,8 @@ public class ManProductos extends javax.swing.JInternalFrame {
         jButton1 = new javax.swing.JButton();
         jBorrar = new javax.swing.JButton();
         jBusModif = new javax.swing.JButton();
+        jLabel8 = new javax.swing.JLabel();
+        jTextField1 = new javax.swing.JTextField();
 
         jPanel1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
@@ -79,7 +82,7 @@ public class ManProductos extends javax.swing.JInternalFrame {
         jPanel1.add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 110, -1, -1));
 
         jLabel5.setText("Precio");
-        jPanel1.add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 170, -1, -1));
+        jPanel1.add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 170, -1, -1));
 
         jNuevo.setText("Nuevo");
         jNuevo.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -111,18 +114,18 @@ public class ManProductos extends javax.swing.JInternalFrame {
                 jAgregarMouseClicked(evt);
             }
         });
-        jPanel1.add(jAgregar, new org.netbeans.lib.awtextra.AbsoluteConstraints(270, 170, -1, -1));
+        jPanel1.add(jAgregar, new org.netbeans.lib.awtextra.AbsoluteConstraints(360, 210, -1, -1));
         jPanel1.add(jCodigo, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 130, 90, -1));
         jPanel1.add(jMinimos, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 190, 30, -1));
         jPanel1.add(jDescripcion, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 130, 150, -1));
-        jPanel1.add(jPrecio, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 190, 70, -1));
+        jPanel1.add(jPrecio, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 190, 70, -1));
 
         jLabel6.setText("Existencias");
-        jPanel1.add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(320, 110, -1, -1));
-        jPanel1.add(jExistencias, new org.netbeans.lib.awtextra.AbsoluteConstraints(320, 130, 40, -1));
+        jPanel1.add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 170, -1, -1));
+        jPanel1.add(jExistencias, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 190, 40, -1));
 
         jLabel7.setText("¢");
-        jPanel1.add(jLabel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 190, -1, -1));
+        jPanel1.add(jLabel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 190, -1, -1));
 
         jCambiar.setText("Cambiar");
         jCambiar.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -130,7 +133,7 @@ public class ManProductos extends javax.swing.JInternalFrame {
                 jCambiarMouseClicked(evt);
             }
         });
-        jPanel1.add(jCambiar, new org.netbeans.lib.awtextra.AbsoluteConstraints(270, 200, -1, -1));
+        jPanel1.add(jCambiar, new org.netbeans.lib.awtextra.AbsoluteConstraints(360, 240, -1, -1));
 
         jButton1.setText("Eliminar");
         jButton1.addActionListener(new java.awt.event.ActionListener() {
@@ -146,7 +149,7 @@ public class ManProductos extends javax.swing.JInternalFrame {
                 jBorrarActionPerformed(evt);
             }
         });
-        jPanel1.add(jBorrar, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 180, -1, -1));
+        jPanel1.add(jBorrar, new org.netbeans.lib.awtextra.AbsoluteConstraints(280, 220, -1, -1));
 
         jBusModif.setText("Buscar");
         jBusModif.addActionListener(new java.awt.event.ActionListener() {
@@ -154,19 +157,23 @@ public class ManProductos extends javax.swing.JInternalFrame {
                 jBusModifActionPerformed(evt);
             }
         });
-        jPanel1.add(jBusModif, new org.netbeans.lib.awtextra.AbsoluteConstraints(360, 180, -1, -1));
+        jPanel1.add(jBusModif, new org.netbeans.lib.awtextra.AbsoluteConstraints(450, 220, -1, -1));
+
+        jLabel8.setText("Proveedor");
+        jPanel1.add(jLabel8, new org.netbeans.lib.awtextra.AbsoluteConstraints(330, 110, -1, -1));
+        jPanel1.add(jTextField1, new org.netbeans.lib.awtextra.AbsoluteConstraints(320, 130, 140, -1));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addContainerGap())
+                .addContainerGap()
+                .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, 529, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, 229, javax.swing.GroupLayout.PREFERRED_SIZE)
+            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, 263, Short.MAX_VALUE)
         );
 
         pack();
@@ -194,6 +201,9 @@ private void jAgregarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:ev
         } catch (Exception e) {
             JOptionPane.showMessageDialog(rootPane, "Existencias: debe ser un valor numérico");
         }
+        
+        producto.setIdProveedor(jTextField1.getText());
+        producto.setFechaIngreso(new Date());
         manager.agregarProducto(producto);
 
         limpiarCampos();
@@ -334,6 +344,7 @@ private void jBuscarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST
         jMinimos.setText("");
         jPrecio.setText("");
         jExistencias.setText("");
+        jTextField1.setText("");
     }
 
     private void isCamposHabilitados(boolean estado) {
@@ -346,6 +357,7 @@ private void jBuscarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST
         jCambiar.setEnabled(estado);
         jBorrar.setEnabled(estado);
         jBusModif.setEnabled(estado);
+        jTextField1.setEnabled(estado);
     }
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jAgregar;
@@ -364,10 +376,12 @@ private void jBuscarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel7;
+    private javax.swing.JLabel jLabel8;
     private javax.swing.JTextField jMinimos;
     private javax.swing.JButton jModificar;
     private javax.swing.JButton jNuevo;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JTextField jPrecio;
+    private javax.swing.JTextField jTextField1;
     // End of variables declaration//GEN-END:variables
 }

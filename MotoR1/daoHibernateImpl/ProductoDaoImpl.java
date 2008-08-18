@@ -32,6 +32,22 @@ public class ProductoDaoImpl implements ProductoDao {
         }
     }
 
+        public List obtenerProductos() {
+        Session session = HibernateUtil.getSessionFactory().openSession();
+        List facturas = null;
+        try {
+            session.beginTransaction();
+            Query getFacturas = session.createQuery("from Producto prod order by prod.existencias");
+            facturas = getFacturas.list();
+    
+        } catch (Exception e) {
+            System.out.println(e.toString());
+        } finally {
+            session.close();
+        }
+        return facturas;
+    }
+    
     public void eliminarProducto(Producto producto) {
         Session session = HibernateUtil.getSessionFactory().openSession();
         try {
@@ -80,22 +96,7 @@ public class ProductoDaoImpl implements ProductoDao {
         return producto;
     }
     
-    public List obtenerProductos() {
-        Session session = HibernateUtil.getSessionFactory().openSession();
-        List facturas = null;
-        try {
-            session.beginTransaction();
-            Query getFacturas = session.createQuery("from Producto prod order by prod.existencias");
-            facturas = getFacturas.list();
-    
-        } catch (Exception e) {
-            System.out.println(e.toString());
-        } finally {
-            session.close();
-        }
-        return facturas;
-    }
-    
+
     public List obtenerMinimos() { //productos donde (existencias <=minimo)
         Session session = HibernateUtil.getSessionFactory().openSession();
         List facturas = null;
