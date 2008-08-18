@@ -50,7 +50,10 @@ public class NewJFrame extends javax.swing.JFrame {
         jMenuItem1 = new javax.swing.JMenuItem();
         jMenuItemBusquedaFacturaUnica = new javax.swing.JMenuItem();
         jMenuItemproforma = new javax.swing.JMenuItem();
+        jMenuReportes = new javax.swing.JMenu();
         jMenuItem2 = new javax.swing.JMenuItem();
+        jMenuItem3 = new javax.swing.JMenuItem();
+        jMenuItem4 = new javax.swing.JMenuItem();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Moto Repuestos Facturacion");
@@ -91,15 +94,35 @@ public class NewJFrame extends javax.swing.JFrame {
         });
         jMenuProforma.add(jMenuItemproforma);
 
-        jMenuItem2.setText("Reportes ");
+        jMenuBar1.add(jMenuProforma);
+
+        jMenuReportes.setText("Reportes");
+
+        jMenuItem2.setText("Reportes de Facturacion");
         jMenuItem2.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jMenuItem2ActionPerformed(evt);
             }
         });
-        jMenuProforma.add(jMenuItem2);
+        jMenuReportes.add(jMenuItem2);
 
-        jMenuBar1.add(jMenuProforma);
+        jMenuItem3.setText("Reportes de Inventario");
+        jMenuItem3.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItem3ActionPerformed(evt);
+            }
+        });
+        jMenuReportes.add(jMenuItem3);
+
+        jMenuItem4.setText("Reportes Gerenciales");
+        jMenuItem4.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItem4ActionPerformed(evt);
+            }
+        });
+        jMenuReportes.add(jMenuItem4);
+
+        jMenuBar1.add(jMenuReportes);
 
         setJMenuBar(jMenuBar1);
 
@@ -150,6 +173,22 @@ private void jMenuItem2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FI
     
 }//GEN-LAST:event_jMenuItem2ActionPerformed
 
+private void jMenuItem3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem3ActionPerformed
+ ReportesInventario reportesInv = new ReportesInventario();
+     Dimension d = jDesktopPane1.getSize();
+     reportesInv.setLocation(d.width/2 - reportesInv.getWidth()/2 , d.height/2 -reportesInv.getHeight()/2 );
+     jDesktopPane1.add(reportesInv);
+     reportesInv.setVisible(true);
+}//GEN-LAST:event_jMenuItem3ActionPerformed
+
+private void jMenuItem4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem4ActionPerformed
+ ReportesGerencial reportesGer = new ReportesGerencial();
+     Dimension d = jDesktopPane1.getSize();
+     reportesGer.setLocation(d.width/2 - reportesGer.getWidth()/2 , d.height/2 -reportesGer.getHeight()/2 );
+     jDesktopPane1.add(reportesGer);
+     reportesGer.setVisible(true);
+}//GEN-LAST:event_jMenuItem4ActionPerformed
+
 
 private void createInternalFrameProforma(){
     FacturaView fact = new FacturaView(null, jDesktopPane1,true);
@@ -195,9 +234,12 @@ private void createInternalFrameFact(){
     private javax.swing.JMenuBar jMenuBar1;
     private javax.swing.JMenuItem jMenuItem1;
     private javax.swing.JMenuItem jMenuItem2;
+    private javax.swing.JMenuItem jMenuItem3;
+    private javax.swing.JMenuItem jMenuItem4;
     private javax.swing.JMenuItem jMenuItemBusquedaFacturaUnica;
     private javax.swing.JMenuItem jMenuItemproforma;
     private javax.swing.JMenu jMenuProforma;
+    private javax.swing.JMenu jMenuReportes;
     // End of variables declaration//GEN-END:variables
 
 }
