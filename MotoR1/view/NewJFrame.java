@@ -49,6 +49,7 @@ public class NewJFrame extends javax.swing.JFrame {
         jMenuProforma = new javax.swing.JMenu();
         jMenuItem1 = new javax.swing.JMenuItem();
         jMenuItemBusquedaFacturaUnica = new javax.swing.JMenuItem();
+        jMenuItem7 = new javax.swing.JMenuItem();
         jMenuItemproforma = new javax.swing.JMenuItem();
         jMenuReportes = new javax.swing.JMenu();
         jMenuItem2 = new javax.swing.JMenuItem();
@@ -89,6 +90,14 @@ public class NewJFrame extends javax.swing.JFrame {
             }
         });
         jMenuProforma.add(jMenuItemBusquedaFacturaUnica);
+
+        jMenuItem7.setText("Anular Factura");
+        jMenuItem7.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItem7ActionPerformed(evt);
+            }
+        });
+        jMenuProforma.add(jMenuItem7);
 
         jMenuItemproforma.setText("Proforma");
         jMenuItemproforma.addActionListener(new java.awt.event.ActionListener() {
@@ -246,6 +255,14 @@ Dimension d = jDesktopPane1.getSize();
      prodManager.setVisible(true);
 }//GEN-LAST:event_jMenuItem6ActionPerformed
 
+private void jMenuItem7ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem7ActionPerformed
+AnularFactura prodManager = new AnularFactura();    
+Dimension d = jDesktopPane1.getSize();
+     prodManager.setLocation(d.width/2 - prodManager.getWidth()/2 , d.height/2 -prodManager.getHeight()/2 );
+     jDesktopPane1.add(prodManager);
+     prodManager.setVisible(true);
+}//GEN-LAST:event_jMenuItem7ActionPerformed
+
 
 private void createInternalFrameProforma(){
     FacturaView fact = new FacturaView(null, jDesktopPane1,true);
@@ -296,6 +313,7 @@ private void createInternalFrameFact(){
     private javax.swing.JMenuItem jMenuItem4;
     private javax.swing.JMenuItem jMenuItem5;
     private javax.swing.JMenuItem jMenuItem6;
+    private javax.swing.JMenuItem jMenuItem7;
     private javax.swing.JMenuItem jMenuItemBusquedaFacturaUnica;
     private javax.swing.JMenuItem jMenuItemProveedores;
     private javax.swing.JMenuItem jMenuItemproforma;

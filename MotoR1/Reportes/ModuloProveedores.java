@@ -30,14 +30,14 @@ import model.Proveedores;
 public class ModuloProveedores {
 public void productosPorProveedor(String idProveedor){
     ProveedorDaoImpl proveedorManager = new ProveedorDaoImpl();
-    List<Producto> listaProductos = proveedorManager.productosPorProveedor(idProveedor);
+    List listaProductos = proveedorManager.productosPorProveedor(idProveedor);
     Iterator itProductos = listaProductos.iterator();
     crearExcelProductos(itProductos, "ProductosPorProveedor.xls", "Productos_por_proveedor", "REPORTE DE PRODUCTOS PARA EL PROVEEDOR: "+idProveedor);
 }
 
 public void proveedoresRegistrados(){
     ProveedorDaoImpl proveedorManager = new ProveedorDaoImpl();
-    List<Proveedores> listaProveedores = proveedorManager.obtenerProveedores();
+    List listaProveedores = proveedorManager.obtenerProveedores();
     Iterator itProveedores = listaProveedores.iterator();
     crearExcelProveedores(itProveedores, "ProveedoresRegistrados.xls", "Proveedores", "REPORTE DE PROVEEDORES");
 }
