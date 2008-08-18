@@ -7,7 +7,16 @@ package boImpl;
 
 import bo.FacturaBo;
 import daoHibernateImpl.FacturaDaoImpl;
+import daoHibernateImpl.ProductoDaoImpl;
+import java.util.ArrayList;
+import java.util.Iterator;
+import java.util.List;
+import javax.swing.JDesktopPane;
+import javax.swing.JInternalFrame;
+import javax.swing.JOptionPane;
+import model.FactProduct;
 import model.Factura;
+import model.Producto;
 
 /**
  *
@@ -16,9 +25,11 @@ import model.Factura;
 public class FacturaBoImpl implements FacturaBo {
     
     public FacturaDaoImpl dao;
+    public ProductoDaoImpl daoProduct;
     
     public  FacturaBoImpl(){
         dao = new FacturaDaoImpl();
+        daoProduct = new ProductoDaoImpl();
     }
     
     public int save(Factura fact) {
@@ -27,6 +38,51 @@ public class FacturaBoImpl implements FacturaBo {
         Factura temp = fact;
       
       return fact.getId() ;
+    }
+    
+    // GUARDA UNA FACTURA VERIFICA SI TODO ESTA BIEN CON INVENTARIO ! 
+    public boolean saveFact(Factura fact,JInternalFrame jFrame){
+        FactProduct tempFactProduct;
+        Producto temp;
+        String mensaje = "";
+        boolean todobien = true;
+        fact.setProductos(borrarVacios(fact.getProductos()));
+        Iterator  tempIt = fact.getProductos().iterator();
+        while(tempIt.hasNext()){
+              tempFactProduct =  (FactProduct)tempIt.next();
+             
+              temp = daoProduct.obtenerProducto(tempFactProduct.getId());
+              temp.setExistencias(temp.getExistencias() - tempFactProduct.getCantidad());
+              
+              if(temp.getExistencias() >= 0){
+                    daoProduct.actualizarProducto(temp);
+                    
+              }
+              if(temp.getExistencias() < 0){
+                mensaje += "Error no hay existencias para el producto"+temp.getId()+" /n";
+                todobien = false;
+              }
+              
+        }
+        if(todobien){
+        dao.agregarFactura(fact);
+        mensaje = "Factura agregada con exito";
+        }
+        JOptionPane.showMessageDialog(jFrame, mensaje);
+        return todobien;
+   }
+    
+    public List<FactProduct> borrarVacios(List<FactProduct> temp){
+        List<FactProduct> tempReturn = new ArrayList<FactProduct>();
+        FactProduct tempFactProduct ;
+        for(int i=0;i<temp.size();i++){
+           tempFactProduct =  (FactProduct)temp.get(i);
+           if(tempFactProduct.getId() != null){
+                tempReturn.add(temp.get(i));
+           
+           }
+        }
+    return tempReturn;
     }
 
 }
