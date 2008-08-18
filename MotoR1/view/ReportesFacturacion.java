@@ -17,6 +17,7 @@ public class ReportesFacturacion extends javax.swing.JInternalFrame {
     /** Creates new form ReportesFacturacion */
     public ReportesFacturacion() {
         initComponents();
+        this.setClosable(true);
     }
 
     /** This method is called from within the constructor to

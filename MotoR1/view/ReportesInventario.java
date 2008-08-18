@@ -18,6 +18,7 @@ public class ReportesInventario extends javax.swing.JInternalFrame {
     /** Creates new form ReportesInventario */
     public ReportesInventario() {
         initComponents();
+        this.setClosable(true);
     }
 
     /** This method is called from within the constructor to

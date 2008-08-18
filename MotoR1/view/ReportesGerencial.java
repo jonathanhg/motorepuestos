@@ -18,6 +18,7 @@ public class ReportesGerencial extends javax.swing.JInternalFrame {
     /** Creates new form ReportesGerencial */
     public ReportesGerencial() {
         initComponents();
+        this.setClosable(true);
     }
 
     /** This method is called from within the constructor to
