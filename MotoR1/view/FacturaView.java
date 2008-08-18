@@ -414,7 +414,11 @@ private void jButtonProcesarActionPerformed(java.awt.event.ActionEvent evt) {
     fact.setTotal(total);
     //fact.setTotal(jTextFieldTotal.getText());
     factBoo.saveFact(fact, this);
-   
+        try {
+            this.setClosed(true);
+        } catch (PropertyVetoException ex) {
+            Logger.getLogger(FacturaView.class.getName()).log(Level.SEVERE, null, ex);
+        }
 }
 
 public class SpinnerListener implements ChangeListener{
