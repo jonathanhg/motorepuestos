@@ -53,6 +53,7 @@ public class ManProductos extends javax.swing.JInternalFrame {
         jCambiar = new javax.swing.JButton();
         jButton1 = new javax.swing.JButton();
         jBorrar = new javax.swing.JButton();
+        jBusModif = new javax.swing.JButton();
 
         jPanel1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
@@ -97,7 +98,7 @@ public class ManProductos extends javax.swing.JInternalFrame {
                 jAgregarMouseClicked(evt);
             }
         });
-        jPanel1.add(jAgregar, new org.netbeans.lib.awtextra.AbsoluteConstraints(280, 170, -1, -1));
+        jPanel1.add(jAgregar, new org.netbeans.lib.awtextra.AbsoluteConstraints(270, 170, -1, -1));
         jPanel1.add(jCodigo, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 130, 90, -1));
         jPanel1.add(jMinimos, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 190, 30, -1));
         jPanel1.add(jDescripcion, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 130, 150, -1));
@@ -116,7 +117,7 @@ public class ManProductos extends javax.swing.JInternalFrame {
                 jCambiarMouseClicked(evt);
             }
         });
-        jPanel1.add(jCambiar, new org.netbeans.lib.awtextra.AbsoluteConstraints(280, 200, -1, -1));
+        jPanel1.add(jCambiar, new org.netbeans.lib.awtextra.AbsoluteConstraints(270, 200, -1, -1));
 
         jButton1.setText("Eliminar");
         jButton1.addActionListener(new java.awt.event.ActionListener() {
@@ -134,12 +135,20 @@ public class ManProductos extends javax.swing.JInternalFrame {
         });
         jPanel1.add(jBorrar, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 180, -1, -1));
 
+        jBusModif.setText("Buscar");
+        jBusModif.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jBusModifActionPerformed(evt);
+            }
+        });
+        jPanel1.add(jBusModif, new org.netbeans.lib.awtextra.AbsoluteConstraints(360, 180, -1, -1));
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, 422, Short.MAX_VALUE)
+                .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addContainerGap())
         );
         layout.setVerticalGroup(
@@ -191,7 +200,9 @@ private void jModificarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:
     limpiarCampos();
     isCamposHabilitados(false);
     jCodigo.setEnabled(true);
-    jCambiar.setEnabled(true);
+    jBusModif.setEnabled(true);
+
+
 }//GEN-LAST:event_jModificarMouseClicked
 
 private void jCambiarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jCambiarMouseClicked
@@ -252,6 +263,23 @@ private void jBorrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST
     }
 }//GEN-LAST:event_jBorrarActionPerformed
 
+private void jBusModifActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBusModifActionPerformed
+    ProductoDaoImpl manager = new ProductoDaoImpl();
+    if (manager.obtenerProducto(jCodigo.getText()) != null) {
+        Producto producto = new Producto();
+        isCamposHabilitados(true);
+        jBorrar.setEnabled(false);
+        jAgregar.setEnabled(false);
+        producto = manager.obtenerProducto(jCodigo.getText());
+        jDescripcion.setText(String.valueOf(producto.getDescripcion()));
+        jMinimos.setText(String.valueOf(producto.getMinimos()));
+        jPrecio.setText(String.valueOf(producto.getPrecioUnitario()));
+        jExistencias.setText(String.valueOf(producto.getExistencias()));
+    }
+    jBusModif.setEnabled(false);
+    jCambiar.setEnabled(true);
+}//GEN-LAST:event_jBusModifActionPerformed
+
     private void limpiarCampos() {
         jCodigo.setText("");
         jDescripcion.setText("");
@@ -269,10 +297,12 @@ private void jBorrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST
         jExistencias.setEnabled(estado);
         jCambiar.setEnabled(estado);
         jBorrar.setEnabled(estado);
+        jBusModif.setEnabled(estado);
     }
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jAgregar;
     private javax.swing.JButton jBorrar;
+    private javax.swing.JButton jBusModif;
     private javax.swing.JButton jBuscar;
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jCambiar;
