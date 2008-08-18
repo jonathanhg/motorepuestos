@@ -673,6 +673,7 @@ public class SpinnerListenerTotal implements ChangeListener{
                         public void internalFrameClosed(InternalFrameEvent e){
                            
                            Producto pro = busquedaProducto.getProduct();
+                           if(pro.getId() !=null){
                            product.setDescripcion(pro.getDescripcion());
                            product.setPrecio(pro.getPrecioUnitario());
                            product.setId(pro.getId());
@@ -681,7 +682,7 @@ public class SpinnerListenerTotal implements ChangeListener{
                             FactProduct factNew = new FactProduct();
                             productos.add(factNew);
                             productos.remove(productos.size()-1);
-                        }
+                        }}
                     
                     }
                             
