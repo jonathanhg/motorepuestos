@@ -16,8 +16,6 @@ public interface  FacturaDao {
     
     public void agregarFactura(Factura factura);
     
-    public void eliminarFactura(Factura factura);
-    
     public void actualizarEmpresa(Factura factura);
     
     public List facturasPorMes(int mes);

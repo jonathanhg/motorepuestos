@@ -6,8 +6,11 @@ package daoHibernateImpl;
 
 import dao.FacturaDao;
 import java.util.Date;
+import java.util.Iterator;
 import java.util.List;
+import model.FactProduct;
 import model.Factura;
+import model.Producto;
 import org.hibernate.Query;
 import org.hibernate.Session;
 import util.HibernateUtil;
@@ -32,11 +35,24 @@ public class FacturaDaoImpl implements FacturaDao {
         }
     }
 
-    public void eliminarFactura(Factura factura) {
+        public void anularFactura(Factura factura) {
         Session session = HibernateUtil.getSessionFactory().openSession();
         try {
             session.beginTransaction();
-            session.delete(factura);
+            factura.setIs_anulado(true);
+            
+            List<FactProduct> productos = factura.getProductos();
+            Iterator itProductos = productos.iterator();
+            ProductoDaoImpl productoManager = new ProductoDaoImpl();
+            FactProduct prodTemp;
+            while (itProductos.hasNext()){
+                prodTemp = (FactProduct) itProductos.next();
+                Producto productoEnSistema = productoManager.obtenerProducto(prodTemp.getId());
+                productoEnSistema.setExistencias(prodTemp.getCantidad());
+                productoManager.actualizarProducto(productoEnSistema); //devuelve al inventario los productos que se habían vendido
+            }
+            
+            session.update(factura);
             session.getTransaction().commit();
         } catch (Exception e) {
             System.out.println(e.toString());
@@ -45,7 +61,8 @@ public class FacturaDaoImpl implements FacturaDao {
         }
     }
 
-    public void actualizarEmpresa(Factura factura) {
+
+    public void anuladFacturaEmpresa(Factura factura) {
         Session session = HibernateUtil.getSessionFactory().openSession();
         try {
             session.beginTransaction();
@@ -204,5 +221,9 @@ public class FacturaDaoImpl implements FacturaDao {
         } finally {
             session.close();
         }
+    }
+
+    public void actualizarEmpresa(Factura factura) {
+        throw new UnsupportedOperationException("Not supported yet.");
     }
 }
