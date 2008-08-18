@@ -302,6 +302,7 @@ private void jBuscarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST
      Dimension d = panel.getSize();
      productoBusqueda.setLocation(d.width/2 - productoBusqueda.getWidth()/2 , d.height/2 -productoBusqueda.getHeight()/2 );
      panel.add(productoBusqueda);
+     productoBusqueda.toFront();
      productoBusqueda.addInternalFrameListener(new InternalFrameAdapter() {
         public void internalFrameClosed(InternalFrameEvent e){
            pasarDatos();
