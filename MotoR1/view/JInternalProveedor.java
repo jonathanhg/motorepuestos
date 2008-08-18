@@ -9,8 +9,6 @@ package view;
 import java.awt.event.ActionListener;
 import model.Proveedores;
 import daoHibernateImpl.*;
-import java.awt.event.ActionEvent;
-import javax.swing.JDesktopPane;
 import javax.swing.JOptionPane;
 
 /**
@@ -20,9 +18,9 @@ import javax.swing.JOptionPane;
 public class JInternalProveedor extends javax.swing.JInternalFrame {
     
     /** Creates new form JInternalProveedor */
-    public JInternalProveedor(JDesktopPane panel) {
+    public JInternalProveedor() {
         initComponents();
-        //prov = new ProveedorDaoImpl();
+        this.setClosable(true);
     }
     
    /**
@@ -95,13 +93,10 @@ public class JInternalProveedor extends javax.swing.JInternalFrame {
             }else
             JOptionPane.showMessageDialog(rootPane,"El proveedor no ha sido encontrado");
         }
-       // clear();
+        clear();
    }
    
-   public void consultarProveedor(){
-        //clear();
-   }
-       
+   
    private void clear(){
         jTextCodigo.setText("");
         jTextNombre.setText("");
@@ -132,7 +127,6 @@ public class JInternalProveedor extends javax.swing.JInternalFrame {
         jLabelTipoCred = new javax.swing.JLabel();
         jTextTipoCred = new javax.swing.JTextField();
         jBtModificar = new javax.swing.JButton();
-        jBtConsultar = new javax.swing.JButton();
         jBtEliminar = new javax.swing.JButton();
         jButton1 = new javax.swing.JButton();
         jBtIncluir = new javax.swing.JButton();
@@ -155,13 +149,6 @@ public class JInternalProveedor extends javax.swing.JInternalFrame {
         jBtModificar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jBtModificarActionPerformed(evt);
-            }
-        });
-
-        jBtConsultar.setText("Consultar");
-        jBtConsultar.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jBtConsultarActionPerformed(evt);
             }
         });
 
@@ -202,24 +189,23 @@ public class JInternalProveedor extends javax.swing.JInternalFrame {
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(jPanel1Layout.createSequentialGroup()
-                                .addComponent(jBtConsultar)
-                                .addGap(18, 18, 18)
-                                .addComponent(jBtIncluir)
-                                .addGap(22, 22, 22)
-                                .addComponent(jBtModificar)
-                                .addGap(26, 26, 26)
-                                .addComponent(jBtEliminar))
-                            .addGroup(jPanel1Layout.createSequentialGroup()
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                 .addComponent(jTextCodigo, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE))
                             .addComponent(jTextNombre, javax.swing.GroupLayout.PREFERRED_SIZE, 440, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(jTextDirec, javax.swing.GroupLayout.DEFAULT_SIZE, 445, Short.MAX_VALUE)
                             .addGroup(jPanel1Layout.createSequentialGroup()
-                                .addComponent(jTextTelefono, javax.swing.GroupLayout.PREFERRED_SIZE, 107, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                                    .addComponent(jBtIncluir)
+                                    .addComponent(jTextTelefono, javax.swing.GroupLayout.PREFERRED_SIZE, 107, javax.swing.GroupLayout.PREFERRED_SIZE))
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(jLabelTipoCred)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(jTextTipoCred, javax.swing.GroupLayout.PREFERRED_SIZE, 65, javax.swing.GroupLayout.PREFERRED_SIZE)))))
+                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                                        .addComponent(jLabelTipoCred)
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                        .addComponent(jTextTipoCred, javax.swing.GroupLayout.PREFERRED_SIZE, 65, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                    .addComponent(jBtModificar, javax.swing.GroupLayout.Alignment.TRAILING))
+                                .addGap(51, 51, 51)
+                                .addComponent(jBtEliminar)))))
                 .addGap(21, 21, 21))
         );
         jPanel1Layout.setVerticalGroup(
@@ -250,10 +236,9 @@ public class JInternalProveedor extends javax.swing.JInternalFrame {
                     .addComponent(jTextTelefono, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(24, 24, 24)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jBtConsultar)
-                    .addComponent(jBtModificar)
                     .addComponent(jBtEliminar)
-                    .addComponent(jBtIncluir))
+                    .addComponent(jBtIncluir)
+                    .addComponent(jBtModificar))
                 .addContainerGap(23, Short.MAX_VALUE))
         );
 
@@ -270,7 +255,7 @@ public class JInternalProveedor extends javax.swing.JInternalFrame {
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(15, Short.MAX_VALUE))
+                .addContainerGap(19, Short.MAX_VALUE))
         );
 
         pack();
@@ -291,14 +276,8 @@ private void jBtModificarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-
     modificarProveedor();
 }//GEN-LAST:event_jBtModificarActionPerformed
 
-private void jBtConsultarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBtConsultarActionPerformed
-// TODO add your handling code here:
-    consultarProveedor();
-}//GEN-LAST:event_jBtConsultarActionPerformed
-
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton jBtConsultar;
     private javax.swing.JButton jBtEliminar;
     private javax.swing.JButton jBtIncluir;
     private javax.swing.JButton jBtModificar;
