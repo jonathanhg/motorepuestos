@@ -17,9 +17,11 @@ import model.Producto;
 public class ManProductos extends javax.swing.JInternalFrame {
 
     /** Creates new form ManProductos */
-    public ManProductos(JDesktopPane main) {
-        isCamposHabilitados(false);
+    public ManProductos() {
+
         initComponents();
+        isCamposHabilitados(false);
+        this.setClosable(true);
     }
 
     /** This method is called from within the constructor to
@@ -41,7 +43,6 @@ public class ManProductos extends javax.swing.JInternalFrame {
         jBuscar = new javax.swing.JButton();
         jModificar = new javax.swing.JButton();
         jAgregar = new javax.swing.JButton();
-        jEliminar = new javax.swing.JButton();
         jCodigo = new javax.swing.JTextField();
         jMinimos = new javax.swing.JTextField();
         jDescripcion = new javax.swing.JTextField();
@@ -50,6 +51,7 @@ public class ManProductos extends javax.swing.JInternalFrame {
         jExistencias = new javax.swing.JTextField();
         jLabel7 = new javax.swing.JLabel();
         jCambiar = new javax.swing.JButton();
+        jButton1 = new javax.swing.JButton();
 
         jPanel1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
@@ -95,9 +97,6 @@ public class ManProductos extends javax.swing.JInternalFrame {
             }
         });
         jPanel1.add(jAgregar, new org.netbeans.lib.awtextra.AbsoluteConstraints(280, 170, -1, -1));
-
-        jEliminar.setText("Eliminar");
-        jPanel1.add(jEliminar, new org.netbeans.lib.awtextra.AbsoluteConstraints(310, 50, -1, -1));
         jPanel1.add(jCodigo, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 130, 90, -1));
         jPanel1.add(jMinimos, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 190, 30, -1));
         jPanel1.add(jDescripcion, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 130, 150, -1));
@@ -117,6 +116,14 @@ public class ManProductos extends javax.swing.JInternalFrame {
             }
         });
         jPanel1.add(jCambiar, new org.netbeans.lib.awtextra.AbsoluteConstraints(280, 200, -1, -1));
+
+        jButton1.setText("Eliminar");
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
+            }
+        });
+        jPanel1.add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(320, 50, -1, -1));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -178,7 +185,7 @@ private void jModificarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:
 }//GEN-LAST:event_jModificarMouseClicked
 
 private void jCambiarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jCambiarMouseClicked
- ProductoDaoImpl manager = new ProductoDaoImpl();
+    ProductoDaoImpl manager = new ProductoDaoImpl();
     if (manager.obtenerProducto(jCodigo.getText()) != null) {
 
         Producto producto = new Producto();
@@ -207,9 +214,28 @@ private void jCambiarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:ev
     } else {
         JOptionPane.showMessageDialog(rootPane, "No se pudo cambiar: El producto no está en el sistema");
     }
- limpiarCampos();
- isCamposHabilitados(false);
+    limpiarCampos();
+    isCamposHabilitados(false);
 }//GEN-LAST:event_jCambiarMouseClicked
+
+private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+    isCamposHabilitados(false);
+    jCodigo.setEnabled(true);
+
+    ProductoDaoImpl manager = new ProductoDaoImpl();
+    Producto producto = new Producto();
+    if (jCodigo.getText() != null) {
+        if (manager.obtenerProducto(jCodigo.getText()) != null) {
+            producto = manager.obtenerProducto(jCodigo.getText());
+            manager.eliminarProducto(producto);
+        }else{
+            JOptionPane.showMessageDialog(rootPane, "No se pudo cambiar: El producto no está en el sistema");
+        }
+    }else{
+        JOptionPane.showMessageDialog(rootPane, "No se pudo cambiar: El código de producto no puede estar vacio");
+    }
+
+}//GEN-LAST:event_jButton1ActionPerformed
 
     private void limpiarCampos() {
         jCodigo.setText("");
@@ -218,8 +244,8 @@ private void jCambiarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:ev
         jPrecio.setText("");
         jExistencias.setText("");
     }
-    
-    private void isCamposHabilitados(boolean estado){
+
+    private void isCamposHabilitados(boolean estado) {
         jCodigo.setEnabled(estado);
         jDescripcion.setEnabled(estado);
         jMinimos.setEnabled(estado);
@@ -231,10 +257,10 @@ private void jCambiarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:ev
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jAgregar;
     private javax.swing.JButton jBuscar;
+    private javax.swing.JButton jButton1;
     private javax.swing.JButton jCambiar;
     private javax.swing.JTextField jCodigo;
     private javax.swing.JTextField jDescripcion;
-    private javax.swing.JButton jEliminar;
     private javax.swing.JTextField jExistencias;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
