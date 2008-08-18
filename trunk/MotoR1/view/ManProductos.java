@@ -25,6 +25,7 @@ public class ManProductos extends javax.swing.JInternalFrame {
 
     public JDesktopPane panel;
     public SearchProduct productoBusqueda;
+
     /** Creates new form ManProductos */
     public ManProductos(JDesktopPane panel) {
         this.panel = panel;
@@ -186,29 +187,37 @@ private void jAgregarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:ev
         Producto producto = new Producto();
         producto.setId(jCodigo.getText());
         producto.setDescripcion(jDescripcion.getText());
+        boolean malDato = false;
+
         try {
             producto.setPrecioUnitario(Double.parseDouble(jPrecio.getText()));
         } catch (Exception e) {
             JOptionPane.showMessageDialog(rootPane, "Precio: debe ser un valor numérico");
+            malDato = true;
         }
         try {
             producto.setMinimos(Integer.parseInt(jMinimos.getText()));
         } catch (Exception e) {
             JOptionPane.showMessageDialog(rootPane, "Mínimos: debe ser un valor numérico");
+            malDato = true;
         }
         try {
             producto.setExistencias(Integer.parseInt(jExistencias.getText()));
         } catch (Exception e) {
             JOptionPane.showMessageDialog(rootPane, "Existencias: debe ser un valor numérico");
+            malDato = true;
         }
-        
+
         producto.setIdProveedor(jTextField1.getText());
         producto.setFechaIngreso(new Date());
-        manager.agregarProducto(producto);
 
-        limpiarCampos();
+        if (malDato == false) {
+            manager.agregarProducto(producto);
+            JOptionPane.showMessageDialog(rootPane, "El producto ha sido agregado");
+            limpiarCampos();
+        }
 
-        JOptionPane.showMessageDialog(rootPane, "El producto ha sido agregado");
+
     } else {
         JOptionPane.showMessageDialog(rootPane, "No se pudo agregar: Producto Repetido");
     }
@@ -279,7 +288,7 @@ private void jBorrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST
         if (manager.obtenerProducto(jCodigo.getText()) != null) {
             producto = manager.obtenerProducto(jCodigo.getText());
             manager.eliminarProducto(producto);
-            JOptionPane.showMessageDialog(rootPane, "No se pudo cambiar: El producto ha sido eliminado");
+            JOptionPane.showMessageDialog(rootPane, "El producto ha sido eliminado");
         } else {
             JOptionPane.showMessageDialog(rootPane, "No se pudo cambiar: El producto no está en el sistema");
         }
@@ -306,38 +315,39 @@ private void jBusModifActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIR
 }//GEN-LAST:event_jBusModifActionPerformed
 
 private void jBuscarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBuscarActionPerformed
-     productoBusqueda = new SearchProduct();
-     productoBusqueda.setVisible(true);
-     this.toBack();
-     Dimension d = panel.getSize();
-     productoBusqueda.setLocation(d.width/2 - productoBusqueda.getWidth()/2 , d.height/2 -productoBusqueda.getHeight()/2 );
-     panel.add(productoBusqueda);
-     productoBusqueda.toFront();
-     productoBusqueda.addInternalFrameListener(new InternalFrameAdapter() {
-        public void internalFrameClosed(InternalFrameEvent e){
-           pasarDatos();
-           
+    productoBusqueda = new SearchProduct();
+    productoBusqueda.setVisible(true);
+    this.toBack();
+    Dimension d = panel.getSize();
+    productoBusqueda.setLocation(d.width / 2 - productoBusqueda.getWidth() / 2, d.height / 2 - productoBusqueda.getHeight() / 2);
+    panel.add(productoBusqueda);
+    productoBusqueda.toFront();
+    productoBusqueda.addInternalFrameListener(new InternalFrameAdapter() {
+
+        public void internalFrameClosed(InternalFrameEvent e) {
+            pasarDatos();
+
         }
-    
     });
 }//GEN-LAST:event_jBuscarActionPerformed
 
-   private void pasarDatos(){
-       Producto tempProducto =  productoBusqueda.getProduct();
-       if(tempProducto != null){
-       jCodigo.setText(tempProducto.getId());
-       jDescripcion.setText(tempProducto.getDescripcion());
-       jExistencias.setText(String.valueOf(tempProducto.getExistencias()));
-       jMinimos.setText(String.valueOf(tempProducto.getMinimos()));
-       jPrecio.setText(String.valueOf(tempProducto.getPrecioUnitario()));
-       }
+    private void pasarDatos() {
+        Producto tempProducto = productoBusqueda.getProduct();
+        if (tempProducto != null) {
+            jCodigo.setText(tempProducto.getId());
+            jDescripcion.setText(tempProducto.getDescripcion());
+            jExistencias.setText(String.valueOf(tempProducto.getExistencias()));
+            jMinimos.setText(String.valueOf(tempProducto.getMinimos()));
+            jPrecio.setText(String.valueOf(tempProducto.getPrecioUnitario()));
+        }
         try {
             productoBusqueda.setClosed(true);
         } catch (PropertyVetoException ex) {
             Logger.getLogger(ManProductos.class.getName()).log(Level.SEVERE, null, ex);
         }
-   
-   }
+
+    }
+
     private void limpiarCampos() {
         jCodigo.setText("");
         jDescripcion.setText("");
