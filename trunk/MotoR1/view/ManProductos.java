@@ -5,9 +5,15 @@
  */
 package view;
 
+import java.beans.PropertyVetoException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.JDesktopPane;
 import javax.swing.JOptionPane;
 import daoHibernateImpl.*;
+import java.awt.Dimension;
+import javax.swing.event.InternalFrameAdapter;
+import javax.swing.event.InternalFrameEvent;
 import model.Producto;
 
 /**
@@ -16,9 +22,11 @@ import model.Producto;
  */
 public class ManProductos extends javax.swing.JInternalFrame {
 
+    public JDesktopPane panel;
+    public SearchProduct productoBusqueda;
     /** Creates new form ManProductos */
-    public ManProductos() {
-
+    public ManProductos(JDesktopPane panel) {
+        this.panel = panel;
         initComponents();
         isCamposHabilitados(false);
         this.setClosable(true);
@@ -82,6 +90,11 @@ public class ManProductos extends javax.swing.JInternalFrame {
         jPanel1.add(jNuevo, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 50, -1, -1));
 
         jBuscar.setText("Buscar");
+        jBuscar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jBuscarActionPerformed(evt);
+            }
+        });
         jPanel1.add(jBuscar, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 50, -1, -1));
 
         jModificar.setText("Modificar");
@@ -282,6 +295,38 @@ private void jBusModifActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIR
     jCambiar.setEnabled(true);
 }//GEN-LAST:event_jBusModifActionPerformed
 
+private void jBuscarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBuscarActionPerformed
+     productoBusqueda = new SearchProduct();
+     productoBusqueda.setVisible(true);
+     this.toBack();
+     Dimension d = panel.getSize();
+     productoBusqueda.setLocation(d.width/2 - productoBusqueda.getWidth()/2 , d.height/2 -productoBusqueda.getHeight()/2 );
+     panel.add(productoBusqueda);
+     productoBusqueda.addInternalFrameListener(new InternalFrameAdapter() {
+        public void internalFrameClosed(InternalFrameEvent e){
+           pasarDatos();
+           
+        }
+    
+    });
+}//GEN-LAST:event_jBuscarActionPerformed
+
+   private void pasarDatos(){
+       Producto tempProducto =  productoBusqueda.getProduct();
+       if(tempProducto != null){
+       jCodigo.setText(tempProducto.getId());
+       jDescripcion.setText(tempProducto.getDescripcion());
+       jExistencias.setText(String.valueOf(tempProducto.getExistencias()));
+       jMinimos.setText(String.valueOf(tempProducto.getMinimos()));
+       jPrecio.setText(String.valueOf(tempProducto.getPrecioUnitario()));
+       }
+        try {
+            productoBusqueda.setClosed(true);
+        } catch (PropertyVetoException ex) {
+            Logger.getLogger(ManProductos.class.getName()).log(Level.SEVERE, null, ex);
+        }
+   
+   }
     private void limpiarCampos() {
         jCodigo.setText("");
         jDescripcion.setText("");
