@@ -51,6 +51,7 @@ public class ModuloInventario {
             sheet.addCell(new jxl.write.Label(2, 3, "MINIMO"));
             sheet.addCell(new jxl.write.Label(3, 3, "EXISTENCIAS"));
             sheet.addCell(new jxl.write.Label(4, 3, "PRECIO UNITARIO"));
+            sheet.addCell(new jxl.write.Label(5, 3, "PROVEEDOR"));
 
             int fila = 4;
             for (int i = 0; itProd.hasNext(); i++) {
@@ -71,6 +72,9 @@ public class ModuloInventario {
                 //Genera los datos de las filas para la columna Cliente
                 sheet.addCell(new jxl.write.Number(4, fila, prodTemp.getPrecioUnitario()));
 
+                //Genera los datos de las filas para la columna Descripcion
+                sheet.addCell(new jxl.write.Label(5, fila, prodTemp.getIdProveedor()));
+                
                 fila++;
             }
 
