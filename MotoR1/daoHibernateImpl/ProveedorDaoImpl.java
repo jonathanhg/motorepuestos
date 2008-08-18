@@ -53,7 +53,7 @@ public class ProveedorDaoImpl implements ProveedoresDao {
         try {
             Proveedores provedor = new Proveedores();
             session.beginTransaction();
-            Query getProductos = session.createQuery("from Producto prod where prod.idproveedor = :pid");
+            Query getProductos = session.createQuery("from Producto prod where prod.idProveedor = :pid");
             getProductos.setString("pid", idProveedor);
             productos = getProductos.list();
 
