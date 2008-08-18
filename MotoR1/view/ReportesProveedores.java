@@ -100,7 +100,7 @@ private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRS
     ModuloProveedores proveedorManager = new ModuloProveedores();
     if (jTextField1.getText() != null) {
         try {
-            proveedorManager.productosPorProveedor(String.valueOf(jTextField1.getText()));
+            proveedorManager.productosPorProveedor(jTextField1.getText());
             JOptionPane.showMessageDialog(rootPane, "El reporte ha sido generado");
         } catch (Exception e) {
             JOptionPane.showMessageDialog(rootPane, "El reporte no pudo ser generado");
