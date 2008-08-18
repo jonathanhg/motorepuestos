@@ -52,6 +52,7 @@ public class ManProductos extends javax.swing.JInternalFrame {
         jLabel7 = new javax.swing.JLabel();
         jCambiar = new javax.swing.JButton();
         jButton1 = new javax.swing.JButton();
+        jBorrar = new javax.swing.JButton();
 
         jPanel1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
@@ -124,6 +125,14 @@ public class ManProductos extends javax.swing.JInternalFrame {
             }
         });
         jPanel1.add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(320, 50, -1, -1));
+
+        jBorrar.setText("Borrar");
+        jBorrar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jBorrarActionPerformed(evt);
+            }
+        });
+        jPanel1.add(jBorrar, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 180, -1, -1));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -221,6 +230,11 @@ private void jCambiarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:ev
 private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
     isCamposHabilitados(false);
     jCodigo.setEnabled(true);
+    jBorrar.setEnabled(true);
+}//GEN-LAST:event_jButton1ActionPerformed
+
+private void jBorrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBorrarActionPerformed
+
 
     ProductoDaoImpl manager = new ProductoDaoImpl();
     Producto producto = new Producto();
@@ -228,14 +242,14 @@ private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRS
         if (manager.obtenerProducto(jCodigo.getText()) != null) {
             producto = manager.obtenerProducto(jCodigo.getText());
             manager.eliminarProducto(producto);
-        }else{
+            JOptionPane.showMessageDialog(rootPane, "No se pudo cambiar: El producto ha sido eliminado");
+        } else {
             JOptionPane.showMessageDialog(rootPane, "No se pudo cambiar: El producto no está en el sistema");
         }
-    }else{
+    } else {
         JOptionPane.showMessageDialog(rootPane, "No se pudo cambiar: El código de producto no puede estar vacio");
     }
-
-}//GEN-LAST:event_jButton1ActionPerformed
+}//GEN-LAST:event_jBorrarActionPerformed
 
     private void limpiarCampos() {
         jCodigo.setText("");
@@ -253,9 +267,11 @@ private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRS
         jAgregar.setEnabled(estado);
         jExistencias.setEnabled(estado);
         jCambiar.setEnabled(estado);
+        jBorrar.setEnabled(estado);
     }
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jAgregar;
+    private javax.swing.JButton jBorrar;
     private javax.swing.JButton jBuscar;
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jCambiar;
