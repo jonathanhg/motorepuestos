@@ -194,6 +194,8 @@ private void jAgregarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:ev
 private void jNuevoMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jNuevoMouseClicked
     isCamposHabilitados(true);
     jCambiar.setEnabled(false);
+    jBorrar.setEnabled(false);
+    jBusModif.setEnabled(false);
 }//GEN-LAST:event_jNuevoMouseClicked
 
 private void jModificarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jModificarMouseClicked
