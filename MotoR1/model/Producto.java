@@ -10,7 +10,6 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 
-import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
@@ -61,14 +60,11 @@ public class Producto {
     // #[regen=yes,id=DCE.E963DD5B-2068-5AEB-5D39-AC313CA24884]
     // </editor-fold> 
     private double impuestoVentas;
-    
-    private String idProveedor;
 
     // <editor-fold defaultstate="collapsed" desc=" UML Marker "> 
     // #[regen=yes,id=DCE.C7DEE7A0-2DA0-95FB-22EB-52BC6C6876AE]
     // </editor-fold> 
-    @ManyToOne
-    private Proveedores proveedor;
+
 
     // <editor-fold defaultstate="collapsed" desc=" UML Marker "> 
     // #[regen=yes,id=DCE.641BF209-EFEC-D639-FA7E-20CACFACD88C]
@@ -191,23 +187,6 @@ public class Producto {
     // </editor-fold> 
     public void setUtilidad (double val) {
         this.utilidad = val;
-    }
-
-    public Proveedores getProveedor() {
-        return proveedor;
-    }
-
-    public void setProveedor(Proveedores proveedor) {
-        this.proveedor = proveedor;
-        this.idProveedor=this.proveedor.getId();
-    }
-
-    public String getIdProveedor() {
-        return idProveedor;
-    }
-
-    public void setIdProveedor(String id) {
-        this.idProveedor=id;
     }
     
     
