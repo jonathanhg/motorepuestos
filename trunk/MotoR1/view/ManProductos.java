@@ -191,6 +191,7 @@ private void jModificarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:
     limpiarCampos();
     isCamposHabilitados(false);
     jCodigo.setEnabled(true);
+    jCambiar.setEnabled(true);
 }//GEN-LAST:event_jModificarMouseClicked
 
 private void jCambiarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jCambiarMouseClicked
