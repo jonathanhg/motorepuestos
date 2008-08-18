@@ -56,6 +56,7 @@ public class NewJFrame extends javax.swing.JFrame {
         jMenuItem4 = new javax.swing.JMenuItem();
         jMenu2 = new javax.swing.JMenu();
         jMenuItem5 = new javax.swing.JMenuItem();
+        jMenuItemProveedores = new javax.swing.JMenuItem();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Moto Repuestos Facturacion");
@@ -136,6 +137,14 @@ public class NewJFrame extends javax.swing.JFrame {
         });
         jMenu2.add(jMenuItem5);
 
+        jMenuItemProveedores.setText("Mantenimiento de Proveedores");
+        jMenuItemProveedores.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItemProveedoresActionPerformed(evt);
+            }
+        });
+        jMenu2.add(jMenuItemProveedores);
+
         jMenuBar1.add(jMenu2);
 
         setJMenuBar(jMenuBar1);
@@ -211,6 +220,15 @@ Dimension d = jDesktopPane1.getSize();
      prodManager.setVisible(true);
 }//GEN-LAST:event_jMenuItem5ActionPerformed
 
+private void jMenuItemProveedoresActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItemProveedoresActionPerformed
+// TODO add your handling code here:
+JInternalProveedor prov = new JInternalProveedor();//GEN-LAST:event_jMenuItemProveedoresActionPerformed
+Dimension d = jDesktopPane1.getSize();
+     prov.setLocation(d.width/2 - prov.getWidth()/2 , d.height/2 -prov.getHeight()/2 );
+     jDesktopPane1.add(prov);
+     prov.setVisible(true);
+}
+
 
 private void createInternalFrameProforma(){
     FacturaView fact = new FacturaView(null, jDesktopPane1,true);
@@ -261,6 +279,7 @@ private void createInternalFrameFact(){
     private javax.swing.JMenuItem jMenuItem4;
     private javax.swing.JMenuItem jMenuItem5;
     private javax.swing.JMenuItem jMenuItemBusquedaFacturaUnica;
+    private javax.swing.JMenuItem jMenuItemProveedores;
     private javax.swing.JMenuItem jMenuItemproforma;
     private javax.swing.JMenu jMenuProforma;
     private javax.swing.JMenu jMenuReportes;
