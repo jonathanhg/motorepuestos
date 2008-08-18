@@ -53,6 +53,7 @@ public class NewJFrame extends javax.swing.JFrame {
         jMenuReportes = new javax.swing.JMenu();
         jMenuItem2 = new javax.swing.JMenuItem();
         jMenuItem3 = new javax.swing.JMenuItem();
+        jMenuItem6 = new javax.swing.JMenuItem();
         jMenuItem4 = new javax.swing.JMenuItem();
         jMenu2 = new javax.swing.JMenu();
         jMenuItem5 = new javax.swing.JMenuItem();
@@ -116,6 +117,14 @@ public class NewJFrame extends javax.swing.JFrame {
             }
         });
         jMenuReportes.add(jMenuItem3);
+
+        jMenuItem6.setText("Reportes de Proveedores");
+        jMenuItem6.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItem6ActionPerformed(evt);
+            }
+        });
+        jMenuReportes.add(jMenuItem6);
 
         jMenuItem4.setText("Reportes Gerenciales");
         jMenuItem4.addActionListener(new java.awt.event.ActionListener() {
@@ -222,12 +231,20 @@ Dimension d = jDesktopPane1.getSize();
 
 private void jMenuItemProveedoresActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItemProveedoresActionPerformed
 // TODO add your handling code here:
-JInternalProveedor prov = new JInternalProveedor();//GEN-LAST:event_jMenuItemProveedoresActionPerformed
+JInternalProveedor prov = new JInternalProveedor();
 Dimension d = jDesktopPane1.getSize();
      prov.setLocation(d.width/2 - prov.getWidth()/2 , d.height/2 -prov.getHeight()/2 );
      jDesktopPane1.add(prov);
      prov.setVisible(true);
-}
+}//GEN-LAST:event_jMenuItemProveedoresActionPerformed
+
+private void jMenuItem6ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem6ActionPerformed
+ReportesProveedores prov = new ReportesProveedores();
+Dimension d = jDesktopPane1.getSize();
+     prov.setLocation(d.width/2 - prov.getWidth()/2 , d.height/2 -prov.getHeight()/2 );
+     jDesktopPane1.add(prov);
+     prov.setVisible(true);
+}//GEN-LAST:event_jMenuItem6ActionPerformed
 
 
 private void createInternalFrameProforma(){
@@ -278,6 +295,7 @@ private void createInternalFrameFact(){
     private javax.swing.JMenuItem jMenuItem3;
     private javax.swing.JMenuItem jMenuItem4;
     private javax.swing.JMenuItem jMenuItem5;
+    private javax.swing.JMenuItem jMenuItem6;
     private javax.swing.JMenuItem jMenuItemBusquedaFacturaUnica;
     private javax.swing.JMenuItem jMenuItemProveedores;
     private javax.swing.JMenuItem jMenuItemproforma;
