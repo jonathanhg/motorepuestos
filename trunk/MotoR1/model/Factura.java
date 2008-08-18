@@ -199,8 +199,8 @@ public class Factura implements Serializable  {
     @OneToMany(cascade=CascadeType.ALL , fetch=FetchType.EAGER) 
     @JoinTable(
         name="FactProductos",
-        joinColumns={@JoinColumn(name="fact_id")},
-        inverseJoinColumns= @JoinColumn(name="product_id")
+        joinColumns={@JoinColumn(name="fact_id",unique=false)},
+        inverseJoinColumns= @JoinColumn(name="product_id",unique=false)
     )
     public List<FactProduct> getProductos() {
         return productos;

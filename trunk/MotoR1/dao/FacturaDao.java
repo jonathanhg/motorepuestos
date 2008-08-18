@@ -31,4 +31,6 @@ public interface  FacturaDao {
     public List facturasAnuladasPorMes(int mes);
     
     public Factura facturaPorCodigo(int codigo);
+    
+    public void actualizarFactura(Factura factura);
 }

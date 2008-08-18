@@ -192,4 +192,17 @@ public class FacturaDaoImpl implements FacturaDao {
         }
         return facturas;
     }
+
+    public void actualizarFactura(Factura factura) {
+          Session session = HibernateUtil.getSessionFactory().openSession();
+        try {
+            session.beginTransaction();
+            session.update(factura);
+            session.getTransaction().commit();
+        } catch (Exception e) {
+            System.out.println(e.toString());
+        } finally {
+            session.close();
+        }
+    }
 }
