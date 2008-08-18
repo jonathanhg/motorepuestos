@@ -5,6 +5,7 @@
 
 package dao;
 
+import java.util.List;
 import model.Proveedores;
 /**
  *
@@ -18,6 +19,8 @@ public interface  ProveedoresDao {
     
     public void actualizarProveedor(Proveedores proveedor);
     
+    public List productosPorProveedor(String idProveedor);
     
+    public List obtenerProveedores();
 
 }
