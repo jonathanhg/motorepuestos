@@ -18,6 +18,7 @@ import javax.persistence.Id;
 
 import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
+import javax.persistence.ManyToMany;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
@@ -196,7 +197,7 @@ public class Factura implements Serializable  {
     // Borra todos los productos cuando se elimina factura ,  
     //crea nuevos productos en la factura sin tener que consultarlos antes para insertarlos , 
     //se utliza Eager para que traiga los campos ya inicializados
-    @OneToMany(cascade=CascadeType.ALL , fetch=FetchType.EAGER) 
+    @ManyToMany(cascade=CascadeType.ALL , fetch=FetchType.EAGER) 
     @JoinTable(
         name="FactProductos",
         joinColumns={@JoinColumn(name="fact_id",unique=false)},
