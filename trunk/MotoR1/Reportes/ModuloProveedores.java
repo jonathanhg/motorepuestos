@@ -44,7 +44,7 @@ public void proveedoresRegistrados(){
 
     
     private void crearExcelProductos(Iterator itProd, String nombreArchivo, String nombreHoja, String nombreReporte) {
-        ProductoX prodTemp;
+        Producto prodTemp;
 
         try {
             //Se crea el libro Excel
@@ -58,20 +58,20 @@ public void proveedoresRegistrados(){
 
             sheet.addCell(new jxl.write.Label(0, 3, "CODIGO DE PRODUCTO"));
             sheet.addCell(new jxl.write.Label(1, 3, "DESCRIPCION"));
-            sheet.addCell(new jxl.write.Label(2, 3, "CANTIDAD VENDIDA")); 
+            sheet.addCell(new jxl.write.Label(2, 3, "EXISTENCIAS")); 
 
             int fila = 4;
             for (int i = 0; itProd.hasNext(); i++) {
-                prodTemp = (ProductoX) itProd.next();
+                prodTemp = (Producto) itProd.next();
 
                 //Genera los datos de las filas para la columna Codigo de Producto
-                sheet.addCell(new jxl.write.Label(0, fila, prodTemp.getNombre()));
+                sheet.addCell(new jxl.write.Label(0, fila, prodTemp.getId()));
 
                 //Genera los datos de las filas para la columna Descripcion
                 sheet.addCell(new jxl.write.Label(1, fila, prodTemp.getDescripcion()));
 
                 //Genera los datos de las filas para la columna cantidad vendidas
-                sheet.addCell(new jxl.write.Number(2, fila, prodTemp.getCantVendidas()));
+                sheet.addCell(new jxl.write.Number(2, fila, prodTemp.getExistencias()));
 
                 fila++;
             }
