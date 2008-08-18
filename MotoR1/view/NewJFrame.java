@@ -50,6 +50,7 @@ public class NewJFrame extends javax.swing.JFrame {
         jMenuItem1 = new javax.swing.JMenuItem();
         jMenuItemBusquedaFacturaUnica = new javax.swing.JMenuItem();
         jMenuItemproforma = new javax.swing.JMenuItem();
+        jMenuItem2 = new javax.swing.JMenuItem();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Moto Repuestos Facturacion");
@@ -89,6 +90,14 @@ public class NewJFrame extends javax.swing.JFrame {
             }
         });
         jMenuProforma.add(jMenuItemproforma);
+
+        jMenuItem2.setText("Reportes ");
+        jMenuItem2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItem2ActionPerformed(evt);
+            }
+        });
+        jMenuProforma.add(jMenuItem2);
 
         jMenuBar1.add(jMenuProforma);
 
@@ -130,6 +139,16 @@ private void jMenuItemproformaActionPerformed(java.awt.event.ActionEvent evt) {/
 // TODO add your handling code here:
     createInternalFrameProforma();
 }//GEN-LAST:event_jMenuItemproformaActionPerformed
+
+private void jMenuItem2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem2ActionPerformed
+// TODO add your handling code here:
+    ReportesFacturacion reportesFact = new ReportesFacturacion();
+     Dimension d = jDesktopPane1.getSize();
+     reportesFact.setLocation(d.width/2 - reportesFact.getWidth()/2 , d.height/2 -reportesFact.getHeight()/2 );
+     jDesktopPane1.add(reportesFact);
+     reportesFact.setVisible(true);
+    
+}//GEN-LAST:event_jMenuItem2ActionPerformed
 
 
 private void createInternalFrameProforma(){
@@ -175,6 +194,7 @@ private void createInternalFrameFact(){
     private javax.swing.JMenu jMenu1;
     private javax.swing.JMenuBar jMenuBar1;
     private javax.swing.JMenuItem jMenuItem1;
+    private javax.swing.JMenuItem jMenuItem2;
     private javax.swing.JMenuItem jMenuItemBusquedaFacturaUnica;
     private javax.swing.JMenuItem jMenuItemproforma;
     private javax.swing.JMenu jMenuProforma;

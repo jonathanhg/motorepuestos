@@ -22,6 +22,7 @@ import java.util.logging.Logger;
 import javax.swing.JDesktopPane;
 import javax.swing.JInternalFrame;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JSpinner;
 import javax.swing.JTable;
 import javax.swing.SwingConstants;
@@ -46,12 +47,16 @@ public class FacturaView extends javax.swing.JInternalFrame {
     
     public boolean isProforma=false;
     
+    public int idFact ;
+    
+    public Date fecha;
+    
     /** Creates new form Factura */
     public FacturaView(Factura factura,JDesktopPane panel,boolean isProforma) {
          super("", true, false, true, true);
           
          factBo = new FacturaBoImpl();
-        int idFact = 0;
+         idFact = 0;
         this.panel = panel;
         this.isProforma = isProforma;
         if(factura == null){
@@ -72,7 +77,9 @@ public class FacturaView extends javax.swing.JInternalFrame {
            
        }else{
             productos = factura.getProductos();
-       
+           this.setTitle("Factura : "+factura.getId()
+                   
+                   );
        }
        
         
@@ -96,10 +103,10 @@ public class FacturaView extends javax.swing.JInternalFrame {
            
              
         SimpleDateFormat newDateFormat = new SimpleDateFormat("yyyy/MM/dd");
-        Date fecha = new Date();
+        Date fechaT = new Date();
          jTextFieldFecha.setEnabled(false);
-         jTextFieldFecha.setText(newDateFormat.format(fecha));
-         factura.setFecha(fecha);
+         jTextFieldFecha.setText(newDateFormat.format(fechaT));
+        this.fecha = fechaT;
          
           Locale locale = new Locale("es", "CR");
         NumberFormat n = NumberFormat.getCurrencyInstance(locale) ;
@@ -379,7 +386,20 @@ private void jButtonAnularActionPerformed(java.awt.event.ActionEvent evt) {
 }
 
 private void jButtonProcesarActionPerformed(java.awt.event.ActionEvent evt) {
+    FacturaBoImpl factBoo = new FacturaBoImpl();
+    Factura fact = new Factura();
+    fact.setId(idFact);
+    if(productos.size() == 0 ){ //TODO VER SI EN REALIDAD HAY UN PRODUCTO PORK EL PRIMERO ESTA VACIO
+    JOptionPane.showMessageDialog(this, "La factura Al Menos debe tener un producto");
+    return;
+    }
+    fact.setProductos(productos);
+    fact.setFecha(fecha);
+    fact.setCliente(jTextFieldCliente.getText());
+    fact.setDescuento((Integer)jSpinnerDescuento.getValue());
     
+    //fact.setTotal(jTextFieldTotal.getText());
+    factBoo.saveFact(fact, this);
 }
 
 public class SpinnerListener implements ChangeListener{
