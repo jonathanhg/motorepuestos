@@ -206,7 +206,9 @@ public class Producto {
         return idProveedor;
     }
 
-    
+    public void setIdProveedor(String id) {
+        this.idProveedor=id;
+    }
     
     
 
