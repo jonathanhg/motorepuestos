@@ -76,7 +76,7 @@ public class ReportesFacturacion extends javax.swing.JInternalFrame {
         jPanel1.add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(220, 50, -1, -1));
 
         jLabel3.setText("Anuladas por mes");
-        jPanel1.add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 220, -1, -1));
+        jPanel1.add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 130, -1, -1));
 
         jButton2.setText("Generar");
         jButton2.addActionListener(new java.awt.event.ActionListener() {
@@ -84,13 +84,13 @@ public class ReportesFacturacion extends javax.swing.JInternalFrame {
                 jButton2ActionPerformed(evt);
             }
         });
-        jPanel1.add(jButton2, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 220, -1, -1));
+        jPanel1.add(jButton2, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 130, -1, -1));
 
         jLabel4.setText("Por cliente");
-        jPanel1.add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 130, -1, -1));
+        jPanel1.add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 170, -1, -1));
 
-        jNameCliente.setToolTipText("Ingrese el codigo de cliente");
-        jPanel1.add(jNameCliente, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 130, 150, -1));
+        jNameCliente.setToolTipText("Ingrese el nombre del cliente");
+        jPanel1.add(jNameCliente, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 170, 150, -1));
 
         jButton3.setText("Generar");
         jButton3.addActionListener(new java.awt.event.ActionListener() {
@@ -98,10 +98,10 @@ public class ReportesFacturacion extends javax.swing.JInternalFrame {
                 jButton3ActionPerformed(evt);
             }
         });
-        jPanel1.add(jButton3, new org.netbeans.lib.awtextra.AbsoluteConstraints(240, 130, -1, -1));
+        jPanel1.add(jButton3, new org.netbeans.lib.awtextra.AbsoluteConstraints(230, 170, -1, -1));
 
         jLabel5.setText("Por fecha");
-        jPanel1.add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 180, -1, -1));
+        jPanel1.add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 210, -1, -1));
 
         jLabel6.setText("Por mes");
         jPanel1.add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 90, -1, -1));
@@ -112,9 +112,9 @@ public class ReportesFacturacion extends javax.swing.JInternalFrame {
                 jButton4ActionPerformed(evt);
             }
         });
-        jPanel1.add(jButton4, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 90, -1, -1));
+        jPanel1.add(jButton4, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 90, -1, -1));
 
-        jLabel7.setText("Sin impuesto");
+        jLabel7.setText("Exoneradas");
         jPanel1.add(jLabel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 270, -1, -1));
 
         jButton5.setText("Generar");
@@ -127,15 +127,15 @@ public class ReportesFacturacion extends javax.swing.JInternalFrame {
 
         comboMesAnuladas.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "1", "2", "3", "4","5","6","7","8","9","10","11","12" }));
         comboMesAnuladas.setToolTipText("Ingrese el mes a consultar");
-        jPanel1.add(comboMesAnuladas, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 220, -1, -1));
+        jPanel1.add(comboMesAnuladas, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 130, -1, -1));
 
         comboMesDesde.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "1", "2", "3", "4","5","6","7","8","9","10","11","12" }));
         comboMesDesde.setToolTipText("Ingrese el mes de la fecha DESDE");
-        jPanel1.add(comboMesDesde, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 180, -1, -1));
+        jPanel1.add(comboMesDesde, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 210, -1, -1));
 
         comboMesHasta.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "1", "2", "3", "4","5","6","7","8","9","10","11","12" }));
         comboMesHasta.setToolTipText("Ingrese el mes de la fecha HASTA");
-        jPanel1.add(comboMesHasta, new org.netbeans.lib.awtextra.AbsoluteConstraints(250, 180, -1, -1));
+        jPanel1.add(comboMesHasta, new org.netbeans.lib.awtextra.AbsoluteConstraints(250, 210, -1, -1));
 
         comboMes.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "1", "2", "3", "4","5","6","7","8","9","10","11","12" }));
         comboMes.setToolTipText("Ingrese el mes a consultar");
@@ -143,7 +143,7 @@ public class ReportesFacturacion extends javax.swing.JInternalFrame {
 
         comboMesSinImp.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "1", "2", "3", "4","5","6","7","8","9","10","11","12"}));
         comboMesSinImp.setToolTipText("Ingrese el mes a consultar");
-        jPanel1.add(comboMesSinImp, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 270, -1, -1));
+        jPanel1.add(comboMesSinImp, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 270, -1, -1));
 
         jButton6.setText("Generar");
         jButton6.addActionListener(new java.awt.event.ActionListener() {
@@ -151,13 +151,13 @@ public class ReportesFacturacion extends javax.swing.JInternalFrame {
                 jButton6ActionPerformed(evt);
             }
         });
-        jPanel1.add(jButton6, new org.netbeans.lib.awtextra.AbsoluteConstraints(280, 180, -1, -1));
+        jPanel1.add(jButton6, new org.netbeans.lib.awtextra.AbsoluteConstraints(290, 210, -1, -1));
 
         jAnioDesde.setToolTipText("Año DESDE (ej: 2012)");
-        jPanel1.add(jAnioDesde, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 180, 60, -1));
+        jPanel1.add(jAnioDesde, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 210, 60, -1));
 
         jAnioHasta.setToolTipText("Año Hasta (ej: 2012)");
-        jPanel1.add(jAnioHasta, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 180, 60, -1));
+        jPanel1.add(jAnioHasta, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 210, 60, -1));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -170,9 +170,9 @@ public class ReportesFacturacion extends javax.swing.JInternalFrame {
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, 315, Short.MAX_VALUE))
+            .addGroup(layout.createSequentialGroup()
+                .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, 323, Short.MAX_VALUE)
+                .addContainerGap())
         );
 
         pack();
