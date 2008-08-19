@@ -48,7 +48,7 @@ public class FacturaDaoImpl implements FacturaDao {
             while (itProductos.hasNext()){
                 prodTemp = (FactProduct) itProductos.next();
                 Producto productoEnSistema = productoManager.obtenerProducto(prodTemp.getId());
-                productoEnSistema.setExistencias(prodTemp.getCantidad());
+                productoEnSistema.setExistencias(productoEnSistema.getExistencias() + prodTemp.getCantidad());
                 productoManager.actualizarProducto(productoEnSistema); //devuelve al inventario los productos que se habían vendido
             }
             
@@ -142,7 +142,7 @@ public class FacturaDaoImpl implements FacturaDao {
         List facturas = null;
         try {
             session.beginTransaction();
-            Query getFacturas = session.createQuery("from Factura fact where fact.cliente = :ncliente and  fact.is_anulado = :isAnulada");
+            Query getFacturas = session.createQuery("from Factura fact where fact.cliente = :ncliente and  fact.is_anulado = :isAnulada order by fact.fecha");
             getFacturas.setString("ncliente", nombreCliente);
             getFacturas.setString("isAnulada", "N");
             facturas = getFacturas.list();
