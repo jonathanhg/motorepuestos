@@ -18,6 +18,7 @@ public class AnularFactura extends javax.swing.JInternalFrame {
     /** Creates new form AnularFactura */
     public AnularFactura() {
         initComponents();
+        this.setClosable(true);
     }
 
     /** This method is called from within the constructor to
@@ -70,10 +71,28 @@ public class AnularFactura extends javax.swing.JInternalFrame {
 private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
     FacturaDaoImpl factManager = new FacturaDaoImpl();
     Factura factura = new Factura();
-    factura = factManager.facturaPorCodigo(Integer.parseInt(jTextField1.getText().toString()));
-    factManager.anularFactura(factura);
-    JOptionPane.showMessageDialog(rootPane, "la factura ha sido anulada");
-
+    int codigoFactura = 0;
+    boolean buenosDatos = true;
+    try {
+        codigoFactura = Integer.parseInt(jTextField1.getText().toString());
+    } catch (Exception e) {
+        JOptionPane.showMessageDialog(rootPane, "Codigo de factura: debe ser un valor numerico");
+        buenosDatos = false;
+    }
+    if (buenosDatos == true) {
+        factura = factManager.facturaPorCodigo(codigoFactura);
+        if (factura != null) {
+            if (factura.getIs_anulado() == false) {
+                factManager.anularFactura(factura);
+                JOptionPane.showMessageDialog(rootPane, "La factura ha sido anulada");
+            } else {
+                System.out.println("estado de la factura: "+factura.getIs_anulado());
+                JOptionPane.showMessageDialog(rootPane, "Error: la factura: " + codigoFactura + " ya estaba anulada");
+            }
+        }else{
+JOptionPane.showMessageDialog(rootPane, "Error: la factura: " + codigoFactura + " no fue encontrada");            
+        }
+    }
 }//GEN-LAST:event_jButton1ActionPerformed
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButton1;
