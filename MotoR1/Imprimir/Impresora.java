@@ -64,7 +64,7 @@ public class Impresora {
         texto.add("TELEFONO:22340718");
         texto.add("______________________________________");
         texto.add("HORA: " + new Date().getHours() + ":" + new Date().getMinutes() + ":" + new Date().getSeconds() + "                       "+"No.FACTURA");
-        texto.add("FECHA: " + factura.getFecha().getDate()+"/"+factura.getFecha().getMonth()+"/"+String.valueOf(factura.getFecha().getYear()).substring(1)+"                       "+factura.getId()+"");
+        texto.add("FECHA: " + factura.getFecha().getDate()+"/"+(factura.getFecha().getMonth()+1)+"/"+String.valueOf(factura.getFecha().getYear()).substring(1)+"                       "+factura.getId()+"");
         texto.add("CLIENTE: ");
         texto.add(factura.getCliente());
         texto.add("______________________________________");
