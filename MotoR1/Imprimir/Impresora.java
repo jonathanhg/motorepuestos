@@ -68,11 +68,11 @@ public class Impresora {
         texto.add("CLIENTE: ");
         texto.add(factura.getCliente());
         texto.add("______________________________________");
-        texto.add("CODIGO           CANTIDAD         TOTAL");
+        texto.add("CODIGO             CANTIDAD         TOTAL");
         while (iProductos.hasNext()) {
             prodTemp = (FactProduct) iProductos.next();
-            texto.add(prodTemp.getId()+"              "+prodTemp.getCantidad()+"                 "+prodTemp.getTotal());
-            String descripcion;if(prodTemp.getDescripcion().length()>23){ descripcion = prodTemp.getDescripcion().substring(0,22);}else{descripcion = prodTemp.getDescripcion();}
+            texto.add(prodTemp.getId()+"                      "+prodTemp.getCantidad()+"                    "+prodTemp.getTotal());
+            String descripcion;if(prodTemp.getDescripcion().length()>23){ descripcion = prodTemp.getDescripcion().substring(0,21);}else{descripcion = prodTemp.getDescripcion();}
             texto.add(descripcion+"  (Precio ¢"+prodTemp.getPrecio()+")");
         }
         texto.add("______________________________________");
