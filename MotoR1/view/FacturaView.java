@@ -219,7 +219,7 @@ private void initComponents() {
             }
         });
 
-        jButtonAnular.setText("Anular");
+        jButtonAnular.setText("Cancelar");
         jButtonAnular.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButtonAnularActionPerformed(evt);
