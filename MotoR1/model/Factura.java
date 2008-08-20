@@ -215,10 +215,8 @@ public class Factura implements Serializable  {
         return sin_impuesto;
     }
 
-    public void setSin_impuesto(boolean yaImplementado) {
-        double impuesto = this.getTotal()*0.13;
-        this.setTotal(this.getTotal()-impuesto);
-        this.sin_impuesto = true;
+    public void setSin_impuesto(boolean estado) {
+        this.sin_impuesto = estado;
     }
 
 }
