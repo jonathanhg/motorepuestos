@@ -4,6 +4,7 @@
  */
 
 package Reportes;
+import java.io.*;
 import dao.ProveedoresDao;
 import java.util.List;
 import model.Proveedores;
@@ -15,6 +16,7 @@ import java.io.File;
 import java.io.IOException;
 import java.util.Iterator;
 import java.util.List;
+import javax.swing.JOptionPane;
 import jxl.Workbook;
 import jxl.write.WritableSheet;
 import jxl.write.WritableWorkbook;
@@ -28,6 +30,7 @@ import model.Proveedores;
  * @author Administrador
  */
 public class ModuloProveedores {
+      private String rutaDeGuardado ="\\ReportesMRSP\\";
 public void productosPorProveedor(String idProveedor){
     ProveedorDaoImpl proveedorManager = new ProveedorDaoImpl();
     List listaProductos = proveedorManager.productosPorProveedor(idProveedor);
@@ -48,7 +51,7 @@ public void proveedoresRegistrados(){
 
         try {
             //Se crea el libro Excel
-            WritableWorkbook workbook = Workbook.createWorkbook(new File(nombreArchivo));
+            WritableWorkbook workbook = Workbook.createWorkbook(new File(rutaDeGuardado+nombreArchivo));
 
             //Se crea una nueva hoja dentro del libro
             WritableSheet sheet = workbook.createSheet(nombreHoja, 0);
@@ -132,7 +135,8 @@ public void proveedoresRegistrados(){
 
             System.out.println("Creacion del reporte finalizado.");
         } catch (IOException ex) {
-            System.out.println("Error al crear el fichero.");
+            //System.out.println("Error al crear el fichero.");
+            JOptionPane.showMessageDialog(null,"Error al crear el fichero.\n Posible causa:\n No se encuentra el directorio: "+rutaDeGuardado+" en la raíz (ejm C:/)");
         } catch (WriteException ex) {
             System.out.println("Error al escribir el fichero.");
         }

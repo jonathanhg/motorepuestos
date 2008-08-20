@@ -9,21 +9,22 @@ import model.Factura;
 
 import java.io.*;
 import java.util.Date;
-//import java.sql.Date;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
+import javax.swing.JOptionPane;
 import jxl.*;
 import jxl.write.*;
 import model.FactProduct;
-import model.Producto;
 
 /**
  *
  * @author Administrador
  */
 public class ModuloFacturacion {
-
+//private String rutaDeGuardado ="C:\\";
+    private String rutaDeGuardado ="\\ReportesMRSP\\";
+        
     public void facturaPorCodigo(int codigoFactura) {
         FacturaDaoImpl facturaManager = new FacturaDaoImpl();
         Factura factura = facturaManager.facturaPorCodigo(codigoFactura);
@@ -72,8 +73,8 @@ public class ModuloFacturacion {
         Factura factTemp;
 
         try {
-            //Se crea el libro Excel
-            WritableWorkbook workbook = Workbook.createWorkbook(new File(nombreArchivo));
+         //Se crea el libro Excel
+            WritableWorkbook workbook = Workbook.createWorkbook(new File(rutaDeGuardado+nombreArchivo));
 
             //Se crea una nueva hoja dentro del libro
             WritableSheet sheet = workbook.createSheet(nombreHoja, 0);
@@ -81,7 +82,7 @@ public class ModuloFacturacion {
             //Creamos una celda de tipo fecha y la mostramos
             //indicando un patron de formato
             DateFormat customDateFormat = new DateFormat("d/m/yy h:mm");
-
+            
             WritableCellFormat dateFormat = new WritableCellFormat(customDateFormat);
             //Creamos celdas de los titulos
             sheet.addCell(new jxl.write.Label(2, 0, nombreReporte)); //(columna+1) & (fila+1) & (dato)
@@ -148,7 +149,8 @@ public class ModuloFacturacion {
 
             System.out.println("Creacion del reporte finalizado.");
         } catch (IOException ex) {
-            System.out.println("Error al crear el fichero.");
+            //System.out.println("Error al crear el fichero.\n Posible causa:\n No se encuentra el directorio: "+rutaDeGuardado.substring(2,2)+" en la carpeta raíz");
+            JOptionPane.showMessageDialog(null,"Error al crear el fichero.\n Posible causa:\n No se encuentra el directorio: "+rutaDeGuardado+" en la raíz (ejm C:/)");
         } catch (WriteException ex) {
             System.out.println("Error al escribir el fichero.");
         }

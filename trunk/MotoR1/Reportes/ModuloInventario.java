@@ -9,6 +9,7 @@ import java.io.*;
 import java.sql.Date;
 import java.util.Iterator;
 import java.util.List;
+import javax.swing.JOptionPane;
 import jxl.*;
 import jxl.write.*;
 import model.Producto;
@@ -18,7 +19,7 @@ import model.Producto;
  * @author Administrador
  */
 public class ModuloInventario {
-
+  private String rutaDeGuardado ="\\ReportesMRSP\\";
     public void reporteInventario() {
         ProductoDaoImpl producto = new ProductoDaoImpl();
         List prodList = producto.obtenerProductos();
@@ -38,7 +39,7 @@ public class ModuloInventario {
 
         try {
             //Se crea el libro Excel
-            WritableWorkbook workbook = Workbook.createWorkbook(new File(nombreArchivo));
+            WritableWorkbook workbook = Workbook.createWorkbook(new File(rutaDeGuardado+nombreArchivo));
 
             //Se crea una nueva hoja dentro del libro
             WritableSheet sheet = workbook.createSheet(nombreHoja, 0);
@@ -85,7 +86,8 @@ public class ModuloInventario {
 
             System.out.println("Creacion del reporte finalizado.");
         } catch (IOException ex) {
-            System.out.println("Error al crear el fichero.");
+            //System.out.println("Error al crear el fichero.");
+            JOptionPane.showMessageDialog(null,"Error al crear el fichero.\n Posible causa:\n No se encuentra el directorio: "+rutaDeGuardado+" en la raíz (ejm C:/)");
         } catch (WriteException ex) {
             System.out.println("Error al escribir el fichero.");
         }
