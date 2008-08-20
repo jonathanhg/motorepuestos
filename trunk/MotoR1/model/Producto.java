@@ -36,7 +36,7 @@ public class Producto implements Serializable {
     // <editor-fold defaultstate="collapsed" desc=" UML Marker "> 
     // #[regen=yes,id=DCE.653935D6-03CC-5F0D-68E3-02E0B976AFF3]
     // </editor-fold> 
-    private Date fechaIngreso;
+    //private Date fechaIngreso;
 
     // <editor-fold defaultstate="collapsed" desc=" UML Marker "> 
     // #[regen=yes,id=DCE.7EDA296F-B66E-4E16-DF81-C2097115C137]
@@ -120,17 +120,17 @@ public class Producto implements Serializable {
     // <editor-fold defaultstate="collapsed" desc=" UML Marker "> 
     // #[regen=yes,regenBody=yes,id=DCE.545DF09C-C253-0F4D-F070-20E7BC8C20FB]
     // </editor-fold> 
-    @Temporal(TemporalType.DATE)
-    public Date getFechaIngreso() {
-        return fechaIngreso;
-    }
+//    @Temporal(TemporalType.DATE)
+//    public Date getFechaIngreso() {
+//        return fechaIngreso;
+//    }
 
     // <editor-fold defaultstate="collapsed" desc=" UML Marker "> 
     // #[regen=yes,regenBody=yes,id=DCE.935422E5-49E5-3D12-0B84-C260121348CC]
     // </editor-fold> 
-    public void setFechaIngreso(Date val) {
-        this.fechaIngreso = val;
-    }
+//    public void setFechaIngreso(Date val) {
+//        this.fechaIngreso = val;
+//    }
 
     // <editor-fold defaultstate="collapsed" desc=" UML Marker "> 
     // #[regen=yes,regenBody=yes,id=DCE.6B76175B-76E7-F817-E929-BC23663ED0FD]

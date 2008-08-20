@@ -209,7 +209,7 @@ private void jAgregarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:ev
         }
 
         producto.setIdProveedor(jTextField1.getText());
-        producto.setFechaIngreso(new Date());
+//        producto.setFechaIngreso(new Date());
 
         if (malDato == false) {
             manager.agregarProducto(producto);
