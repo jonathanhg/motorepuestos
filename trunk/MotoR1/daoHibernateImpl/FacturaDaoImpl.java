@@ -197,9 +197,9 @@ public class FacturaDaoImpl implements FacturaDao {
         List facturas = null;
         try {
             session.beginTransaction();
-            Query getFacturas = session.createQuery("from Factura fact where fact.sin_impuesto = :estado and month(fact.fecha) = :pMes");
+            Query getFacturas = session.createQuery("from Factura fact where fact.sin_impuesto = :isSinImpuesto and month(fact.fecha) = :pMes");
             getFacturas.setInteger("pMes", mes);
-            getFacturas.setBoolean("estado", true);
+            getFacturas.setString("isSinImpuesto", "Y");
             facturas = getFacturas.list();
 
         } catch (Exception e) {
