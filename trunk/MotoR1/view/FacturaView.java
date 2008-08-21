@@ -519,10 +519,10 @@ public class SpinnerListenerTotal implements ChangeListener{
         
       if(jCheckBoxExonerar.isSelected()){
            
-            total = subTotal;
+            total = subTotal-(subTotal/100)*(Integer)jSpinner2.getValue();
       
       }else{
-             total = subTotal+(subTotal/100)*(Integer)jSpinner2.getValue();
+             total = subTotal;
       
       }
         Locale locale = new Locale("es", "CR");
