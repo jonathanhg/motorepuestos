@@ -7,6 +7,7 @@
 package view;
 
 
+import com.birosoft.liquid.LiquidLookAndFeel;
 import java.awt.Dimension;
 import java.awt.Toolkit;
 import java.beans.PropertyVetoException;
@@ -44,6 +45,7 @@ public class NewJFrame extends javax.swing.JFrame {
     private void initComponents() {
 
         jDesktopPane1 = new javax.swing.JDesktopPane();
+        jLabel1 = new javax.swing.JLabel();
         jButton1 = new javax.swing.JButton();
         jMenuBar1 = new javax.swing.JMenuBar();
         jMenu1 = new javax.swing.JMenu();
@@ -67,6 +69,11 @@ public class NewJFrame extends javax.swing.JFrame {
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Moto Repuestos Facturacion");
         setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
+
+        jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/view/MRSP_Logo.jpg"))); // NOI18N
+        jLabel1.setText("Logo");
+        jLabel1.setBounds(-10, 490, 1010, 110);
+        jDesktopPane1.add(jLabel1, javax.swing.JLayeredPane.DEFAULT_LAYER);
 
         jButton1.setText("jButton1");
 
@@ -337,6 +344,21 @@ private void createInternalFrameFact(){
     * @param args the command line arguments
     */
     public static void main(String args[]) {
+                try {
+            UIManager.setLookAndFeel("com.birosoft.liquid.LiquidLookAndFeel");
+        } catch (ClassNotFoundException ex) {
+            Logger.getLogger(NewJFrame.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (InstantiationException ex) {
+            Logger.getLogger(NewJFrame.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (IllegalAccessException ex) {
+            Logger.getLogger(NewJFrame.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (UnsupportedLookAndFeelException ex) {
+            Logger.getLogger(NewJFrame.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        LiquidLookAndFeel.setLiquidDecorations(true, "mac");
+        LiquidLookAndFeel.setShowTableGrids(true);
+        LiquidLookAndFeel.setToolbarFlattedButtons(false);
+        LiquidLookAndFeel.setToolbarButtonsFocusable(false);
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
                 new NewJFrame().setVisible(true);
@@ -347,6 +369,7 @@ private void createInternalFrameFact(){
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButton1;
     private javax.swing.JDesktopPane jDesktopPane1;
+    private javax.swing.JLabel jLabel1;
     private javax.swing.JMenu jMenu1;
     private javax.swing.JMenu jMenu2;
     private javax.swing.JMenu jMenu3;
