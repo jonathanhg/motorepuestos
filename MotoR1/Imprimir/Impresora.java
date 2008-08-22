@@ -78,6 +78,7 @@ public class Impresora {
         texto.add("______________________________________");
         texto.add("TOTAL ¢ "+factura.getTotal());
         texto.add("______________________________________");
+        if(factura.getId()==0){texto.add("                        **PROFORMA**");}       
         texto.add("              Impuesto de ventas incluido");
         if(factura.isSin_impuesto()==true){texto.add(" *EXONERADO DEL IMPUESTO DE VENTAS*");}       
         texto.add("AUTORIZADO MEDIANTE OFICIO NUMERO");
