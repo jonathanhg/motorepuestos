@@ -8,8 +8,7 @@ package view;
 
 import boImpl.FacturaBoImpl;
 import daoHibernateImpl.ProductoDaoImpl;
-import java.awt.Component;
-import java.awt.Dimension;
+import java.awt.event.ActionEvent;
 import java.beans.PropertyVetoException;
 import java.text.NumberFormat;
 import java.text.SimpleDateFormat;
@@ -19,14 +18,8 @@ import java.util.List;
 import java.util.Locale;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import javax.swing.JDesktopPane;
-import javax.swing.JInternalFrame;
-import javax.swing.JLabel;
-import javax.swing.JOptionPane;
-import javax.swing.JSpinner;
-import javax.swing.JTable;
-import javax.swing.SwingConstants;
-import javax.swing.SwingUtilities;
+import java.awt.*;
+import java.awt.event.ActionListener;
 import javax.swing.event.ChangeEvent;
 import javax.swing.event.ChangeListener;
 import javax.swing.event.InternalFrameAdapter;
@@ -35,6 +28,7 @@ import javax.swing.table.AbstractTableModel;
 import javax.swing.table.DefaultTableCellRenderer;
 import javax.swing.table.TableColumn;
 import javax.swing.table.TableColumnModel;
+import javax.swing.*;
 import model.FactProduct;
 import model.Factura;
 import model.Producto;
@@ -54,6 +48,8 @@ public class FacturaView extends javax.swing.JInternalFrame {
     public double subTotal;
     
     public double total;
+    
+    public FactTableModel  tablemodel;
     
     /** Creates new form Factura */
     public FacturaView(Factura factura,JDesktopPane panel,boolean isProforma) {
@@ -86,8 +82,8 @@ public class FacturaView extends javax.swing.JInternalFrame {
                    );
        }
        
-        
-       jTableProductos = new javax.swing.JTable(new FactTableModel());
+        tablemodel = new FactTableModel();
+       jTableProductos = new javax.swing.JTable(tablemodel);
         
         SwingUtilities.invokeLater(new Runnable() { 
           public void run(){
@@ -192,6 +188,7 @@ private void initComponents() {
         jLabel3.setText("SubTotal:");
 
         jLabel4.setText("I.Ventas %:");
+        
 
         jCheckBoxExonerar.setText("Exonerar");
         jCheckBoxExonerar.addActionListener(new java.awt.event.ActionListener() {
@@ -240,11 +237,7 @@ private void initComponents() {
 
         jButtonEliminarRow.setFont(new java.awt.Font("Tahoma", 0, 10));
         jButtonEliminarRow.setText("Eliminar");
-        jButtonEliminarRow.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButtonEliminarRowActionPerformed(evt);
-            }
-        });
+      
         
         jSpinnerDescuento.addChangeListener(new SpinnerListener());
         jSpinner2.addChangeListener(new SpinnerListenerTotal());
@@ -256,6 +249,14 @@ private void initComponents() {
             }
         } );
         
+        jButtonEliminarRow.addActionListener(new ActionListener(){
+          
+            public void actionPerformed(ActionEvent e) {
+               onClickEliminarRow();
+            }
+        
+        
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -379,8 +380,14 @@ private void jCheckBoxExonerarActionPerformed(java.awt.event.ActionEvent evt) {
 // TODO add your handling code here:
 }                                                 
 
-private void jButtonEliminarRowActionPerformed(java.awt.event.ActionEvent evt) {                                         
-// TODO add your handling code here:
+private void onClickEliminarRow() {                                         
+    int selectedRows[] = jTableProductos.getSelectedRows();
+    for(int i=0;i<selectedRows.length;i++ ){
+      
+        productos.remove(selectedRows[i]);
+        tablemodel.refreshData();
+        
+    }
     
 }
 
@@ -681,6 +688,8 @@ public class SpinnerListenerTotal implements ChangeListener{
                             FactProduct factNew = new FactProduct();
                             productos.add(factNew);
                             productos.remove(productos.size()-1);
+                              calcSubTotal(-1);
+                              calcTotal();
                         }
                     
                     }
@@ -743,7 +752,9 @@ public class SpinnerListenerTotal implements ChangeListener{
         }
 
       
-        
+        public void refreshData(){
+            fireTableDataChanged();
+        }
         
         
 }
