@@ -36,7 +36,7 @@ public class chrge {
         Producto producto1 = new Producto();
         producto1.setId("R428RH132");
         producto1.setDescripcion("ACEITE MOTUL ESTAN. 510");
-        producto1.setFechaIngreso(new Date());
+       // producto1.setFechaIngreso(new Date());
         producto1.setExistencias(24);
         producto1.setMinimos(6);
         producto1.setPrecioUnitario(567);
@@ -44,7 +44,7 @@ public class chrge {
         Producto producto2 = new Producto();
         producto2.setId("Kawasaky85");
         producto2.setDescripcion("RAYOS DT175 MONO DT2001R(TRASEROS) DISPAREJOS");
-        producto2.setFechaIngreso(new Date());
+        //producto2.setFechaIngreso(new Date());
         producto2.setExistencias(9);
         producto2.setMinimos(10);
         producto2.setPrecioUnitario(8910);
