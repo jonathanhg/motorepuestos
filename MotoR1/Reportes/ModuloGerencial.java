@@ -19,6 +19,7 @@ import java.io.*;
 import java.util.Date;
 import java.util.Iterator;
 import java.util.List;
+import javax.swing.JOptionPane;
 import jxl.*;
 import jxl.write.*;
 import model.Producto;
@@ -68,7 +69,7 @@ class ProductoX {
 }
 
 public class ModuloGerencial {
-
+private String rutaDeGuardado ="\\ReportesMRSP\\";
     //producto con mayor o menor cantidad de ventas
     public void canditadVentasProducto(int mes) {
         List<ProductoX> listaProdX = new ArrayList<ProductoX>();
@@ -79,24 +80,35 @@ public class ModuloGerencial {
         List facturas = factManager.facturasPorMes(mes);
         Iterator itFacturas = facturas.iterator();
 
-        //llenamos a listaProdX con los productos vendidos en el mes indicado
+        List<FactProduct> facProd = new ArrayList<FactProduct>(); //lista que va a contener todos los productos que se han vendido este mes
+        
+//llenamos a facProd con los productos vendidos en el mes indicado              
         Factura factTemp;
         while (itFacturas.hasNext()) {
-            factTemp = (Factura) itFacturas.next();
-            ProductoX producto = new ProductoX();
-            List<FactProduct> facProd = factTemp.getProductos(); //lista con todos los productos vendidos en el mes
-
+            factTemp = (Factura) itFacturas.next();  //obtengo una factura de la lista
+            FactProduct prodTemp = new FactProduct();
+                List productos = factTemp.getProductos();
+                Iterator itProd = productos.iterator();
+                while (itProd.hasNext()) {//recorro la lista de productos en esta factura
+                    prodTemp = (FactProduct) itProd.next();
+                    facProd.add(prodTemp); //agrega este producto a la lista
+                }
+            
+        }
+        //llenamos a listaProdX con los Productos transformados a ProductoX
             Iterator itProd = facProd.iterator();
             FactProduct factProductTemp;
-            while (itProd.hasNext()) {
-                factProductTemp = (FactProduct) itProd.next();
+            while (itProd.hasNext()) { //recorre la lista de productos vendidos este mes
+                factProductTemp = (FactProduct) itProd.next(); //obtiene un producto de la lista
+                ProductoX producto = new ProductoX();
                 producto.setNombre(factProductTemp.getId());
                 producto.setDescripcion(factProductTemp.getDescripcion());
                 producto.setCantVendidas(factProductTemp.getCantidad());
+            listaProdX.add(producto); //llena la lista con todos los productosX vendidos este mes (incluye productos repetidos)
             }
 
-            listaProdX.add(producto);
-        }
+            
+        
 
         ProductoDaoImpl prodManager = new ProductoDaoImpl();
 
@@ -105,6 +117,7 @@ public class ModuloGerencial {
         Iterator itProdOriginales = prodOriginales.iterator();
         Producto prodTemp;
 
+        //
         while (itProdOriginales.hasNext()) {
             prodTemp = (Producto) itProdOriginales.next();
             ProductoX producto = new ProductoX();
@@ -124,10 +137,13 @@ public class ModuloGerencial {
 
     //retorna el número de veces que se repite un codigo en la lista
     private int vecesRepetido(List<ProductoX> listaProdX, String nombreProducto) {
+        Iterator itListaProdX = listaProdX.iterator();
+        ProductoX prodTemp = new ProductoX();
         int result = 0;
-        for (int i = 0; i < listaProdX.size(); i++) {
-            if (listaProdX.get(i).getNombre().equals(nombreProducto)) {
-                result += listaProdX.get(i).getCantVendidas();
+        while(itListaProdX.hasNext()){
+            prodTemp = (ProductoX) itListaProdX.next();
+            if(prodTemp.getNombre().equals(nombreProducto)){
+                result += prodTemp.getCantVendidas();
             }
         }
         return result;
@@ -138,7 +154,7 @@ public class ModuloGerencial {
 
         try {
             //Se crea el libro Excel
-            WritableWorkbook workbook = Workbook.createWorkbook(new File(nombreArchivo));
+            WritableWorkbook workbook = Workbook.createWorkbook(new File(rutaDeGuardado+nombreArchivo));
 
             //Se crea una nueva hoja dentro del libro
             WritableSheet sheet = workbook.createSheet(nombreHoja, 0);
@@ -173,7 +189,7 @@ public class ModuloGerencial {
 
             System.out.println("Creacion del reporte finalizado.");
         } catch (IOException ex) {
-            System.out.println("Error al crear el fichero.");
+           JOptionPane.showMessageDialog(null,"Error al crear el fichero.\n Posible causa:\n No se encuentra el directorio: "+rutaDeGuardado+" en la raíz (ejm C:/)");
         } catch (WriteException ex) {
             System.out.println("Error al escribir el fichero.");
         }
