@@ -48,12 +48,13 @@ public class FacturaBoImpl implements FacturaBo {
         boolean todobien = true;
         fact.setProductos(borrarVacios(fact.getProductos()));
         Iterator tempIt = fact.getProductos().iterator();
-        while (tempIt.hasNext()) {
-            tempFactProduct = (FactProduct) tempIt.next();
+        if (!isProforma) {
+            while (tempIt.hasNext()) {
+                tempFactProduct = (FactProduct) tempIt.next();
 
-            temp = daoProduct.obtenerProducto(tempFactProduct.getId());
-            temp.setExistencias(temp.getExistencias() - tempFactProduct.getCantidad());
-            if (!isProforma) {
+                temp = daoProduct.obtenerProducto(tempFactProduct.getId());
+                temp.setExistencias(temp.getExistencias() - tempFactProduct.getCantidad());
+
                 if (temp.getExistencias() >= 0) {
                     daoProduct.actualizarProducto(temp);
 
@@ -66,8 +67,8 @@ public class FacturaBoImpl implements FacturaBo {
             }
         }
         if (todobien) {
-            if(!isProforma){
-            dao.actualizarFactura(fact);
+            if (!isProforma) {
+                dao.actualizarFactura(fact);
             }
             Impresora impresora = new Impresora();
             impresora.imprimir(fact);
