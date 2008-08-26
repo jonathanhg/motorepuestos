@@ -6,6 +6,7 @@
 
 package view;
 
+import Imprimir.Impresora;
 import boImpl.FacturaBoImpl;
 import daoHibernateImpl.ProductoDaoImpl;
 import java.awt.event.ActionEvent;
@@ -420,7 +421,8 @@ private void jButtonProcesarActionPerformed(java.awt.event.ActionEvent evt) {
     fact.setSin_impuesto(jCheckBoxExonerar.isSelected());
     fact.setTotal(total);
     //fact.setTotal(jTextFieldTotal.getText());
-    factBoo.saveFact(fact, this);
+    factBoo.saveFact(fact,isProforma,this);    
+
         try {
             this.setClosed(true);
         } catch (PropertyVetoException ex) {
