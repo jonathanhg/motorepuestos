@@ -311,6 +311,7 @@ private void jBusModifActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIR
         jExistencias.setText(String.valueOf(producto.getExistencias()));
     }
     jBusModif.setEnabled(false);
+    jCodigo.setEnabled(false);
     jCambiar.setEnabled(true);
 }//GEN-LAST:event_jBusModifActionPerformed
 
