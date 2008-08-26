@@ -80,7 +80,7 @@ public class FacturaDaoImpl implements FacturaDao {
         List facturas = null;
         try {
             session.beginTransaction();
-            Query getFacturas = session.createQuery("from Factura fact where month(fact.fecha) = :var1 and  fact.is_anulado = :isAnulada and year(fact.fecha)= :anio");
+            Query getFacturas = session.createQuery("from Factura fact where month(fact.fecha) = :var1 and  fact.is_anulado = :isAnulada and year(fact.fecha)= :anio order by fact.id desc");
             getFacturas.setInteger("var1", mes); // la funcion esta Deprecated hay que buscar otra
 
             getFacturas.setString("isAnulada", "N");
