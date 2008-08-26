@@ -41,7 +41,7 @@ public class FacturaBoImpl implements FacturaBo {
     }
 
     // GUARDA UNA FACTURA VERIFICA SI TODO ESTA BIEN CON INVENTARIO ! 
-    public boolean saveFact(Factura fact, JInternalFrame jFrame) {
+    public boolean saveFact(Factura fact, boolean isProforma, JInternalFrame jFrame) {
         FactProduct tempFactProduct;
         Producto temp;
         String mensaje = "";
@@ -53,20 +53,22 @@ public class FacturaBoImpl implements FacturaBo {
 
             temp = daoProduct.obtenerProducto(tempFactProduct.getId());
             temp.setExistencias(temp.getExistencias() - tempFactProduct.getCantidad());
+            if (!isProforma) {
+                if (temp.getExistencias() >= 0) {
+                    daoProduct.actualizarProducto(temp);
 
-            if (temp.getExistencias() >= 0) {
-                daoProduct.actualizarProducto(temp);
-
+                }
+                if (temp.getExistencias() < 0) {
+                    mensaje += "Error no hay existencias para el producto" + temp.getId() + " /n";
+                    todobien = false;
+                    JOptionPane.showMessageDialog(jFrame, mensaje);
+                }
             }
-            if (temp.getExistencias() < 0) {
-                mensaje += "Error no hay existencias para el producto" + temp.getId() + " /n";
-                todobien = false;
-                JOptionPane.showMessageDialog(jFrame, mensaje);
-            }
-
         }
         if (todobien) {
+            if(!isProforma){
             dao.actualizarFactura(fact);
+            }
             Impresora impresora = new Impresora();
             impresora.imprimir(fact);
         }
