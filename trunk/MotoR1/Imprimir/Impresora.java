@@ -55,6 +55,7 @@ public class Impresora {
     private Iterator getTexto(Factura factura) {
         Calendar fechaSistema = Calendar.getInstance();
         int mes=fechaSistema.get( Calendar.MONTH ) + 1;
+        String amPm ="a.m.";if(fechaSistema.get(Calendar.AM_PM)==1){amPm="p.m.";}
         Iterator iProductos = factura.getProductos().iterator();
         FactProduct prodTemp = new FactProduct();
         ArrayList<String> texto = new ArrayList<String>();
@@ -66,7 +67,7 @@ public class Impresora {
         texto.add("400NE S. TACHO");
         texto.add("TELEFONO:22340718");
         texto.add("______________________________________");
-        texto.add("HORA: " + fechaSistema.get(Calendar.HOUR_OF_DAY) + ":" + fechaSistema.get(Calendar.MINUTE) + ":" + fechaSistema.get(Calendar.SECOND)+"                       "+"No.FACTURA");
+        texto.add("HORA: " + fechaSistema.get(Calendar.HOUR) + ":" + fechaSistema.get(Calendar.MINUTE) +" "+ amPm+"                    "+"No.FACTURA");
         texto.add("FECHA: " + fechaSistema.get(Calendar.DAY_OF_MONTH)+"/"+ mes +"/"+fechaSistema.get(Calendar.YEAR)+"                   "+factura.getId()+"");
         texto.add("CLIENTE: ");
         texto.add(factura.getCliente());
