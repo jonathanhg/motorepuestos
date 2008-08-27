@@ -88,6 +88,9 @@ private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRS
             factura = factManager.facturaPorCodigo(codigoFactura);
              Impresora impresora = new Impresora();
              impresora.imprimir(factura);
+             jTextField1.setText("");
+             JOptionPane.showMessageDialog(rootPane, "La factura: "+factura.getId()+" ha sido reimpresa");
+             
         }
     }else{
             JOptionPane.showMessageDialog(rootPane, "El codigo de factura no debe de estar vacío");

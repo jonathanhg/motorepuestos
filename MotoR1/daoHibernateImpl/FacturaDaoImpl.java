@@ -15,13 +15,15 @@ import model.Producto;
 import org.hibernate.Query;
 import org.hibernate.Session;
 import util.HibernateUtil;
+import Settings.Configuracion;
 
 /**
  *
  * @author lcastillo
  */
 public class FacturaDaoImpl implements FacturaDao {
-
+private Configuracion configuracion = new Configuracion();
+    
     public void agregarFactura(Factura factura) {
         Session session = HibernateUtil.getSessionFactory().openSession();
         try {
@@ -46,7 +48,7 @@ public class FacturaDaoImpl implements FacturaDao {
     }
 
     public void anularFactura(Factura factura) {
-        int diasPermitidos = 6;
+        int diasPermitidos = configuracion.getDiasHabilesAnulacion();
         if (transcurrido(factura) <= diasPermitidos) {
             Session session = HibernateUtil.getSessionFactory().openSession();
             try {

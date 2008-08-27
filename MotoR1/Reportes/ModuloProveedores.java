@@ -24,13 +24,15 @@ import jxl.write.WritableWorkbook;
 import jxl.write.WriteException;
 import model.Producto;
 import model.Proveedores;
+import Settings.Configuracion;
 
 /**
  *
  * @author Administrador
  */
 public class ModuloProveedores {
-      private String rutaDeGuardado ="\\ReportesMRSP\\";
+    private Configuracion configuracion = new Configuracion();
+    private String rutaDeGuardado = configuracion.getRutaDeReportes();
 public void productosPorProveedor(String idProveedor){
     ProveedorDaoImpl proveedorManager = new ProveedorDaoImpl();
     List listaProductos = proveedorManager.productosPorProveedor(idProveedor);
