@@ -6,7 +6,8 @@ package Reportes;
 
 import daoHibernateImpl.ProductoDaoImpl;
 import java.io.*;
-import java.sql.Date;
+
+import java.util.Date;
 import java.util.Iterator;
 import java.util.List;
 import javax.swing.JOptionPane;
@@ -44,9 +45,15 @@ public class ModuloInventario {
             //Se crea una nueva hoja dentro del libro
             WritableSheet sheet = workbook.createSheet(nombreHoja, 0);
 
+            DateFormat customDateFormat = new DateFormat("d/m/yy h:mm");
+            WritableCellFormat dateFormat = new WritableCellFormat(customDateFormat);
+            
             //Creamos celdas de los titulos
             sheet.addCell(new jxl.write.Label(2, 0, nombreReporte)); //(columna+1) & (fila+1) & (dato)
 
+            sheet.addCell(new jxl.write.Label(0, 1, "Fecha de creacion:"));
+            sheet.addCell(new jxl.write.DateTime(1, 1, new Date(), dateFormat));
+            
             sheet.addCell(new jxl.write.Label(0, 3, "CODIGO DE PRODUCTO"));
             sheet.addCell(new jxl.write.Label(1, 3, "DESCRIPCION"));
             sheet.addCell(new jxl.write.Label(2, 3, "MINIMO"));
