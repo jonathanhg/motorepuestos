@@ -9,6 +9,7 @@ import java.awt.*;
 import java.awt.event.*;
 import java.awt.print.PrinterJob;
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.Date;
 import java.util.Iterator;
 import javax.print.PrintService;
@@ -52,10 +53,12 @@ public class Impresora {
     }
 
     private Iterator getTexto(Factura factura) {
+        Calendar fechaSistema = Calendar.getInstance();
+        int mes=fechaSistema.get( Calendar.MONTH ) + 1;
         Iterator iProductos = factura.getProductos().iterator();
         FactProduct prodTemp = new FactProduct();
         ArrayList<String> texto = new ArrayList<String>();
-        int total;
+        int total;        
         texto.add("       MOTO REPUESTOS SAN PEDRO");
         texto.add("            XINIA CASTILLO HIDALGO");
         texto.add("                   Cedula: 1-602-294");
@@ -63,8 +66,8 @@ public class Impresora {
         texto.add("400NE S. TACHO");
         texto.add("TELEFONO:22340718");
         texto.add("______________________________________");
-        texto.add("HORA: " + new Date().getHours() + ":" + new Date().getMinutes() + ":" + new Date().getSeconds() + "                       "+"No.FACTURA");
-        texto.add("FECHA: " + factura.getFecha().getDate()+"/"+(factura.getFecha().getMonth()+1)+"/"+String.valueOf(factura.getFecha().getYear()).substring(1)+"                       "+factura.getId()+"");
+        texto.add("HORA: " + fechaSistema.get(Calendar.HOUR_OF_DAY) + ":" + fechaSistema.get(Calendar.MINUTE) + ":" + fechaSistema.get(Calendar.SECOND)+"                       "+"No.FACTURA");
+        texto.add("FECHA: " + fechaSistema.get(Calendar.DAY_OF_MONTH)+"/"+ mes +"/"+fechaSistema.get(Calendar.YEAR)+"                   "+factura.getId()+"");
         texto.add("CLIENTE: ");
         texto.add(factura.getCliente());
         texto.add("______________________________________");
