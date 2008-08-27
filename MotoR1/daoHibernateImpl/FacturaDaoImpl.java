@@ -159,9 +159,8 @@ private Configuracion configuracion = new Configuracion();
         List facturas = null;
         try {
             session.beginTransaction();
-            Query getFacturas = session.createQuery("from Factura fact where fact.cliente = :ncliente and  fact.is_anulado = :isAnulada order by fact.fecha");
-            getFacturas.setString("ncliente", nombreCliente);
-            getFacturas.setString("isAnulada", "N");
+            Query getFacturas = session.createQuery("from Factura fact where fact.cliente like '%"+nombreCliente+"%' order by fact.fecha");
+            //getFacturas.setString("ncliente", nombreCliente);
             facturas = getFacturas.list();
 
         } catch (Exception e) {
