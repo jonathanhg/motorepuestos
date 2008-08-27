@@ -8,6 +8,7 @@ import dao.FacturaDao;
 import java.util.Date;
 import java.util.Iterator;
 import java.util.List;
+import javax.swing.JOptionPane;
 import model.FactProduct;
 import model.Factura;
 import model.Producto;
@@ -21,7 +22,6 @@ import util.HibernateUtil;
  */
 public class FacturaDaoImpl implements FacturaDao {
 
-    
     public void agregarFactura(Factura factura) {
         Session session = HibernateUtil.getSessionFactory().openSession();
         try {
@@ -35,32 +35,46 @@ public class FacturaDaoImpl implements FacturaDao {
         }
     }
 
-        public void anularFactura(Factura factura) {
-        Session session = HibernateUtil.getSessionFactory().openSession();
-        try {
-            session.beginTransaction();
-            factura.setIs_anulado(true);
-            
-            List<FactProduct> productos = factura.getProductos();
-            Iterator itProductos = productos.iterator();
-            ProductoDaoImpl productoManager = new ProductoDaoImpl();
-            FactProduct prodTemp;
-            while (itProductos.hasNext()){
-                prodTemp = (FactProduct) itProductos.next();
-                Producto productoEnSistema = productoManager.obtenerProducto(prodTemp.getId());
-                productoEnSistema.setExistencias(productoEnSistema.getExistencias() + prodTemp.getCantidad());
-                productoManager.actualizarProducto(productoEnSistema); //devuelve al inventario los productos que se habían vendido
-            }
-            
-            session.update(factura);
-            session.getTransaction().commit();
-        } catch (Exception e) {
-            System.out.println(e.toString());
-        } finally {
-            session.close();
-        }
+    private int transcurrido(Factura factura) {
+        long fechaFactura = factura.getFecha().getTime();
+        long fechaSistema = new Date().getTime();
+        long diferencia = fechaSistema - fechaFactura;
+        double dias = Math.floor(diferencia / (1000 * 60 * 60 * 24)); //dias que han pasado
+
+        int transcurrido = (int) dias;
+        return transcurrido;
     }
 
+    public void anularFactura(Factura factura) {
+        int diasPermitidos = 6;
+        if (transcurrido(factura) <= diasPermitidos) {
+            Session session = HibernateUtil.getSessionFactory().openSession();
+            try {
+                session.beginTransaction();
+                factura.setIs_anulado(true);
+                List<FactProduct> productos = factura.getProductos();
+                Iterator itProductos = productos.iterator();
+                ProductoDaoImpl productoManager = new ProductoDaoImpl();
+                FactProduct prodTemp;
+                while (itProductos.hasNext()) {
+                    prodTemp = (FactProduct) itProductos.next();
+                    Producto productoEnSistema = productoManager.obtenerProducto(prodTemp.getId());
+                    productoEnSistema.setExistencias(productoEnSistema.getExistencias() + prodTemp.getCantidad());
+                    productoManager.actualizarProducto(productoEnSistema); //devuelve al inventario los productos que se habían vendido
+
+                }
+                session.update(factura);
+                session.getTransaction().commit();
+                JOptionPane.showMessageDialog(null, "La factura ha sido anulada");
+            } catch (Exception e) {
+                System.out.println(e.toString());
+            } finally {
+                session.close();
+            }
+        } else {
+            JOptionPane.showMessageDialog(null, "La factura no puede ser anulada, \n Han pasado más de: " + diasPermitidos + " dias");
+        }
+    }
 
     public void anuladFacturaEmpresa(Factura factura) {
         Session session = HibernateUtil.getSessionFactory().openSession();
@@ -85,6 +99,7 @@ public class FacturaDaoImpl implements FacturaDao {
 
             getFacturas.setString("isAnulada", "N");
             getFacturas.setInteger("anio", new Date().getYear() + 1900);//solo las facturas de este anio** Nota: Date().getYear() retorna 108 (en vez de 2008)
+
             facturas = getFacturas.list();
 
         } catch (Exception e) {
@@ -211,7 +226,7 @@ public class FacturaDaoImpl implements FacturaDao {
     }
 
     public void actualizarFactura(Factura factura) {
-          Session session = HibernateUtil.getSessionFactory().openSession();
+        Session session = HibernateUtil.getSessionFactory().openSession();
         try {
             session.beginTransaction();
             session.update(factura);

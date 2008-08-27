@@ -84,7 +84,6 @@ private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRS
         if (factura != null) {
             if (factura.getIs_anulado() == false) {
                 factManager.anularFactura(factura);
-                JOptionPane.showMessageDialog(rootPane, "La factura ha sido anulada");
             } else {
                 System.out.println("estado de la factura: "+factura.getIs_anulado());
                 JOptionPane.showMessageDialog(rootPane, "Error: la factura: " + codigoFactura + " ya estaba anulada");
