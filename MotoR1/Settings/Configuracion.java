@@ -28,6 +28,7 @@ public class Configuracion {
     private int margenIzq;
     private int tamLetra;
     private int interlineado;
+    private int maxDesc;//numero de caracteres de la Descripcion, que se pueden imprimir
     private Font fuente;
 
     public Configuracion() {
@@ -55,6 +56,7 @@ public class Configuracion {
         setTamLetra(9);
         setInterlineado(11);
         setFuente(new Font("Dialog", Font.PLAIN, getTamLetra()));
+        setMaxDesc(23);
     }
     
     public String getRutaDeReportes() {
@@ -175,6 +177,14 @@ public class Configuracion {
 
     public void setFuente(Font fuente) {
         this.fuente = fuente;
+    }
+
+    public int getMaxDesc() {
+        return maxDesc;
+    }
+
+    public void setMaxDesc(int maxDesc) {
+        this.maxDesc = maxDesc;
     }
 
     
