@@ -6,7 +6,6 @@ package Reportes;
 
 import daoHibernateImpl.FacturaDaoImpl;
 import model.Factura;
-
 import java.io.*;
 import java.util.Date;
 import java.util.ArrayList;
@@ -16,15 +15,17 @@ import javax.swing.JOptionPane;
 import jxl.*;
 import jxl.write.*;
 import model.FactProduct;
+import Settings.Configuracion;
 
 /**
  *
  * @author Administrador
  */
 public class ModuloFacturacion {
-//private String rutaDeGuardado ="C:\\";
-    private String rutaDeGuardado ="\\ReportesMRSP\\";
-        
+
+    private Configuracion configuracion = new Configuracion();
+    private String rutaDeGuardado = configuracion.getRutaDeReportes();
+
     public void facturaPorCodigo(int codigoFactura) {
         FacturaDaoImpl facturaManager = new FacturaDaoImpl();
         Factura factura = facturaManager.facturaPorCodigo(codigoFactura);
@@ -47,34 +48,34 @@ public class ModuloFacturacion {
         Iterator itFact = factList.iterator();
         crearExcel(itFact, "FacturasPorCliente.xls", "Facturas_por_cliente", "REPORTE DE FACTURAS POR CLIENTE");
     }
-    
+
     public void facturasSinImpuesto(int mes) {
         FacturaDaoImpl factura = new FacturaDaoImpl();
         List factList = factura.facturasSinImpuesto(mes);
         Iterator itFact = factList.iterator();
         crearExcel(itFact, "FacturasSinImpuesto.xls", "Facturas_sin_impuesto", "REPORTE DE FACTURAS SIN IMPUESTO");
-    }    
-    
+    }
+
     public void facturasPorMes(int mes) {
         FacturaDaoImpl factura = new FacturaDaoImpl();
         List factList = factura.facturasPorMes(mes);
         Iterator itFact = factList.iterator();
-        crearExcel(itFact, "FacturasPorMes.xls", "Facturas_por_mes", "REPORTE DE FACTURAS PARA EL MES: " + mes + " DEL AÑO "+ ((new Date().getYear())+1900));
+        crearExcel(itFact, "FacturasPorMes.xls", "Facturas_por_mes", "REPORTE DE FACTURAS PARA EL MES: " + mes + " DEL AÑO " + ((new Date().getYear()) + 1900));
     }
-    
+
     public void facturasAnuladasPorMes(int mes) {
         FacturaDaoImpl factura = new FacturaDaoImpl();
         List factList = factura.facturasAnuladasPorMes(mes);
         Iterator itFact = factList.iterator();
-        crearExcel(itFact, "FacturasAnuladasPorMes.xls", "Facturas_anuladas_por_mes", "REPORTE DE FACTURAS ANULADAS PARA EL  MES: " + mes + " DEL AÑO "+ ((new Date().getYear())+1900));
+        crearExcel(itFact, "FacturasAnuladasPorMes.xls", "Facturas_anuladas_por_mes", "REPORTE DE FACTURAS ANULADAS PARA EL  MES: " + mes + " DEL AÑO " + ((new Date().getYear()) + 1900));
     }
 
     private void crearExcel(Iterator itFact, String nombreArchivo, String nombreHoja, String nombreReporte) {
         Factura factTemp;
 
         try {
-         //Se crea el libro Excel
-            WritableWorkbook workbook = Workbook.createWorkbook(new File(rutaDeGuardado+nombreArchivo));
+            //Se crea el libro Excel
+            WritableWorkbook workbook = Workbook.createWorkbook(new File(rutaDeGuardado + nombreArchivo));
 
             //Se crea una nueva hoja dentro del libro
             WritableSheet sheet = workbook.createSheet(nombreHoja, 0);
@@ -82,13 +83,14 @@ public class ModuloFacturacion {
             //Creamos una celda de tipo fecha y la mostramos
             //indicando un patron de formato
             DateFormat customDateFormat = new DateFormat("d/m/yy h:mm");
-            
+
             WritableCellFormat dateFormat = new WritableCellFormat(customDateFormat);
             //Creamos celdas de los titulos
             sheet.addCell(new jxl.write.Label(2, 0, nombreReporte)); //(columna+1) & (fila+1) & (dato)
+
             sheet.addCell(new jxl.write.Label(0, 1, "Fecha de creacion:"));
             sheet.addCell(new jxl.write.DateTime(1, 1, new Date(), dateFormat));
-            
+
             sheet.addCell(new jxl.write.Label(0, 3, "CODIGO DE FACTURA"));
             sheet.addCell(new jxl.write.Label(1, 3, "¿Anulada?"));
             sheet.addCell(new jxl.write.Label(2, 3, "FECHA"));
@@ -123,18 +125,18 @@ public class ModuloFacturacion {
                 Iterator itProd = productos.iterator();
                 while (itProd.hasNext()) {
                     prodTemp = (FactProduct) itProd.next();
-                    sheet.addCell(new jxl.write.Number(5, fila, prodTemp.getCantidad())); 
-                    sheet.addCell(new jxl.write.Number(6, fila, prodTemp.getPrecio())); 
-                    sheet.addCell(new jxl.write.Number(7, fila,prodTemp.getTotal())); 
-                    sheet.addCell(new jxl.write.Label(4, fila++, prodTemp.getDescripcion()));           
+                    sheet.addCell(new jxl.write.Number(5, fila, prodTemp.getCantidad()));
+                    sheet.addCell(new jxl.write.Number(6, fila, prodTemp.getPrecio()));
+                    sheet.addCell(new jxl.write.Number(7, fila, prodTemp.getTotal()));
+                    sheet.addCell(new jxl.write.Label(4, fila++, prodTemp.getDescripcion()));
                 }
 
                 //Genera los datos de las filas para la columna Total
                 sheet.addCell(new jxl.write.Number(8, fila++, factTemp.getTotal()));
-                montoTotal +=factTemp.getTotal();
-                
+                montoTotal += factTemp.getTotal();
+
                 sheet.addCell(new jxl.write.Label(0, fila++, "____________________________________________________________________"));
-                
+
             }
 
             //Genera los datos para el monto total acumulado
@@ -150,7 +152,7 @@ public class ModuloFacturacion {
             System.out.println("Creacion del reporte finalizado.");
         } catch (IOException ex) {
             //System.out.println("Error al crear el fichero.\n Posible causa:\n No se encuentra el directorio: "+rutaDeGuardado.substring(2,2)+" en la carpeta raíz");
-            JOptionPane.showMessageDialog(null,"Error al crear el fichero.\n Posible causa:\n No se encuentra el directorio: "+rutaDeGuardado+" en la raíz (ejm C:/)");
+            JOptionPane.showMessageDialog(null, "Error al crear el fichero.\n Posible causa:\n No se encuentra el directorio: " + rutaDeGuardado + " en la raíz (ejm C:/)");
         } catch (WriteException ex) {
             System.out.println("Error al escribir el fichero.");
         }

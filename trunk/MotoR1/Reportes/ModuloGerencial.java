@@ -23,7 +23,7 @@ import javax.swing.JOptionPane;
 import jxl.*;
 import jxl.write.*;
 import model.Producto;
-
+import Settings.Configuracion;
 /**
  *
  * @author Administrador
@@ -69,7 +69,8 @@ class ProductoX {
 }
 
 public class ModuloGerencial {
-private String rutaDeGuardado ="\\ReportesMRSP\\";
+    private Configuracion configuracion = new Configuracion();
+    private String rutaDeGuardado = configuracion.getRutaDeReportes();
     //producto con mayor o menor cantidad de ventas
     public void canditadVentasProducto(int mes) {
         List<ProductoX> listaProdX = new ArrayList<ProductoX>();

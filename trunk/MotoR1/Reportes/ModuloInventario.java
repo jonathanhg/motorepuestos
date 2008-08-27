@@ -14,13 +14,14 @@ import javax.swing.JOptionPane;
 import jxl.*;
 import jxl.write.*;
 import model.Producto;
-
+import Settings.Configuracion;
 /**
  *
  * @author Administrador
  */
 public class ModuloInventario {
-  private String rutaDeGuardado ="\\ReportesMRSP\\";
+    private Configuracion configuracion = new Configuracion();
+    private String rutaDeGuardado = configuracion.getRutaDeReportes();
     public void reporteInventario() {
         ProductoDaoImpl producto = new ProductoDaoImpl();
         List prodList = producto.obtenerProductos();
