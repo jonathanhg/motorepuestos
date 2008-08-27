@@ -55,12 +55,10 @@ public class Impresora {
     }
 
     private Iterator getTexto(Factura factura) {
+        int maxDesc= configuracion.getMaxDesc();
         Calendar fechaSistema = Calendar.getInstance();
         int mes = fechaSistema.get(Calendar.MONTH) + 1;
-        String amPm = "a.m.";
-        if (fechaSistema.get(Calendar.AM_PM) == 1) {
-            amPm = "p.m.";
-        }
+        String amPm = "a.m.";if (fechaSistema.get(Calendar.AM_PM) == 1) {amPm = "p.m.";}
         Iterator iProductos = factura.getProductos().iterator();
         FactProduct prodTemp = new FactProduct();
         ArrayList<String> texto = new ArrayList<String>();
@@ -82,23 +80,15 @@ public class Impresora {
             prodTemp = (FactProduct) iProductos.next();
             texto.add(prodTemp.getId() + "                      " + prodTemp.getCantidad() + "                    " + prodTemp.getTotal());
             String descripcion;
-            if (prodTemp.getDescripcion().length() > 23) {
-                descripcion = prodTemp.getDescripcion().substring(0, 21);
-            } else {
-                descripcion = prodTemp.getDescripcion();
-            }
+            if (prodTemp.getDescripcion().length() > maxDesc) {descripcion = prodTemp.getDescripcion().substring(0, (maxDesc-2));} else {descripcion = prodTemp.getDescripcion();}
             texto.add(descripcion + "  (Precio ¢" + prodTemp.getPrecio() + ")");
         }
         texto.add("______________________________________");
         texto.add("TOTAL ¢ " + factura.getTotal());
         texto.add("______________________________________");
-        if (factura.getId() == 0) {
-            texto.add("                        **PROFORMA**");
-        }
+        if (factura.getId() == 0) {texto.add("                        **PROFORMA**");}
         texto.add("              Impuesto de Ventas Incluido");
-        if (factura.isSin_impuesto() == true) {
-            texto.add(" *EXONERADO DEL IMPUESTO DE VENTAS*");
-        }
+        if (factura.isSin_impuesto() == true) {texto.add(" *EXONERADO DEL IMPUESTO DE VENTAS*");        }
         texto.add("AUTORIZADO MEDIANTE OFICIO NUMERO");
         texto.add(configuracion.getNmroAutorizado());
         texto.add("             " + configuracion.getPaginaWeb());
