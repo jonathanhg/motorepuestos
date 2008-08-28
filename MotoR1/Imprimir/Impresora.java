@@ -68,6 +68,7 @@ public class Impresora {
         texto.add("                   Cedula: " + configuracion.getCedulaDuenio());
         texto.add(configuracion.getDireccion1());
         texto.add(configuracion.getDireccion2());
+        if (factura.getId() == 0) {texto.add("                        **PROFORMA**");}
         texto.add("TELEFONO: "+configuracion.getTelefono());
         texto.add("______________________________________");
         texto.add("HORA: " + fechaSistema.get(Calendar.HOUR) + ":" + fechaSistema.get(Calendar.MINUTE) + " " + amPm + "                    " + "No.FACTURA");
@@ -75,22 +76,21 @@ public class Impresora {
         texto.add("CLIENTE: ");
         texto.add(factura.getCliente());
         texto.add("______________________________________");
-        texto.add("CODIGO             CANTIDAD         TOTAL");
+        texto.add("CODIGO            DESCRIPCION         ");
         while (iProductos.hasNext()) {
             prodTemp = (FactProduct) iProductos.next();
-            texto.add(prodTemp.getId() + "                      " + prodTemp.getCantidad() + "                    " + prodTemp.getTotal());
-            String descripcion;
-            if (prodTemp.getDescripcion().length() > maxDesc) {descripcion = prodTemp.getDescripcion().substring(0, (maxDesc-2));} else {descripcion = prodTemp.getDescripcion();}
-            texto.add(descripcion + "  (Precio ¢" + prodTemp.getPrecio() + ")");
+            texto.add(prodTemp.getId() + "        " + prodTemp.getDescripcion());
+            texto.add("¢"+prodTemp.getPrecio()+" x "+prodTemp.getCantidad()+" = "+prodTemp.getTotal());
         }
         texto.add("______________________________________");
         texto.add("TOTAL ¢ " + factura.getTotal());
         texto.add("______________________________________");
-        if (factura.getId() == 0) {texto.add("                        **PROFORMA**");}
         texto.add("              Impuesto de Ventas Incluido");
         if (factura.isSin_impuesto() == true) {texto.add(" *EXONERADO DEL IMPUESTO DE VENTAS*");        }
+        if (factura.getId() != 0) {
         texto.add("AUTORIZADO MEDIANTE OFICIO NUMERO");
-        texto.add(configuracion.getNmroAutorizado());
+        texto.add(configuracion.getNmroAutorizado());    
+        }
         texto.add("             " + configuracion.getPaginaWeb());
 
         return texto.listIterator();
