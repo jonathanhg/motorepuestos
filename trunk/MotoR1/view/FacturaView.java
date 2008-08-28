@@ -421,8 +421,10 @@ private void jButtonProcesarActionPerformed(java.awt.event.ActionEvent evt) {
     fact.setSin_impuesto(jCheckBoxExonerar.isSelected());
     fact.setTotal(total);
     //fact.setTotal(jTextFieldTotal.getText());
-    factBoo.saveFact(fact,isProforma,this);    
-
+    boolean todoBien =factBoo.saveFact(fact,isProforma,this);    
+    if(!todoBien){
+        return;
+    }
         try {
             this.setClosed(true);
         } catch (PropertyVetoException ex) {

@@ -60,7 +60,7 @@ public class FacturaBoImpl implements FacturaBo {
 
                 }
                 if (temp.getExistencias() < 0) {
-                    mensaje += "Error no hay existencias para el producto" + temp.getId() + " /n";
+                    mensaje += "Error no hay existencias para el producto " + temp.getId();
                     todobien = false;
                     JOptionPane.showMessageDialog(jFrame, mensaje);
                 }
