@@ -71,21 +71,22 @@ public class Impresora {
         if (factura.getId() == 0) {texto.add("                        **PROFORMA**");}
         texto.add("TELEFONO: "+configuracion.getTelefono());
         texto.add("______________________________________");
-        texto.add("HORA: " + fechaSistema.get(Calendar.HOUR) + ":" + fechaSistema.get(Calendar.MINUTE) + " " + amPm + "                    " + "No.FACTURA");
+        texto.add("HORA: " + fechaSistema.get(Calendar.HOUR) + ":" + fechaSistema.get(Calendar.MINUTE) + " " + amPm + "                   " + "No.FACTURA");
         texto.add("FECHA: " + fechaSistema.get(Calendar.DAY_OF_MONTH) + "/" + mes + "/" + fechaSistema.get(Calendar.YEAR) + "                   " + factura.getId() + "");
         texto.add("CLIENTE: ");
         texto.add(factura.getCliente());
         texto.add("______________________________________");
-        texto.add("CODIGO            DESCRIPCION         ");
+        texto.add("CODIGO           DESCRIPCION      TOTAL");
         while (iProductos.hasNext()) {
             prodTemp = (FactProduct) iProductos.next();
             texto.add(prodTemp.getId() + "        " + prodTemp.getDescripcion());
-            texto.add("¢"+prodTemp.getPrecio()+" x "+prodTemp.getCantidad()+" = "+prodTemp.getTotal());
+            texto.add("           "+prodTemp.getCantidad()+"     x "+"      ¢"+prodTemp.getPrecio()+"       =      "+prodTemp.getTotal());
         }
         texto.add("______________________________________");
         texto.add("TOTAL ¢ " + factura.getTotal());
         texto.add("______________________________________");
         texto.add("              Impuesto de Ventas Incluido");
+        if (factura.getId() == 0) {texto.add("                   Aplican Retricciones");}
         if (factura.isSin_impuesto() == true) {texto.add(" *EXONERADO DEL IMPUESTO DE VENTAS*");        }
         if (factura.getId() != 0) {
         texto.add("AUTORIZADO MEDIANTE OFICIO NUMERO");
