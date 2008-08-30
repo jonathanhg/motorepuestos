@@ -102,7 +102,7 @@ public class ProductoDaoImpl implements ProductoDao {
         List facturas = null;
         try {
             session.beginTransaction();
-            Query getFacturas = session.createQuery("from Producto prod where prod.existencias <= prod.minimos order by prod.existencias");
+            Query getFacturas = session.createQuery("from Producto prod where prod.existencias < prod.minimos order by prod.descripcion");
             facturas = getFacturas.list();
     
         } catch (Exception e) {
