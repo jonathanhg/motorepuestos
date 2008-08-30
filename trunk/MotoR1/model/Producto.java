@@ -70,6 +70,8 @@ public class Producto implements Serializable {
     private Proveedores proveedor;
 
     private String idProveedor;
+    
+    private String codBarras;
     // <editor-fold defaultstate="collapsed" desc=" UML Marker "> 
     // #[regen=yes,id=DCE.641BF209-EFEC-D639-FA7E-20CACFACD88C]
     // </editor-fold> 
@@ -204,6 +206,14 @@ public class Producto implements Serializable {
 
     public void setIdProveedor(String idProveedor) {
         this.idProveedor = idProveedor;
+    }
+
+    public String getCodBarras() {
+        return codBarras;
+    }
+
+    public void setCodBarras(String codBarras) {
+        this.codBarras = codBarras;
     }
 }
 

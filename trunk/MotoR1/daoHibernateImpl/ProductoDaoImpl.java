@@ -84,7 +84,7 @@ public class ProductoDaoImpl implements ProductoDao {
        Producto producto = null;
         try {
             session.beginTransaction();
-            Query getFacturas = session.createQuery("from Producto prod where prod.id = :ncodigo");
+            Query getFacturas = session.createQuery("from Producto prod where prod.id = :ncodigo or prod.codBarras = :ncodigo");
             getFacturas.setString("ncodigo", codigo);
             producto = (Producto)getFacturas.uniqueResult();
 
