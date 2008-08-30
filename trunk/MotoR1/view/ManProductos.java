@@ -208,7 +208,24 @@ private void jAgregarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:ev
             malDato = true;
         }
 
-        producto.setCodBarras(jTextField1.getText());
+        if (!jTextField1.getText().equals("")) {//si se ingresa algun dato
+
+            if (manager.obtenerProductoSoloPorCodigo(jTextField1.getText()) != null) { //si no es igual a otro codigo de producto
+
+                if (manager.obtenerProductoSoloPorCodigoDeBarras(jTextField1.getText()) != null) { //si no es igual a otro codigo de barras
+
+                    producto.setCodBarras(jTextField1.getText());
+                } else {
+                    JOptionPane.showMessageDialog(rootPane, "Error: el codigo de barras no puede ser \n igual a otro codigo de producto");
+                    malDato = true;
+                }
+            } else {
+                JOptionPane.showMessageDialog(rootPane, "Error: el codigo de barras no puede ser \n igual a otro codigo de barras");
+                malDato = true;
+            }
+        } else {
+            producto.setCodBarras(jTextField1.getText());
+        }
 //        producto.setFechaIngreso(new Date());
 
         if (malDato == false) {
