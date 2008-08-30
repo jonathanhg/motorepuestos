@@ -46,6 +46,8 @@ public class NewJFrame extends javax.swing.JFrame {
 
         jDesktopPane1 = new javax.swing.JDesktopPane();
         jLabel1 = new javax.swing.JLabel();
+        jButton2 = new javax.swing.JButton();
+        jButton3 = new javax.swing.JButton();
         jButton1 = new javax.swing.JButton();
         jMenuBar1 = new javax.swing.JMenuBar();
         jMenu1 = new javax.swing.JMenu();
@@ -74,6 +76,24 @@ public class NewJFrame extends javax.swing.JFrame {
         jLabel1.setText("Logo");
         jLabel1.setBounds(-10, 490, 1010, 110);
         jDesktopPane1.add(jLabel1, javax.swing.JLayeredPane.DEFAULT_LAYER);
+
+        jButton2.setText("Nueva Factura");
+        jButton2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton2ActionPerformed(evt);
+            }
+        });
+        jButton2.setBounds(0, 10, 120, 23);
+        jDesktopPane1.add(jButton2, javax.swing.JLayeredPane.DEFAULT_LAYER);
+
+        jButton3.setText("Mantenimiento");
+        jButton3.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton3ActionPerformed(evt);
+            }
+        });
+        jButton3.setBounds(0, 40, 120, 23);
+        jDesktopPane1.add(jButton3, javax.swing.JLayeredPane.DEFAULT_LAYER);
 
         jButton1.setText("jButton1");
 
@@ -312,6 +332,18 @@ Dimension d = jDesktopPane1.getSize();
      prodManager.setVisible(true);// TODO add your handling code here:
 }//GEN-LAST:event_jMenuItem9ActionPerformed
 
+private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+createInternalFrameFact();
+}//GEN-LAST:event_jButton2ActionPerformed
+
+private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
+ManProductos prodManager = new ManProductos(jDesktopPane1);
+Dimension d = jDesktopPane1.getSize();
+     prodManager.setLocation(d.width/2 - prodManager.getWidth()/2 , d.height/2 -prodManager.getHeight()/2 );
+     jDesktopPane1.add(prodManager);
+     prodManager.setVisible(true);
+}//GEN-LAST:event_jButton3ActionPerformed
+
 
 private void createInternalFrameProforma(){
     FacturaView fact = new FacturaView(null, jDesktopPane1,true);
@@ -368,6 +400,8 @@ private void createInternalFrameFact(){
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButton1;
+    private javax.swing.JButton jButton2;
+    private javax.swing.JButton jButton3;
     private javax.swing.JDesktopPane jDesktopPane1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JMenu jMenu1;
