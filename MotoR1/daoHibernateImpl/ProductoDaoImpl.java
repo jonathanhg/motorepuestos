@@ -65,12 +65,12 @@ public class ProductoDaoImpl implements ProductoDao {
         Session session = HibernateUtil.getSessionFactory().openSession();
         try {
             session.beginTransaction();
-            Producto producto = (Producto) session.load(Producto.class, xProducto.getId());
-            producto.setDescripcion(xProducto.getDescripcion());
-            producto.setExistencias(xProducto.getExistencias());
-            producto.setMinimos(xProducto.getMinimos());
-            producto.setPrecioUnitario(xProducto.getPrecioUnitario());
-            session.update(producto);
+//            Producto producto = (Producto) session.load(Producto.class, xProducto.getId());
+//            producto.setDescripcion(xProducto.getDescripcion());
+//            producto.setExistencias(xProducto.getExistencias());
+//            producto.setMinimos(xProducto.getMinimos());
+//            producto.setPrecioUnitario(xProducto.getPrecioUnitario());
+            session.update(xProducto);
             session.getTransaction().commit();
         } catch (Exception e) {
             System.out.println(e.toString());

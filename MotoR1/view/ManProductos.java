@@ -181,6 +181,7 @@ public class ManProductos extends javax.swing.JInternalFrame {
     }// </editor-fold>//GEN-END:initComponents
 
 private void jAgregarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jAgregarMouseClicked
+
     ProductoDaoImpl manager = new ProductoDaoImpl();
     if (manager.obtenerProducto(jCodigo.getText()) == null) {
 
@@ -210,17 +211,17 @@ private void jAgregarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:ev
 
         if (!jTextField1.getText().equals("")) {//si se ingresa algun dato
 
-            if (manager.obtenerProductoSoloPorCodigo(jTextField1.getText()) != null) { //si no es igual a otro codigo de producto
+            if (manager.obtenerProductoSoloPorCodigo(jTextField1.getText()) == null) { //si no es igual a otro codigo de producto
 
-                if (manager.obtenerProductoSoloPorCodigoDeBarras(jTextField1.getText()) != null) { //si no es igual a otro codigo de barras
+                if (manager.obtenerProductoSoloPorCodigoDeBarras(jTextField1.getText()) == null) { //si no es igual a otro codigo de barras
 
                     producto.setCodBarras(jTextField1.getText());
                 } else {
-                    JOptionPane.showMessageDialog(rootPane, "Error: el codigo de barras no puede ser \n igual a otro codigo de producto");
+                    JOptionPane.showMessageDialog(rootPane, "Error: el codigo de barras no puede ser \n igual a otro codigo de barras");
                     malDato = true;
                 }
             } else {
-                JOptionPane.showMessageDialog(rootPane, "Error: el codigo de barras no puede ser \n igual a otro codigo de barras");
+                JOptionPane.showMessageDialog(rootPane, "Error: el codigo de barras no puede ser \n igual a otro codigo de producto");
                 malDato = true;
             }
         } else {
@@ -241,6 +242,7 @@ private void jAgregarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:ev
 }//GEN-LAST:event_jAgregarMouseClicked
 
 private void jNuevoMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jNuevoMouseClicked
+    limpiarCampos();
     isCamposHabilitados(true);
     jCambiar.setEnabled(false);
     jBorrar.setEnabled(false);
@@ -258,36 +260,67 @@ private void jModificarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:
 
 private void jCambiarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jCambiarMouseClicked
     ProductoDaoImpl manager = new ProductoDaoImpl();
+    boolean malDato = false;
+
     if (manager.obtenerProducto(jCodigo.getText()) != null) {
 
-        Producto producto = new Producto();
-        producto.setId(jCodigo.getText());
+        Producto producto = manager.obtenerProducto(jCodigo.getText());      
         producto.setDescripcion(jDescripcion.getText());
         try {
             producto.setPrecioUnitario(Double.parseDouble(jPrecio.getText()));
         } catch (Exception e) {
             JOptionPane.showMessageDialog(rootPane, "Precio: debe ser un valor numérico");
+            malDato = true;
         }
         try {
             producto.setMinimos(Integer.parseInt(jMinimos.getText()));
         } catch (Exception e) {
             JOptionPane.showMessageDialog(rootPane, "Mínimos: debe ser un valor numérico");
+            malDato = true;
         }
         try {
             producto.setExistencias(Integer.parseInt(jExistencias.getText()));
         } catch (Exception e) {
             JOptionPane.showMessageDialog(rootPane, "Existencias: debe ser un valor numérico");
+            malDato = true;
         }
-        manager.actualizarProducto(producto);
 
-        limpiarCampos();
+        if (!(jTextField1.getText().equals(""))) {//si se ingresa algun dato
 
-        JOptionPane.showMessageDialog(rootPane, "El producto ha sido cambiado");
+            if (!(jTextField1.getText().equals(manager.obtenerProducto(jCodigo.getText()).getCodBarras()))) {//si se modifica el codigo de barras
+
+                if (manager.obtenerProductoSoloPorCodigo(jTextField1.getText()) == null) { //si no es igual a otro codigo de producto
+
+                    if (manager.obtenerProductoSoloPorCodigoDeBarras(jTextField1.getText()) == null) { //si no es igual a otro codigo de barras
+
+                        producto.setCodBarras(jTextField1.getText());
+                    } else {
+                        JOptionPane.showMessageDialog(rootPane, "Error: el codigo de barras no puede ser \n igual a otro codigo de barras");
+                        malDato = true;
+                    }
+                } else {
+                    JOptionPane.showMessageDialog(rootPane, "Error: el codigo de barras no puede ser \n igual a otro codigo de producto");
+                    malDato = true;
+                }
+
+            } else {
+               producto.setCodBarras(jTextField1.getText());
+            }
+        }
+
+
+        if (malDato == false) {
+            manager.actualizarProducto(producto);
+
+            limpiarCampos();
+            isCamposHabilitados(false);
+
+            JOptionPane.showMessageDialog(rootPane, "El producto ha sido cambiado");
+        }
     } else {
         JOptionPane.showMessageDialog(rootPane, "No se pudo cambiar: El producto no está en el sistema");
     }
-    limpiarCampos();
-    isCamposHabilitados(false);
+    
 }//GEN-LAST:event_jCambiarMouseClicked
 
 private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
@@ -297,7 +330,7 @@ private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRS
 }//GEN-LAST:event_jButton1ActionPerformed
 
 private void jBorrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBorrarActionPerformed
-
+limpiarCampos();
 
     ProductoDaoImpl manager = new ProductoDaoImpl();
     Producto producto = new Producto();
@@ -317,15 +350,18 @@ private void jBorrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST
 private void jBusModifActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBusModifActionPerformed
     ProductoDaoImpl manager = new ProductoDaoImpl();
     if (manager.obtenerProducto(jCodigo.getText()) != null) {
-        Producto producto = new Producto();
+        Producto producto = manager.obtenerProducto(jCodigo.getText());
         isCamposHabilitados(true);
         jBorrar.setEnabled(false);
         jAgregar.setEnabled(false);
-        producto = manager.obtenerProducto(jCodigo.getText());
+       
         jDescripcion.setText(String.valueOf(producto.getDescripcion()));
         jMinimos.setText(String.valueOf(producto.getMinimos()));
         jPrecio.setText(String.valueOf(producto.getPrecioUnitario()));
         jExistencias.setText(String.valueOf(producto.getExistencias()));
+        if(producto.getCodBarras()!=null){
+        jTextField1.setText(String.valueOf(producto.getCodBarras()));
+        }
     }
     jBusModif.setEnabled(false);
     jCodigo.setEnabled(false);
