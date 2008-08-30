@@ -160,7 +160,7 @@ public class ManProductos extends javax.swing.JInternalFrame {
         });
         jPanel1.add(jBusModif, new org.netbeans.lib.awtextra.AbsoluteConstraints(450, 220, -1, -1));
 
-        jLabel8.setText("Proveedor");
+        jLabel8.setText("Codigo de barras");
         jPanel1.add(jLabel8, new org.netbeans.lib.awtextra.AbsoluteConstraints(330, 110, -1, -1));
         jPanel1.add(jTextField1, new org.netbeans.lib.awtextra.AbsoluteConstraints(320, 130, 140, -1));
 
@@ -174,7 +174,7 @@ public class ManProductos extends javax.swing.JInternalFrame {
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, 263, Short.MAX_VALUE)
+            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, 275, Short.MAX_VALUE)
         );
 
         pack();
@@ -208,7 +208,7 @@ private void jAgregarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:ev
             malDato = true;
         }
 
-        producto.setIdProveedor(jTextField1.getText());
+        producto.setCodBarras(jTextField1.getText());
 //        producto.setFechaIngreso(new Date());
 
         if (malDato == false) {

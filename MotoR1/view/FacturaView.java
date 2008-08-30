@@ -208,7 +208,7 @@ private void initComponents() {
         jTextAreaDescripcion.setRows(5);
         jScrollPane2.setViewportView(jTextAreaDescripcion);
 
-        jLabel6.setText("Descripcion:");
+        jLabel6.setText("Anotaciones:");
 
         jButtonProcesar.setText("Procesar");
         jButtonProcesar.addActionListener(new java.awt.event.ActionListener() {
@@ -217,7 +217,7 @@ private void initComponents() {
             }
         });
 
-        jButtonAnular.setText("Cancelar");
+        jButtonAnular.setText("Ignorar");
         jButtonAnular.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButtonAnularActionPerformed(evt);
