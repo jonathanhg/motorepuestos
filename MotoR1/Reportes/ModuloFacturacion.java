@@ -39,14 +39,14 @@ public class ModuloFacturacion {
         FacturaDaoImpl factura = new FacturaDaoImpl();
         List factList = factura.facturasPorFecha(anioDesde, anioHasta, mesDesde, mesHasta);
         Iterator itFact = factList.iterator();
-        crearExcel(itFact, "FacturasPorFecha.xls", "Facturas_por_fecha", "REPORTE DE FACTURAS POR FECHA");
+        crearExcel(itFact, "FacturasPorFecha.xls", "Facturas_por_fecha", "REPORTE DE FACTURAS POR FECHA ("+mesDesde+"/"+anioDesde+" hasta "+mesHasta+"/"+anioHasta+")");
     }
 
     public void facturasPorCliente(String nombreCliente) {
         FacturaDaoImpl factura = new FacturaDaoImpl();
         List factList = factura.facturasPorCliente(nombreCliente);
         Iterator itFact = factList.iterator();
-        crearExcel(itFact, "FacturasPorCliente.xls", "Facturas_por_cliente", "REPORTE DE FACTURAS POR CLIENTE");
+        crearExcel(itFact, "FacturasPorCliente.xls", "Facturas_por_cliente", "REPORTE DE FACTURAS POR CLIENTE ("+nombreCliente+")");
     }
 
     public void facturasSinImpuesto(int mes) {
