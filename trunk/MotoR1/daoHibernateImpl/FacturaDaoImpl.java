@@ -137,7 +137,7 @@ private Configuracion configuracion = new Configuracion();
         List facturas = null;
         try {
             session.beginTransaction();
-            Query getFacturas = session.createQuery("from Factura fact where year(fact.fecha) >= :adesde and  year(fact.fecha) <= :ahasta and where month(fact.fecha) >= :mdesde and where month(fact.fecha) <= :mhasta and where fact.is_anulado = :isAnulada");
+            Query getFacturas = session.createQuery("from Factura fact where year(fact.fecha) >= :adesde and  year(fact.fecha) <= :ahasta and month(fact.fecha) >= :mdesde and month(fact.fecha) <= :mhasta and fact.is_anulado = :isAnulada");
             getFacturas.setInteger("adesde", anioDesde);
             getFacturas.setInteger("ahasta", anioHasta);
             getFacturas.setInteger("mdesde", mesDesde);
