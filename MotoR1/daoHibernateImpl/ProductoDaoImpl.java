@@ -32,14 +32,14 @@ public class ProductoDaoImpl implements ProductoDao {
         }
     }
 
-        public List obtenerProductos() {
+    public List obtenerProductos() {
         Session session = HibernateUtil.getSessionFactory().openSession();
         List facturas = null;
         try {
             session.beginTransaction();
             Query getFacturas = session.createQuery("from Producto prod order by prod.id");
             facturas = getFacturas.list();
-    
+
         } catch (Exception e) {
             System.out.println(e.toString());
         } finally {
@@ -47,7 +47,7 @@ public class ProductoDaoImpl implements ProductoDao {
         }
         return facturas;
     }
-    
+
     public void eliminarProducto(Producto producto) {
         Session session = HibernateUtil.getSessionFactory().openSession();
         try {
@@ -79,14 +79,14 @@ public class ProductoDaoImpl implements ProductoDao {
         }
     }
 
-        public Producto obtenerProducto(String codigo) {
+    public Producto obtenerProducto(String codigo) {
         Session session = HibernateUtil.getSessionFactory().openSession();
-       Producto producto = null;
+        Producto producto = null;
         try {
             session.beginTransaction();
             Query getFacturas = session.createQuery("from Producto prod where prod.id = :ncodigo or prod.codBarras = :ncodigo");
             getFacturas.setString("ncodigo", codigo);
-            producto = (Producto)getFacturas.uniqueResult();
+            producto = (Producto) getFacturas.uniqueResult();
 
         } catch (Exception e) {
             System.out.println(e.toString());
@@ -95,16 +95,50 @@ public class ProductoDaoImpl implements ProductoDao {
         }
         return producto;
     }
-    
+
+    public Producto obtenerProductoSoloPorCodigo(String codigo) {
+        Session session = HibernateUtil.getSessionFactory().openSession();
+        Producto producto = null;
+        try {
+            session.beginTransaction();
+            Query getFacturas = session.createQuery("from Producto prod where prod.id = :ncodigo");
+            getFacturas.setString("ncodigo", codigo);
+            producto = (Producto) getFacturas.uniqueResult();
+
+        } catch (Exception e) {
+            System.out.println(e.toString());
+        } finally {
+            session.close();
+        }
+        return producto;
+    }
+
+    public Producto obtenerProductoSoloPorCodigoDeBarras(String codigo) {
+        Session session = HibernateUtil.getSessionFactory().openSession();
+        Producto producto = null;
+        try {
+            session.beginTransaction();
+            Query getFacturas = session.createQuery("from Producto prod where prod.codBarras = :ncodigo");
+            getFacturas.setString("ncodigo", codigo);
+            producto = (Producto) getFacturas.uniqueResult();
+
+        } catch (Exception e) {
+            System.out.println(e.toString());
+        } finally {
+            session.close();
+        }
+        return producto;
+    }
 
     public List obtenerMinimos() { //productos donde (existencias <=minimo)
+
         Session session = HibernateUtil.getSessionFactory().openSession();
         List facturas = null;
         try {
             session.beginTransaction();
             Query getFacturas = session.createQuery("from Producto prod where prod.existencias < prod.minimos order by prod.descripcion");
             facturas = getFacturas.list();
-    
+
         } catch (Exception e) {
             System.out.println(e.toString());
         } finally {
@@ -118,10 +152,10 @@ public class ProductoDaoImpl implements ProductoDao {
         List facturas = null;
         try {
             session.beginTransaction();
-            Query getFacturas = session.createQuery("from Producto prod where prod.id like '%"+criterio+"%' or prod.descripcion like '%"+criterio+"%'");
-           
+            Query getFacturas = session.createQuery("from Producto prod where prod.id like '%" + criterio + "%' or prod.descripcion like '%" + criterio + "%'");
+
             facturas = getFacturas.list();
-    
+
         } catch (Exception e) {
             System.out.println(e.toString());
         } finally {
