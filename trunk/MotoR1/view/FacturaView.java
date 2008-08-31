@@ -91,10 +91,15 @@ public class FacturaView extends javax.swing.JInternalFrame {
           }
             });
             
-       
-         
+               
         
             initComponents();
+            
+         //Cambios para modificar los permisos
+         /* jSpinner2.setVisible(false);
+            jCheckBoxExonerar.setVisible(false);
+            jSpinnerDescuento.setVisible(false);
+          */  
             if(isProforma){
                 jButtonProcesar.setText("Imprimir");
             

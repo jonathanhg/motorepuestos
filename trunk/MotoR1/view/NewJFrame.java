@@ -32,9 +32,12 @@ public class NewJFrame extends javax.swing.JFrame {
             Logger.getLogger(NewJFrame.class.getName()).log(Level.SEVERE, null, ex);
         }*/
         initComponents();
-        jButton3.setVisible(true);
-        jMenuItem7.setVisible(true);
-        jMenu2.setVisible(true);
+
+        //Cambios para modificar los permisos
+/*      jButton3.setVisible(false);
+        jMenuItem7.setVisible(false);
+        jMenu2.setVisible(false);
+        jMenuReportes.setVisible(false);*/
         //createInternalFrameFact();
     }
 
