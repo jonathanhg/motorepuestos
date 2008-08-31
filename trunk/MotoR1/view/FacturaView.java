@@ -63,13 +63,11 @@ public class FacturaView extends javax.swing.JInternalFrame {
         if(factura == null){
             factura = new Factura();
             productos = new ArrayList<FactProduct>();
-            if(!isProforma){
-                idFact= factBo.save(factura);
-            }
+
             
             FactProduct factNew = new FactProduct();
             productos.add(factNew);
-            this.setTitle("Factura : "+idFact );
+            this.setTitle("Factura");
             if(isProforma){
                 this.setTitle("Factura : Proforma");
             
@@ -78,7 +76,7 @@ public class FacturaView extends javax.swing.JInternalFrame {
            
        }else{
             productos = factura.getProductos();
-           this.setTitle("Factura : "+factura.getId()
+           this.setTitle("Factura"
                    
                    );
        }

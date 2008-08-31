@@ -68,6 +68,7 @@ public class FacturaBoImpl implements FacturaBo {
         }
         if (todobien) {
             if (!isProforma) {
+                fact.setId(this.save(fact));
                 dao.actualizarFactura(fact);
             }
             Impresora impresora = new Impresora();
