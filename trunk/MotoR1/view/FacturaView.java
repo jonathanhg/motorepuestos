@@ -407,7 +407,7 @@ private void jButtonProcesarActionPerformed(java.awt.event.ActionEvent evt) {
     FacturaBoImpl factBoo = new FacturaBoImpl();
     Factura fact = new Factura();
     fact.setId(idFact);
-    if(productos.size() == 0 ){ //TODO VER SI EN REALIDAD HAY UN PRODUCTO PORK EL PRIMERO ESTA VACIO
+    if(productos.size() == 1 ){ //TODO VER SI EN REALIDAD HAY UN PRODUCTO PORK EL PRIMERO ESTA VACIO
     JOptionPane.showMessageDialog(this, "La factura Al Menos debe tener un producto");
     return;
     }
