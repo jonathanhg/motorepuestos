@@ -32,6 +32,9 @@ public class NewJFrame extends javax.swing.JFrame {
             Logger.getLogger(NewJFrame.class.getName()).log(Level.SEVERE, null, ex);
         }*/
         initComponents();
+        jButton3.setVisible(true);
+        jMenuItem7.setVisible(true);
+        jMenu2.setVisible(true);
         //createInternalFrameFact();
     }
 
@@ -92,7 +95,7 @@ public class NewJFrame extends javax.swing.JFrame {
                 jButton3ActionPerformed(evt);
             }
         });
-        jButton3.setBounds(0, 40, 120, 23);
+        jButton3.setBounds(0, 50, 120, 23);
         jDesktopPane1.add(jButton3, javax.swing.JLayeredPane.DEFAULT_LAYER);
 
         jButton1.setText("jButton1");
