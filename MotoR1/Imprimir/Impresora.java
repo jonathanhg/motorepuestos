@@ -80,10 +80,10 @@ public class Impresora {
         while (iProductos.hasNext()) {
             prodTemp = (FactProduct) iProductos.next();
             texto.add(prodTemp.getId() + "        " + prodTemp.getDescripcion());
-            texto.add("           "+prodTemp.getCantidad()+"     x "+"     ¢"+prodTemp.getPrecio()+"         =        "+prodTemp.getTotal());
+            texto.add("           "+prodTemp.getCantidad()+"     x "+"      "+ (int) prodTemp.getPrecio()+"         =        "+ (int) prodTemp.getTotal());
         }
         texto.add("______________________________________");
-        texto.add("TOTAL ¢ " + factura.getTotal());
+        texto.add("TOTAL ¢                                        " + (int) factura.getTotal());
         texto.add("______________________________________");
         texto.add("              Impuesto de Ventas Incluido");
         if (factura.getId() == 0) {texto.add("                   Aplican Retricciones");}
