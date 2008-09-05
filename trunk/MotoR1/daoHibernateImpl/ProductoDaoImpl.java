@@ -8,7 +8,6 @@ import dao.ProductoDao;
 import java.util.Date;
 import java.util.List;
 import model.Producto;
-import model.Producto;
 import org.hibernate.Query;
 import org.hibernate.Session;
 import util.HibernateUtil;
