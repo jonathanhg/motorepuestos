@@ -3,9 +3,9 @@
 <hibernate-configuration>
     
   <session-factory>
-    <property name="hibernate.connection.url">jdbc:mysql://Facturacion:3307/Moto</property>
+    <property name="hibernate.connection.url">jdbc:mysql://localhost:3306/Moto</property>
     <property name="hibernate.connection.username">root</property>
-    <property name="hibernate.connection.password">diego</property>
+    <property name="hibernate.connection.password">clase</property>
     <property name="hibernate.connection.driver_class">com.mysql.jdbc.Driver</property>
     <property name="hibernate.dialect">org.hibernate.dialect.MySQLInnoDBDialect</property>
 

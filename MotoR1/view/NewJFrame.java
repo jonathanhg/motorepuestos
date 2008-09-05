@@ -7,7 +7,9 @@
 package view;
 
 
+import Settings.UpdateSchedule;
 import com.birosoft.liquid.LiquidLookAndFeel;
+import daoHibernateImpl.EmpresaDaoImpl;
 import java.awt.Dimension;
 import java.awt.Toolkit;
 import java.beans.PropertyVetoException;
@@ -15,6 +17,7 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.UIManager;
 import javax.swing.UnsupportedLookAndFeelException;
+import model.Empresa;
 import model.Factura;
 
 /**
@@ -381,6 +384,7 @@ private void createInternalFrameFact(){
     /**
     * @param args the command line arguments
     */
+
     public static void main(String args[]) {
                 try {
             UIManager.setLookAndFeel("com.birosoft.liquid.LiquidLookAndFeel");
@@ -397,6 +401,7 @@ private void createInternalFrameFact(){
         LiquidLookAndFeel.setShowTableGrids(true);
         LiquidLookAndFeel.setToolbarFlattedButtons(false);
         LiquidLookAndFeel.setToolbarButtonsFocusable(false);
+        new UpdateSchedule();
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
                 new NewJFrame().setVisible(true);

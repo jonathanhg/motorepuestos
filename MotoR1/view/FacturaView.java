@@ -100,6 +100,7 @@ public class FacturaView extends javax.swing.JInternalFrame {
             jCheckBoxExonerar.setVisible(false);
             jSpinnerDescuento.setVisible(false);
           */  
+            jSpinner2.setEnabled(false);
             if(isProforma){
                 jButtonProcesar.setText("Imprimir");
             
