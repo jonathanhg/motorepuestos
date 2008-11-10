@@ -51,22 +51,29 @@ public class FacturaBoImpl implements FacturaBo {
         if (!isProforma) {
             while (tempIt.hasNext()) {
                 tempFactProduct = (FactProduct) tempIt.next();
-
                 temp = daoProduct.obtenerProducto(tempFactProduct.getId());
                 temp.setExistencias(temp.getExistencias() - tempFactProduct.getCantidad());
 
-                if (temp.getExistencias() >= 0) {
-                    daoProduct.actualizarProducto(temp);
-
-                }
                 if (temp.getExistencias() < 0) {
                     mensaje += "Error no hay existencias para el producto " + temp.getId();
                     todobien = false;
                     JOptionPane.showMessageDialog(jFrame, mensaje);
                 }
             }
+            
+            Iterator tempIt2 = fact.getProductos().iterator();
+            if (todobien == true) {
+                while (tempIt2.hasNext()) {
+                    tempFactProduct = (FactProduct) tempIt2.next();
+                    temp = daoProduct.obtenerProducto(tempFactProduct.getId());
+                    temp.setExistencias(temp.getExistencias() - tempFactProduct.getCantidad());
+
+                    daoProduct.actualizarProducto(temp);
+                }
+            }
+
         }
-        if (todobien) {
+        if (todobien == true) {
             if (!isProforma) {
                 fact.setId(this.save(fact));
                 dao.actualizarFactura(fact);
